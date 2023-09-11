@@ -9,10 +9,10 @@ export default {
 			spacing: {
 				'90': '91.6vh',
 				'93': '93vh'
-			}
-		},
-		fontSize: {
-			'4xl':['2.6rem', '2.5rem']
+			},
+			fontSize: {
+				'4xl':['2.6rem', '2.5rem']
+			},
 		},
 	},
 	plugins: [],

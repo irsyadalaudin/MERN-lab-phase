@@ -1,6 +1,6 @@
 @font-face {
-	font-family: 'Univers-Condensed-Regular.woff';
-	src: url('./assets/font/Univers-Condensed-Regular.woff');
+	font-family: 'univers-light-condensed.woff';
+	src: url('./assets/font/univers-light-condensed.woff');
 }
 
 @font-face {
@@ -32,7 +32,7 @@ h1, h2, button {
 }
 
 p {
-	font-family: 'Univers-Condensed-Regular.woff';
-	src: url('./assets/font/Univers-Condensed-Regular.woff');
+	font-family: 'univers-light-condensed.woff';
+	src: url('./assets/font/univers-light-condensed.woff');
 	font-weight: 200;
 }

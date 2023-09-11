@@ -1,8 +1,12 @@
 @font-face {
+	font-family: 'Univers-Condensed-Regular.woff';
+	src: url('./assets/font/Univers-Condensed-Regular.woff');
+}
+
+@font-face {
 	font-family: 'Century-Gothic.woff';
 	src: url('./assets/font/Century-Gothic.woff');
 }
-
 
 :root {
 	font-family: 'Century-Gothic.woff';
@@ -22,7 +26,13 @@ body {
 	padding: 0;
 }
 
-h1, h2 {
+h1, h2, button {
     margin: 0;
 	padding: 0;
+}
+
+p {
+	font-family: 'Univers-Condensed-Regular.woff';
+	src: url('./assets/font/Univers-Condensed-Regular.woff');
+	font-weight: 200;
 }

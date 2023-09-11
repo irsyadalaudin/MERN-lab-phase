@@ -34,5 +34,9 @@ h1, h2 {
 p {
 	font-family: 'univers-light-condensed.woff';
 	src: url('./assets/font/univers-light-condensed.woff');
-	font-weight: 200;
+}
+
+button {
+	font-family: 'Century-Gothic.woff';
+	src: url('./assets/font/Century-Gothic.woff');
 }

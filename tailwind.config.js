@@ -8,7 +8,7 @@ export default {
 		extend: {
 			spacing: {
 				'90': '91.7vh',
-				'93': '93vh'
+				'93': '93.2vh'
 			},
 			fontSize: {
 				'4xl':['2.6rem', '2.5rem']

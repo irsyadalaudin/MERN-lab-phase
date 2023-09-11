@@ -7,8 +7,12 @@ export default {
 	theme: {
 		extend: {
 			spacing: {
+				'22': '5.76rem',
+				'26': '6.6rem',
+				'85': '21.2rem',
 				'90': '91.7vh',
-				'93': '93.2vh'
+				'93': '93.2vh',
+				'97': '60rem'
 			},
 			fontSize: {
 				'4xl':['2.5rem', '2rem']

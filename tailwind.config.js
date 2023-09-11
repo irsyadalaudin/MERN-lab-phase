@@ -7,7 +7,7 @@ export default {
 	theme: {
 		extend: {
 			spacing: {
-				'90': '91.6vh',
+				'90': '91.7vh',
 				'93': '93vh'
 			},
 			fontSize: {

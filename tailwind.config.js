@@ -11,7 +11,7 @@ export default {
 				'93': '93.2vh'
 			},
 			fontSize: {
-				'4xl':['2.6rem', '2.5rem']
+				'4xl':['2.5rem', '2rem']
 			},
 		},
 	},

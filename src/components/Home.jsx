@@ -1,4 +1,3 @@
-// import { useRef } from 'react'
 import Recipe from './Recipe'
 
 const Home = () => {
@@ -13,7 +12,7 @@ const Home = () => {
                 <div className='flex-1'>
                     <h1 className='text-4xl'>What ingredients do you have?</h1>
                     <p className='text-xl pb-6'>They can surely be turned into delicious food, and anyone can cook!</p>
-                    <button onClick={scrollDownToRecipe} className='bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer'>Click here</button>
+                    <button onClick={scrollDownToRecipe} className='bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Click here</button>
                 </div>
                 <img className='w-93' src='https://i.postimg.cc/qRLWYDYm/tofu-2.png' alt='tofu-image' />
             </div>

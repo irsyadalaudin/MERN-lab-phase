@@ -1,5 +1,3 @@
-// import { useRef } from 'react'
-
 /* eslint-disable react/no-unescaped-entities */
 const Recipe = () => {
     return (

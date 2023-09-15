@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 const AboutUs = () => {
     return (
         <div className='bg-yellow-600 h-90 px-28'>

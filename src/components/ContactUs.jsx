@@ -8,14 +8,14 @@ const ContactUs = () => {
                 <p className='mt-4'>Feel free to reach out to us with any questions, suggestions, or inquiries. We're dedicated to making your culinary journey enjoyable and budget-friendly. Together, let's explore the world of delightful dishes that anyone can cook, regardless of their culinary expertise or budget limitations.</p>
                 <p className='mt-4'>Contact us today, and let's embark on a flavorful adventure!</p>
             </div>
-                <form className='flex flex-col self-center mt-4 px-28'>
-                    <input className='placeholder-white focus:outline-none w-64 text-lg mb-2 bg-yellow-800 text-white rounded' type='text' placeholder='name'/>
-                    <input className='placeholder-white focus:outline-none w-64 text-lg mb-0 bg-yellow-800 text-white rounded' type='email' placeholder='email' />
-                </form>
-                <form className='flex justify-center px-28 mt-2'>
-                    <textarea className='placeholder-white focus:outline-none resize-none text-xl p-3 w-97 h-44 bg-yellow-800 text-white rounded-md' placeholder='Enter your message'></textarea>
-                </form>
-                <button className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
+            <form className='flex flex-col self-center mt-4 px-28'>
+                <input className='placeholder-white focus:outline-none w-64 text-lg mb-2 bg-yellow-800 text-white rounded' type='text' placeholder='name'/>
+                <input className='placeholder-white focus:outline-none w-64 text-lg mb-0 bg-yellow-800 text-white rounded' type='email' placeholder='email' />
+            </form>
+            <form className='flex justify-center px-28 mt-2'>
+                <textarea className='placeholder-white focus:outline-none resize-none text-xl p-3 w-97 h-44 bg-yellow-800 text-white rounded-md' placeholder='Enter your message'></textarea>
+            </form>
+            <button className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
         </div>
     )
 }

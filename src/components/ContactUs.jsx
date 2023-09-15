@@ -10,10 +10,12 @@ const ContactUs = () => {
             </div>
                 <form className='flex flex-col self-center mt-4 px-28'>
                     <input className='placeholder-white focus:outline-none w-64 text-lg mb-2 bg-yellow-800 text-white rounded' type='text' placeholder='name'/>
-                    <input className='placeholder-white focus:outline-none w-64 text-lg mb-2 bg-yellow-800 text-white rounded' type='email' placeholder='email' />
-                    <textarea className='placeholder-white focus:outline-none resize-none text-xl w-95 h-36 p-2 bg-yellow-800 text-white rounded-md' placeholder='Enter your message'></textarea>
+                    <input className='placeholder-white focus:outline-none w-64 text-lg mb-0 bg-yellow-800 text-white rounded' type='email' placeholder='email' />
                 </form>
-                <button className='float-right h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
+                <form className='flex justify-center px-28 mt-2'>
+                    <textarea className='placeholder-white focus:outline-none resize-none text-xl p-3 w-97 h-32 bg-yellow-800 text-white rounded-md' placeholder='Enter your message'></textarea>
+                </form>
+                <button className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
         </div>
     )
 }

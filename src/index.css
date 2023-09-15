@@ -31,12 +31,13 @@ h1, h2 {
 	padding: 0;
 }
 
-p, label, input {
+p {
 	font-family: 'univers-light-condensed.woff';
 	src: url('./assets/font/univers-light-condensed.woff');
+	margin: 0
 }
 
-button {
+button, input, textarea {
 	font-family: 'Century-Gothic.woff';
 	src: url('./assets/font/Century-Gothic.woff');
 }

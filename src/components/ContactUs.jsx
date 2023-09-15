@@ -9,11 +9,11 @@ const ContactUs = () => {
                 <p className='mt-4'>Contact us today, and let's embark on a flavorful adventure!</p>
             </div>
                 <form className='flex flex-col self-center mt-4 px-28'>
-                    <input className='w-64 mb-2 text-lg' type='text' placeholder='name'/>
-                    <input className='w-64 mb-2 text-lg' type='email' placeholder='email' />
-                    <textarea className='resize-none text-xl w-95 h-40' placeholder='Enter your message'></textarea>
+                    <input className='placeholder-white focus:outline-none w-64 text-lg mb-2 bg-yellow-800 text-white rounded' type='text' placeholder='name'/>
+                    <input className='placeholder-white focus:outline-none w-64 text-lg mb-2 bg-yellow-800 text-white rounded' type='email' placeholder='email' />
+                    <textarea className='placeholder-white focus:outline-none resize-none text-xl w-95 h-36 p-2 bg-yellow-800 text-white rounded-md' placeholder='Enter your message'></textarea>
                 </form>
-                <button className='float-right self-end h-8 w-20 mt-2 mx-28'>Search</button>
+                <button className='float-right h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
         </div>
     )
 }

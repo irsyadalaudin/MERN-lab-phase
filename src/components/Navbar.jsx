@@ -1,6 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-undef */
-
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {

@@ -14,10 +14,10 @@ const Navbar = () => {
                 <Link to='/' onClick={scrollToTop}>AYO MASAK</Link>
             </h1>
             <div className='flex gap-4 no-underline'>
-                <a className='text-neutral-100 no-underline' href='/'>Home</a>
-                <a className='text-neutral-100 no-underline' href='/recipe'>Recipe</a>
-                <a className='text-neutral-100 no-underline' href='/contact-us'>Contact us</a>
-                <a className='text-neutral-100 no-underline' href='/about-us'>About us</a>
+                <Link to='/' onClick={scrollToTop} className='text-neutral-100 no-underline'>Home</Link>
+                <Link to='/recipe' className='text-neutral-100 no-underline'>Recipe</Link>
+                <Link to='/contact-us' className='text-neutral-100 no-underline'>Contact us</Link>
+                <Link to='/about-us' className='text-neutral-100 no-underline'>About us</Link>
             </div>
         </nav>
     )

@@ -7,7 +7,6 @@ const Navbar = () => {
             <h1>
                 <a className='text-neutral-100 no-underline' href='/'>AYO MASAK</a>
             </h1>
-
             <div className='flex gap-4 no-underline'>
                 <a className='text-neutral-100 no-underline' href='/'>Home</a>
                 <a className='text-neutral-100 no-underline' href='/recipe'>Recipe</a>

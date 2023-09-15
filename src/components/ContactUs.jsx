@@ -13,7 +13,7 @@ const ContactUs = () => {
                 <input className='placeholder-white focus:outline-none w-64 text-lg mb-0 bg-yellow-800 text-white rounded' type='email' placeholder='email' />
             </form>
             <form className='flex justify-center px-28 mt-2'>
-                <textarea className='placeholder-white focus:outline-none resize-none text-xl p-3 w-97 h-44 bg-yellow-800 text-white rounded-md' placeholder='Enter your message'></textarea>
+                <textarea className='placeholder-white focus:outline-none resize-none text-xl p-3 w-97 h-36 bg-yellow-800 text-white rounded-md' placeholder='Enter your message'></textarea>
             </form>
             <button className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
         </div>

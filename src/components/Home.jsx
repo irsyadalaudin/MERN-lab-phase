@@ -8,7 +8,7 @@ const Home = () => {
 
     return (
         <>
-            <div className='bg-yellow-600 h-90 flex items-center pl-28'>
+            <div id='home' className='bg-yellow-600 h-90 flex items-center pl-28'>
                 <div className='flex-1'>
                     <h1 className='text-4xl mb-4'>What ingredients do you have?</h1>
                     <p className='text-xl mb-6'>They can surely be turned into delicious food, and anyone can cook!</p>

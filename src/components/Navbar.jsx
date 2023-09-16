@@ -22,6 +22,7 @@ const Navbar = () => {
                 <Link to='/' onClick={scrollToBottom} className='text-neutral-100 no-underline'>Recipe</Link>
                 <Link to='/contact-us' className='text-neutral-100 no-underline'>Contact us</Link>
                 <Link to='/about-us' className='text-neutral-100 no-underline'>About us</Link>
+                <Link to='/login' className='text-neutral-100 no-underline'>Login</Link>
             </div>
         </nav>
     )

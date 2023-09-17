@@ -41,3 +41,9 @@ button, input, textarea {
 	font-family: 'Century-Gothic.woff';
 	src: url('./assets/font/Century-Gothic.woff');
 }
+
+button[disabled] {
+	pointer-events: none;
+	background-color: #92400E;
+	cursor: not-allowed;
+}

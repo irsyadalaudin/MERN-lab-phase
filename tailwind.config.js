@@ -14,6 +14,7 @@ export default {
 				'93': '93.2vh',
 				'95': '57.7rem',
 				'97': '73rem',
+				'450': '450px',
 			},
 			fontSize: {
 				'4xl':['2.5rem', '2rem']

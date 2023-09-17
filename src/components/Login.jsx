@@ -21,13 +21,14 @@ const Login = () => {
         <>
         <div className='bg-yellow-600 h-90 px-28 flex justify-center items-center'>
             <div className='w-1/2 text-center relative'>
-                <p className='mb-10 text-2xl'>Embark on a delightful culinary journey with us at AYO MASAK! Let's make every meal an enjoyable and budget-friendly experience</p>
+                <p className='mb-10 text-2xl'>Embark on a delightful culinary journey with us at AYO MASAK! <br /> Let's make every meal an enjoyable and budget-friendly experience</p>
                 <button onClick={handleToggleSignIn} disabled={showSignIn ? true : false} id='sign-in-btn' className='p-1 mb-2 bg-amber-700 rounded-l-lg'>Sign In</button>
                 <button onClick={handleToggleSignUp} disabled={disableSignUp} id='sign-up-btn' className='p-1 mb-2 bg-amber-700 rounded-r-lg'>Sign Up</button>
                 {/* SIGN IN */}
                 <form className='flex flex-col items-center px-28' style={{ display: showSignIn ? 'block' : 'none'}}>
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' placeholder='Email / Username' />
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' placeholder='Password' />
+                    <p>create your account if you don't have an account yet!</p>
                 </form>
                 {/* SIGN UP */}
                 <form className='flex flex-col items-center px-28' style={{ display: showSignIn ? 'none' : 'block'}}>

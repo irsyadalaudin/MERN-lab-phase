@@ -26,10 +26,10 @@ const Login = () => {
                 <button onClick={handleToggleSignUp} disabled={disableSignUp} id='sign-up-btn' className='p-1 mb-2 bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800'>Sign Up</button>
                 {/* SIGN IN */}
                 <form className='flex flex-col items-center px-28' style={{ display: showSignIn ? 'block' : 'none'}}>
-                <p className='mb-1'>create your account if you don't have an account yet!</p>
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' placeholder='Email / Username' />
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' placeholder='Password' />
-                    <button className='float-right self-end bg-yellow-800 text-white p-2 mr-2.5 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign In</button>
+                    <button className='float-right self-end bg-yellow-800 text-white p-2 mr-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign In</button>
+                    <p className='float-left mt-2 ml-2'>Don't have an account?<a onClick={handleToggleSignUp} href='#' className='ml-1 no-underline'>sign up</a></p>
                 </form>
                 {/* SIGN UP */}
                 <form className='flex flex-col items-center px-28' style={{ display: showSignIn ? 'none' : 'block'}}>

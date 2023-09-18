@@ -21,7 +21,9 @@ const Login = () => {
         <>
         <div className='bg-yellow-600 h-90 px-28 flex justify-center items-center'>
             <div className='w-1/2 text-center relative'>
-                <p className='mb-6 text-2xl'>Embark on a delightful culinary journey with us at AYO MASAK! <br /> Let's make every meal an enjoyable and budget-friendly experience</p>
+                <div className='flex justify-center'>
+                    <p className='mb-6 text-2xl text-justify flex justify-center w-85'>Embark on a delightful culinary journey with us at AYO MASAK! &emsp; Let's make every meal an enjoyable and budget-friendly experience</p>
+                </div>
                 <button onClick={handleToggleSignIn} disabled={showSignIn ? true : false} id='sign-in-btn' className='p-1 mb-2 bg-amber-700 rounded-l-lg hover: cursor-pointer hover:bg-amber-800'>Sign In</button>
                 <button onClick={handleToggleSignUp} disabled={disableSignUp} id='sign-up-btn' className='p-1 mb-2 bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800'>Sign Up</button>
                 {/* SIGN IN */}

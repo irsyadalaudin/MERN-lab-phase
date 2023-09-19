@@ -3,7 +3,7 @@ const AboutUs = () => {
     return (
         <div className='bg-yellow-600 h-90 px-28'>
             <h1 className='text-4xl flex justify-center pt-8'>About Us</h1>
-            <div className='text-2xl font-bold'>
+            <div className='text-2xl font-bold text-justify leading-7'>
                 <p className='mt-4'>Welcome to our culinary journey! At AYO MASAK, we're passionate about making cooking accessible, enjoyable, and budget-friendly for everyone. Our team is a blend of food enthusiasts, experienced chefs, and creative minds who are dedicated to helping you explore the world of delicious dishes.</p>
                 <p className='mt-4'>Our mission is simple:
                     <ul className='mt-2'>

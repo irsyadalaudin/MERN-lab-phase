@@ -2,11 +2,31 @@ import { useState } from 'react'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
+    const [isEditing, setIsEditing] = useState(false)
+    const [name, setName] = useState('Joko')
+    const [userName, setUserName] = useState('joko0123')
+    const [email, setEmail] = useState('jokomiyaw@gmail.com')
 
-    const changeTab = (tabName) => {
+    const moveTab = (tabName) => {
         return () => {
             setSelectedTab(tabName)
         }
+    }
+
+    const handleEdit = () => {
+        setIsEditing((prev) => !prev)
+    }
+
+    const editName = (e) => {
+        setName(e.target.value)
+    }
+
+    const editUserName = (e) => {
+        setUserName(e.target.value)
+    }
+
+    const editEmail = (e) => {
+        setEmail(e.target.value)
     }
 
     return (
@@ -18,16 +38,33 @@ const Account = () => {
             <div className='flex gap-14'>
                 <div className='w-1/3 mt-5'>
                     <div className='flex flex-col'>
-                        <button onClick={changeTab('personal-information')} className='bg-transparent h-24'>Personal Information</button>
-                        <button onClick={changeTab('recipe-history')} className='bg-transparent h-24'>Recipe History</button>
-                        <button onClick={changeTab('favorite-food')} className='bg-transparent h-24'>Favorite Food</button>
-                        <button onClick={changeTab('account-setting')} className='bg-transparent h-24'>Account Setting</button>
+                        <button onClick={moveTab('personal-information')} className='bg-transparent h-24'>Personal Information</button>
+                        <button onClick={moveTab('recipe-history')} className='bg-transparent h-24'>Recipe History</button>
+                        <button onClick={moveTab('favorite-food')} className='bg-transparent h-24'>Favorite Food</button>
+                        <button onClick={moveTab('account-setting')} className='bg-transparent h-24'>Account Setting</button>
                     </div>
                 </div>
                 <div className='w-2/3 mt-5'>
                     {selectedTab === 'personal-information' && (
                         <div>
-                            content for personal information
+                            <form action='#'>
+                                <div>
+                                    <label className='block' htmlFor='name'>Name:</label>
+                                    <input onChange={editName} type='text' value={name} disabled={!isEditing}/>
+                                    <button onClick={handleEdit}>✎</button>
+                                </div>
+                                <div>
+                                    <label className='block' htmlFor='userName'>Username:</label>
+                                    <input onChange={editUserName} type='text' value={userName} disabled={!isEditing}/>
+                                    <button onClick={handleEdit}>✎</button>
+                                </div>
+                                <div>
+                                    <label className='block' htmlFor='email'>Email:</label>
+                                    <input onChange={editEmail} type='text' value={email} disabled={!isEditing}/>
+                                    <button onClick={handleEdit}>✎</button>
+                                </div>
+                            </form>
+                            
                         </div>
                     )}
                     {selectedTab === 'recipe-history' && (

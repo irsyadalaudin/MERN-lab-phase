@@ -18,11 +18,10 @@ const Login = () => {
     }
 
     return (
-        <>
         <div className='bg-yellow-600 h-90 px-28 flex justify-center items-center'>
             <div className='w-1/2 text-center relative'>
                 <div className='flex justify-center'>
-                    <p className='mb-6 text-2xl text-justify flex justify-center w-85'>Embark on a delightful culinary journey with us at AYO MASAK! &emsp; Let's make every meal an enjoyable and budget-friendly experience</p>
+                    <p className='mb-6 text-2xl text-justify flex justify-center w-85'>Embark on a delightful culinary journey with us at AYO MASAK! &ensp; Let's make every meal an enjoyable and budget-friendly experience</p>
                 </div>
                 <button onClick={handleToggleSignIn} disabled={showSignIn ? true : false} id='sign-in-btn' className='p-1 mb-2 bg-amber-700 rounded-l-lg hover: cursor-pointer hover:bg-amber-800'>Sign In</button>
                 <button onClick={handleToggleSignUp} disabled={disableSignUp} id='sign-up-btn' className='p-1 mb-2 bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800'>Sign Up</button>
@@ -42,13 +41,11 @@ const Login = () => {
                     <button className='float-right self-end bg-yellow-800 text-white p-2 mr-2.5 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign Up</button>
                 </form>
             </div>
-
             {/* IMAGE */}
             <div className='w-1/2 flex justify-center relative'>
                 <img className='w-450' src='https://i.postimg.cc/L6XC79m3/tofu-3.png' alt='tofu-login' style={{ objectFit: 'contain'}}/>
             </div>
         </div>
-        </>
     )
 }
 

@@ -3,8 +3,10 @@ import { useState } from 'react'
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
 
-    const handleChangeTab = (tab) => {
-        setSelectedTab(tab)
+    const changeTab = (tabName) => {
+        return () => {
+            setSelectedTab(tabName)
+        }
     }
 
     return (
@@ -13,13 +15,13 @@ const Account = () => {
                 <h1 className='pb-4 text-4xl'>Account</h1>
                 <p className='text-2xl'>Manage your personal information, including phone numbers and email address where you can be contacted</p>
             </div>
-            <div className='flex'>
+            <div className='flex gap-14'>
                 <div className='w-1/3 mt-5'>
                     <div className='flex flex-col'>
-                        <button onClick={() => handleChangeTab('personal-information')} className={selectedTab === 'personal-information' ? 'active-tab' : ''}>Personal Information</button>
-                        <button onClick={() => handleChangeTab('recipe-history')} className={selectedTab === 'recipe-history' ? 'active-tab' : ''}>Recipe History</button>
-                        <button onClick={() => handleChangeTab('favorite-food')} className={selectedTab === 'favorite-food' ? 'active-tab' : ''}>Favorite Food</button>
-                        <button onClick={() => handleChangeTab('account-setting')} className={selectedTab === 'account-setting' ? 'active-tab' : ''}>Account Setting</button>
+                        <button onClick={changeTab('personal-information')} className='bg-transparent h-24'>Personal Information</button>
+                        <button onClick={changeTab('recipe-history')} className='bg-transparent h-24'>Recipe History</button>
+                        <button onClick={changeTab('favorite-food')} className='bg-transparent h-24'>Favorite Food</button>
+                        <button onClick={changeTab('account-setting')} className='bg-transparent h-24'>Account Setting</button>
                     </div>
                 </div>
                 <div className='w-2/3 mt-5'>

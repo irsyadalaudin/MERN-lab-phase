@@ -47,3 +47,8 @@ button[disabled] {
 	background-color: #92400E;
 	cursor: not-allowed;
 }
+
+input:-webkit-autofill, input:-webkit-autofill:focus {
+	box-shadow: 0 0 0 1000px #854D0E inset;
+	-webkit-text-fill-color: #FFFFFF;
+	}

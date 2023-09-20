@@ -50,17 +50,17 @@ const Account = () => {
                             <form action='#'>
                                 <div>
                                     <label className='block' htmlFor='name'>Name:</label>
-                                    <input onChange={editName} type='text' value={name} disabled={!isEditing}/>
+                                    <input onChange={editName} type='text' value={name} disabled={!isEditing} autoComplete='off'/>
                                     <button onClick={handleEdit}>✎</button>
                                 </div>
                                 <div>
                                     <label className='block' htmlFor='userName'>Username:</label>
-                                    <input onChange={editUserName} type='text' value={userName} disabled={!isEditing}/>
+                                    <input onChange={editUserName} type='text' value={userName} disabled={!isEditing} autoComplete='off'/>
                                     <button onClick={handleEdit}>✎</button>
                                 </div>
                                 <div>
                                     <label className='block' htmlFor='email'>Email:</label>
-                                    <input onChange={editEmail} type='text' value={email} disabled={!isEditing}/>
+                                    <input onChange={editEmail} type='text' value={email} disabled={!isEditing} autoComplete='off'/>
                                     <button onClick={handleEdit}>✎</button>
                                 </div>
                             </form>

@@ -64,7 +64,6 @@ const Account = () => {
                                     <button onClick={handleEdit}>✎</button>
                                 </div>
                             </form>
-                            
                         </div>
                     )}
                     {selectedTab === 'recipe-history' && (

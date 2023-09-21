@@ -3,6 +3,7 @@ import { useState } from 'react'
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
     const [isEditing, setIsEditing] = useState(false)
+    const [editId, setEditId] = useState(null)
     const [name, setName] = useState('Joko')
     const [userName, setUserName] = useState('joko0123')
     const [email, setEmail] = useState('jokomiyaw@gmail.com')
@@ -13,8 +14,25 @@ const Account = () => {
         }
     }
 
-    const handleEdit = () => {
-        setIsEditing((prev) => !prev)
+    // const handleEdit = () => {
+    //     setIsEditing((prev) => !prev)
+    // }
+
+    const handleEdit = (id) => {
+        setIsEditing(true)
+        setEditId(id)
+    }
+
+    const handleEditName = () => {
+        handleEdit('name')
+    }
+
+    const handleEditUserName = () => {
+        handleEdit('userName')
+    }
+
+    const handleEditEmail = () => {
+        handleEdit('email')
     }
 
     const editName = (e) => {
@@ -29,6 +47,11 @@ const Account = () => {
         setEmail(e.target.value)
     }
 
+    const handleSave = () => {
+        setIsEditing(false)
+        setEditId(null)
+    }
+    
     return (
         <div className='bg-yellow-600 h-90 px-28'>
             <div className='text-center pt-8'>
@@ -50,20 +73,25 @@ const Account = () => {
                             <form action='#'>
                                 <div>
                                     <label className='block' htmlFor='name'>Name:</label>
-                                    <input onChange={editName} type='text' value={name} disabled={!isEditing} autoComplete='off'/>
-                                    <button onClick={handleEdit}>✎</button>
+                                    <input onChange={editName} type='text' value={name} disabled={!isEditing || (editId && editId !== 'name') } autoComplete='off'/>
+                                    {/* <button onClick={() => handleEdit ('name')}>✎</button> */}
+                                    <button onClick={handleEditName}>✎</button>
+                                    <button onClick={handleSave}>save</button>
                                 </div>
                                 <div>
                                     <label className='block' htmlFor='userName'>Username:</label>
-                                    <input onChange={editUserName} type='text' value={userName} disabled={!isEditing} autoComplete='off'/>
-                                    <button onClick={handleEdit}>✎</button>
+                                    <input onChange={editUserName} type='text' value={userName} disabled={!isEditing || (editId && editId !== 'userName') } autoComplete='off'/>
+                                    <button onClick={handleEditUserName}>✎</button>
+                                    <button onClick={handleSave}>save</button>
                                 </div>
                                 <div>
                                     <label className='block' htmlFor='email'>Email:</label>
-                                    <input onChange={editEmail} type='text' value={email} disabled={!isEditing} autoComplete='off'/>
-                                    <button onClick={handleEdit}>✎</button>
+                                    <input onChange={editEmail} type='text' value={email} disabled={!isEditing || (editId && editId !== 'email') } autoComplete='off'/>
+                                    <button onClick={handleEditEmail}>✎</button>
+                                    <button onClick={handleSave}>save</button>
                                 </div>
                             </form>
+                            
                         </div>
                     )}
                     {selectedTab === 'recipe-history' && (

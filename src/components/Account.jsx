@@ -89,16 +89,19 @@ const Account = () => {
                             
                         </div>
                     )}
+
                     {selectedTab === 'recipe-history' && (
                         <div>
                             content for recipe history
                         </div>
                     )}
+
                     {selectedTab === 'favorite-food' && (
                         <div>
                             content for favorite food
                         </div>
                     )}
+
                     {selectedTab === 'account-setting' && (
                         <div>
                             content for account setting

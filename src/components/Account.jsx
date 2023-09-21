@@ -96,7 +96,45 @@ const Account = () => {
 
                     {selectedTab === 'recipe-history' && (
                         <div>
-                            content for recipe history
+                            <h1>ayam bakar taliwang</h1>
+                            <h3>ingredients</h3>
+                            <ul>
+                                <li>1 ekor ayam, potong menjadi 4 bagian</li>
+                                <li>10 buah cabai rawit (sesuai selera pedas)</li>
+                                <li>5 buah cabai merah besar</li>
+                                <li>5 buah bawang merah</li>
+                                <li>3 siung bawang putih</li>
+                                <li>2 cm kencur</li>
+                                <li>1 cm jahe</li>
+                                <li>2 batang serai, memarkan</li>
+                                <li>3 lembar daun salam</li>
+                                <li>3 lembar daun jeruk</li>
+                                <li>2 sendok makan kecap manis</li>
+                                <li>1 sendok makan gula pasir</li>
+                                <li>Garam secukupnya</li>
+                                <li>Merica secukupnya</li>
+                                <li>Minyak untuk menggoreng dan menumis</li>
+                            </ul>
+                            <h3>cooking instructions</h3>
+                            <ol>
+                                <li>Siapkan bumbu halus:</li>
+                                <ul>
+                                    <li>Haluskan cabai rawit, cabai merah besar, bawang merah, bawang putih, kencur, dan jahe.</li>
+                                </ul>
+                                <li>Marinasi Ayam:</li>
+                                <ul>
+                                    <li>Campurkan ayam dengan bumbu halus, kecap manis, gula pasir, garam, dan merica. Diamkan minimal 1-2 jam agar bumbu meresap.</li>
+                                </ul>
+                                <li>Panggang Ayam:</li>
+                                <ul>
+                                    <li>Panaskan grill atau panggangan. Olesi ayam dengan sedikit minyak.</li>
+                                    <li>Panggang ayam di atas bara api hingga matang dan berwarna kecokelatan.</li>
+                                </ul>
+                                <li>Sajikan:</li>
+                                <ul>
+                                    <li>Sajikan ayam bakar Taliwang bersama nasi putih hangat, irisan timun, dan lalapan daun kemangi. Tambahkan sambal untuk lebih pedas jika diinginkan.</li>
+                                </ul>
+                            </ol>
                         </div>
                     )}
 

@@ -14,10 +14,6 @@ const Account = () => {
         }
     }
 
-    // const handleEdit = () => {
-    //     setIsEditing((prev) => !prev)
-    // }
-
     const handleEdit = (id) => {
         setIsEditing(true)
         setEditId(id)
@@ -74,7 +70,6 @@ const Account = () => {
                                 <div>
                                     <label className='block' htmlFor='name'>Name:</label>
                                     <input onChange={editName} type='text' value={name} disabled={!isEditing || (editId && editId !== 'name') } autoComplete='off'/>
-                                    {/* <button onClick={() => handleEdit ('name')}>✎</button> */}
                                     <button onClick={handleEditName}>✎</button>
                                     <button onClick={handleSave}>save</button>
                                 </div>

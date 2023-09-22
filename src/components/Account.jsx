@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import './Account.css'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
@@ -7,6 +8,7 @@ const Account = () => {
     const [name, setName] = useState('Joko')
     const [userName, setUserName] = useState('joko0123')
     const [email, setEmail] = useState('jokomiyaw@gmail.com')
+    const contentRef = useRef(null)
 
     const moveTab = (tabName) => {
         return () => {
@@ -54,14 +56,27 @@ const Account = () => {
             handleSave()
         }
     }
-    
+
+    useEffect(() => {
+        // Update the class of the container based on content height
+        if (contentRef.current) {
+            const contentHeight = contentRef.current.offsetHeight;
+            const container = document.getElementById('container');
+            if (contentHeight > container.clientHeight) {
+                container.classList.add('fullHeight');     // Apply the class for full height
+            } else {
+                container.classList.remove('fullHeight');  // Remove the class if not needed
+            }
+        }
+    });
+
     return (
-        <div className='bg-yellow-600 h-90 px-28'>
+        <div id='container' className='bg-yellow-600 h-90 px-28'>
             <div className='text-center pt-8'>
                 <h1 className='pb-4 text-4xl'>Account</h1>
                 <p className='text-2xl'>Manage your personal information, including phone numbers and email address where you can be contacted</p>
             </div>
-            <div className='flex gap-14'>
+            <div className='flex flex-grow gap-14' ref={contentRef}>
                 <div className='w-1/3 mt-5'>
                     <div className='flex flex-col'>
                         <button onClick={moveTab('personal-information')} className='bg-transparent h-24'>Personal Information</button>
@@ -70,7 +85,7 @@ const Account = () => {
                         <button onClick={moveTab('account-setting')} className='bg-transparent h-24'>Account Setting</button>
                     </div>
                 </div>
-                <div className='w-2/3 mt-5'>
+                <div className='w-2/3 mt-5' ref={contentRef}>
                     {selectedTab === 'personal-information' && (
                         <form action='#'>
                             <div>

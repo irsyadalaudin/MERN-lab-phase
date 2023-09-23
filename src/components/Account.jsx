@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from 'react'
+// import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Account.css'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
+    const [contentExceddHeight, setContentExceddHeight] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editId, setEditId] = useState(null)
     const [name, setName] = useState('Joko')
     const [userName, setUserName] = useState('joko0123')
     const [email, setEmail] = useState('jokomiyaw@gmail.com')
-    const contentRef = useRef(null)
+    // const contentRef = useRef(null)
 
     const moveTab = (tabName) => {
         return () => {
@@ -57,26 +59,42 @@ const Account = () => {
         }
     }
 
+    // useEffect(() => {
+    //     // Update the class of the container based on content height
+    //     if (contentRef.current) {
+    //         const contentHeight = contentRef.current.offsetHeight;
+    //         const container = document.getElementById('container');
+    //         if (contentHeight > container.clientHeight) {
+    //             container.classList.add('fullHeight');     // Apply the class for full height
+    //         } else {
+    //             container.classList.remove('fullHeight');  // Remove the class if not needed
+    //         }
+    //     }
+    // });
+
     useEffect(() => {
-        // Update the class of the container based on content height
-        if (contentRef.current) {
-            const contentHeight = contentRef.current.offsetHeight;
-            const container = document.getElementById('container');
-            if (contentHeight > container.clientHeight) {
-                container.classList.add('fullHeight');     // Apply the class for full height
-            } else {
-                container.classList.remove('fullHeight');  // Remove the class if not needed
-            }
+        const container = document.getElementById('container')
+        const contentHeight = container.scrollHeight
+        const containerHeight = container.clientHeight
+
+        if (contentHeight > containerHeight) {
+            setContentExceddHeight(true)
+        } else {
+            setContentExceddHeight(false)
         }
-    });
+    }, [selectedTab])
+
+    const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
 
     return (
-        <div id='container' className='bg-yellow-600 h-90 px-28'>
+        // <div id='container' className='bg-yellow-600 h-90 px-28'>
+        <div id='container' className={containerStyle}>
             <div className='text-center pt-8'>
                 <h1 className='pb-4 text-4xl'>Account</h1>
                 <p className='text-2xl'>Manage your personal information, including phone numbers and email address where you can be contacted</p>
             </div>
-            <div className='flex flex-grow gap-14' ref={contentRef}>
+            {/* <div className='flex flex-grow gap-14' ref={contentRef}> */}
+            <div className='flex flex-grow gap-14'>
                 <div className='w-1/3 mt-5'>
                     <div className='flex flex-col'>
                         <button onClick={moveTab('personal-information')} className='bg-transparent h-24'>Personal Information</button>
@@ -85,7 +103,8 @@ const Account = () => {
                         <button onClick={moveTab('account-setting')} className='bg-transparent h-24'>Account Setting</button>
                     </div>
                 </div>
-                <div className='w-2/3 mt-5' ref={contentRef}>
+                {/* <div className='w-2/3 mt-5' ref={contentRef}> */}
+                <div className='w-2/3 mt-5'>
                     {selectedTab === 'personal-information' && (
                         <form action='#'>
                             <div>

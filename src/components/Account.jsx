@@ -1,6 +1,5 @@
 // import { useEffect, useRef, useState } from 'react'
 import { useEffect, useState } from 'react'
-import './Account.css'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')

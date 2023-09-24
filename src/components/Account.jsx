@@ -8,6 +8,8 @@ const Account = () => {
     const [name, setName] = useState('Joko')
     const [userName, setUserName] = useState('joko0123')
     const [email, setEmail] = useState('jokomiyaw@gmail.com')
+    const [favoriteFood, setFavoriteFood] = useState('')
+    const [submitedFavoriteFood, setSubmitedFavoriteFood] = useState([])
 
     const moveTab = (tabName) => {
         return () => {
@@ -15,6 +17,8 @@ const Account = () => {
         }
     }
 
+
+    /* PERSONAL INFORMATION FUNCTION */
     const handleEdit = (id) => {
         setIsEditing(true)
         setEditId(id)
@@ -56,6 +60,8 @@ const Account = () => {
         }
     }
 
+
+    /* RECIPE HISTORY FUNCTION */
     useEffect(() => {
         const container = document.getElementById('container')
         const contentHeight = container.scrollHeight
@@ -69,6 +75,20 @@ const Account = () => {
     }, [selectedTab])
 
     const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
+
+
+    /* FAVORITE FOOD FUNCTION */
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setSubmitedFavoriteFood([...submitedFavoriteFood, favoriteFood])
+        setFavoriteFood('')
+        // console.log(favoriteFood)
+    }
+
+    const handleFavoriteFood = (e) => {
+        setFavoriteFood(e.target.value)
+    }
+
 
     return (
         <div id='container' className={containerStyle}>
@@ -155,14 +175,24 @@ const Account = () => {
 
                     {selectedTab === 'favorite-food' && (
                         <div>
-                            content for favorite food
+                            <form onSubmit={handleSubmit}>
+                                <label className='block' htmlFor='favoriteFood'>Favorite Food:</label>
+                                <input className='block' type='text' value={favoriteFood} onChange={handleFavoriteFood} />
+                                <button type='submit'>submit</button>
+                            </form>
+
+                            <ol>
+                                {submitedFavoriteFood.map((food, index) => {
+                                    return <li key={index}>{food}</li>
+                                })}
+                            </ol>
                         </div>
                     )}
 
                     {selectedTab === 'account-setting' && (
-                        <div>
+                        <form>
                             content for account setting
-                        </div>
+                        </form>
                     )}
                 </div>
             </div>

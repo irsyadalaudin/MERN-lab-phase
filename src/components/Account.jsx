@@ -83,7 +83,7 @@ const Account = () => {
 
             const newFavoriteFood = {
                 id: Date.now(),
-                favoriteFood: favoriteFood
+                favoriteFood
             }
 
         setSubmitedFavoriteFood([...submitedFavoriteFood, newFavoriteFood])

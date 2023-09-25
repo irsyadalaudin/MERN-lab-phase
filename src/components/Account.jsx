@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import 'font-awesome/css/font-awesome.min.css'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
@@ -95,6 +96,12 @@ const Account = () => {
         setFavoriteFood(e.target.value)
     }
 
+    const handleDeleteFavoriteFood = (id) => {
+        const deleteFavoriteFood = submitedFavoriteFood.filter(food => food.id !== id)
+        setSubmitedFavoriteFood(deleteFavoriteFood)
+        console.log(deleteFavoriteFood)
+    }
+
 
     return (
         <div id='container' className={containerStyle}>
@@ -188,7 +195,12 @@ const Account = () => {
                             </form>
                             <ol>
                                 {submitedFavoriteFood.map((food) => {
-                                    return <li key={food.id}>{food.favoriteFood}</li>
+                                    return (
+                                        <li key={food.id}>
+                                        {food.favoriteFood}
+                                        <button onClick={() => handleDeleteFavoriteFood(food.id)}>🗑</button>
+                                        </li>
+                                    )
                                 })}
                             </ol>
                         </div>

@@ -80,9 +80,18 @@ const Account = () => {
     /* FAVORITE FOOD FUNCTION */
     const handleSubmit = (e) => {
         e.preventDefault()
-        setSubmitedFavoriteFood([...submitedFavoriteFood, favoriteFood])
+
+            const newFavoriteFood = {
+                id: Date.now(),
+                favoriteFood: favoriteFood
+                // Date.now(),
+                // favoriteFood
+            }
+        // setSubmitedFavoriteFood([...submitedFavoriteFood, favoriteFood])
+        setSubmitedFavoriteFood([...submitedFavoriteFood, newFavoriteFood])
         setFavoriteFood('')
         // console.log(favoriteFood)
+        console.log(submitedFavoriteFood)
     }
 
     const handleFavoriteFood = (e) => {
@@ -180,10 +189,12 @@ const Account = () => {
                                 <input className='block' type='text' value={favoriteFood} onChange={handleFavoriteFood} />
                                 <button type='submit'>submit</button>
                             </form>
-
                             <ol>
-                                {submitedFavoriteFood.map((food, index) => {
+                                {/* {submitedFavoriteFood.map((food, index) => {
                                     return <li key={index}>{food}</li>
+                                })} */}
+                                {submitedFavoriteFood.map((food) => {
+                                    return <li key={food.id}>{food.favoriteFood}</li>
                                 })}
                             </ol>
                         </div>

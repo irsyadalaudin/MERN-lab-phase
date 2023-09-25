@@ -102,6 +102,11 @@ const Account = () => {
         console.log(deleteFavoriteFood)
     }
 
+    const handleDeleteAll = () => {
+        setSubmitedFavoriteFood([])
+        console.log(submitedFavoriteFood)
+    }
+    
 
     return (
         <div id='container' className={containerStyle}>
@@ -203,6 +208,10 @@ const Account = () => {
                                     )
                                 })}
                             </ol>
+                            {submitedFavoriteFood.length > 0 && (
+                                    <button onClick={handleDeleteAll}>deleteAll</button>
+                                )
+                            }
                         </div>
                     )}
 

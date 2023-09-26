@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import 'font-awesome/css/font-awesome.min.css'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')

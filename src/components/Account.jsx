@@ -199,14 +199,12 @@ const Account = () => {
                                 <button type='submit'>submit</button>
                             </form>
                             <ol>
-                                {submitedFavoriteFood.map((food) => {
-                                    return (
+                                {submitedFavoriteFood.map((food) => (
                                         <li key={food.id}>
                                         {food.favoriteFood}
                                         <button onClick={() => handleDeleteFavoriteFood(food.id)}>🗑</button>
                                         </li>
-                                    )
-                                })}
+                                    ))}
                             </ol>
                             {submitedFavoriteFood.length > 0 && (
                                     <button onClick={handleDeleteAll}>deleteAll</button>

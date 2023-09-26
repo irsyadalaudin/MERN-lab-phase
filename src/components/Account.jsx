@@ -200,8 +200,8 @@ const Account = () => {
                             <ol>
                                 {submitedFavoriteFood.map((food) => (
                                     <li key={food.id}>
-                                    {food.favoriteFood}
-                                    <button onClick={() => handleDeleteFavoriteFood(food.id)}>🗑</button>
+                                        {food.favoriteFood}
+                                        <button onClick={() => handleDeleteFavoriteFood(food.id)}>🗑</button>
                                     </li>
                                 ))}
                             </ol>

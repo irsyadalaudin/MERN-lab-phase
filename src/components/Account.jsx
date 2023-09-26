@@ -214,7 +214,19 @@ const Account = () => {
 
                     {selectedTab === 'account-setting' && (
                         <form>
-                            content for account setting
+                            <div>
+                                <label className='block' htmlFor='currentPassword'>Current Password:</label>
+                                <input type='password' placeholder='*****' />
+                            </div>
+                            <div>
+                                <label className='block' htmlFor='newPassword'>New Password:</label>
+                                <input type='password' placeholder='*****' />
+                            </div>
+                            <div>
+                                <label className='block' htmlFor='confirmNewPassword'>Confirm New Password:</label>
+                                <input type='password' placeholder='*****' />
+                            </div>
+                            <button>Save</button>
                         </form>
                     )}
                 </div>

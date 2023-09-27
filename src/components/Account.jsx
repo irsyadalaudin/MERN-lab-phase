@@ -10,6 +10,8 @@ const Account = () => {
     const [email, setEmail] = useState('jokomiyaw@gmail.com')
     const [favoriteFood, setFavoriteFood] = useState('')
     const [submitedFavoriteFood, setSubmitedFavoriteFood] = useState([])
+    const [editFavoriteFood, setEditFavoriteFood] = useState(null)
+    // const [editingFavoritFood, setEditingFavoriteFood] = useState('')
 
     const moveTab = (tabName) => {
         return () => {
@@ -105,7 +107,29 @@ const Account = () => {
         setSubmitedFavoriteFood([])
         console.log(submitedFavoriteFood)
     }
-    
+
+    const handleEditFavoriteFood = (id) => {
+        // setFavoriteFood('')
+        setEditFavoriteFood(id)
+        const editFavoriteFood = submitedFavoriteFood.find(food => food.id === id)
+        setFavoriteFood(editFavoriteFood.favoriteFood)
+        // if (editFavoriteFood) {
+        //     setFavoriteFood(editFavoriteFood)
+        // }
+    }
+
+    const handleSaveAfterEditFavoriteFood = (id) => {
+        const updatetFavoriteFoodList = submitedFavoriteFood.map((food) => {
+            if (food.id === id) {
+                return {...food, favoriteFood}
+            } else {
+                return food
+            }
+        })
+        setSubmitedFavoriteFood(updatetFavoriteFoodList)
+        setEditFavoriteFood(null)
+        setFavoriteFood('')
+    }
 
     return (
         <div id='container' className={containerStyle}>
@@ -200,8 +224,21 @@ const Account = () => {
                             <ol>
                                 {submitedFavoriteFood.map((food) => (
                                     <li key={food.id}>
-                                        {food.favoriteFood}
+                                        {/* {food.favoriteFood}
                                         <button onClick={() => handleDeleteFavoriteFood(food.id)}>🗑</button>
+                                        <button onClick={() => handleEditFavoriteFood(food.id)}>✎</button> */}
+                                        {editFavoriteFood === food.id ? (
+                                            <div>
+                                                <input type='text' value={favoriteFood} onChange={handleFavoriteFood} />
+                                                <button onClick={() => handleSaveAfterEditFavoriteFood(food.id)}>✔</button>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                {food.favoriteFood}
+                                                <button onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
+                                                <button onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
+                                            </div>
+                                        )}
                                     </li>
                                 ))}
                             </ol>

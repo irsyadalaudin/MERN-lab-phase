@@ -10,7 +10,6 @@ const Account = () => {
     const [email, setEmail] = useState('jokomiyaw@gmail.com')
     const [favoriteFood, setFavoriteFood] = useState('')
     const [submitedFavoriteFood, setSubmitedFavoriteFood] = useState([])
-    // const [editFavoriteFood, setEditFavoriteFood] = useState(null)
     const [editFavoriteFood, setEditFavoriteFood] = useState({ id: null, text: '' })  // STATE FOR EDIT BUTTON
 
     const moveTab = (tabName) => {
@@ -80,19 +79,6 @@ const Account = () => {
 
 
     /* FAVORITE FOOD FUNCTION */
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-
-    //         const newFavoriteFood = {
-    //             id: Date.now(),
-    //             favoriteFood
-    //         }
-
-    //     setSubmitedFavoriteFood([...submitedFavoriteFood, newFavoriteFood])
-    //     setFavoriteFood('')
-    //     console.log(submitedFavoriteFood)
-    // }
-
     const handleSubmit = (e) => {
         // USE CORRESPONDING INPUT BASED ON EDIT MODE 
         e.preventDefault()
@@ -111,14 +97,9 @@ const Account = () => {
         }
     }
 
-    // const handleFavoriteFood = (e) => {
-    //     setFavoriteFood(e.target.value)
-    // }
-
     const handleFavoriteFood = (e) => {
         // UPDATE THE STATE ACCORDING TO THE ACTIVE INPUT 
         if  (editFavoriteFood.id !== null) {
-            // setEditFavoriteFood({ id: editFavoriteFood.id, text: e.target.value })
             setEditFavoriteFood({ ...editFavoriteFood, text: e.target.value })
             // SPREAD OPERATOR IS A MORE COMMON AND RECOMMENDED USE
         } else {
@@ -136,36 +117,12 @@ const Account = () => {
         setSubmitedFavoriteFood([])
         console.log(submitedFavoriteFood)
     }
-    /*
-    const handleEditFavoriteFood = (id) => {
-        // setFavoriteFood('')
-        setEditFavoriteFood(id)
-        const editFavoriteFood = submitedFavoriteFood.find(food => food.id === id)
-        setFavoriteFood(editFavoriteFood.favoriteFood)
-        // if (editFavoriteFood) {
-        //     setFavoriteFood(editFavoriteFood)
-        // }
-    }*/
 
     const handleEditFavoriteFood = (id) => {
         const editFavoriteFood = submitedFavoriteFood.find(food => food.id === id)
-        // setEditFavoriteFood({ id: id, text: editFavoriteFood.favoriteFood })
         setEditFavoriteFood({ id, text: editFavoriteFood.favoriteFood })
         // SHORTHAND PROPERTY. IF THE PROPERTY NAME IN THE OBJECT IS THE SAME AS THE NAME OF THE VARIABLE THAT STORES IT
     }
-
-    // const handleSaveAfterEditFavoriteFood = (id) => {
-    //     const updatetFavoriteFoodList = submitedFavoriteFood.map((food) => {
-    //         if (food.id === id) {
-    //             return {...food, favoriteFood}
-    //         } else {
-    //             return food
-    //         }
-    //     })
-    //     setSubmitedFavoriteFood(updatetFavoriteFoodList)
-    //     setEditFavoriteFood(null)
-    //     setFavoriteFood('')
-    // }
 
     const handleSaveAfterEditFavoriteFood = (id) => {
         const updatetFavoriteFoodList = submitedFavoriteFood.map((food) => {
@@ -279,12 +236,8 @@ const Account = () => {
                             <ol>
                                 {submitedFavoriteFood.map((food) => (
                                     <li key={food.id}>
-                                        {/* {editFavoriteFood === food.id ? ( */}
                                         {editFavoriteFood.id === food.id ? (
                                             <div>
-                                                {/* <input type='text' value={favoriteFood} onChange={handleFavoriteFood} /> */}
-                                                {/* <input type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} onKeyDown={handleEnterFavoriteFood} />
-                                                <button onClick={() => handleSaveAfterEditFavoriteFood(food.id)}>✔</button> */}
                                                 <form onSubmit={() => handleSaveAfterEditFavoriteFood(food.id)}>
                                                     <input type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} />
                                                     <button type='submit'>✔</button>

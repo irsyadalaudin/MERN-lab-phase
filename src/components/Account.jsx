@@ -223,7 +223,7 @@ const Account = () => {
                         <div>
                             <form onSubmit={handleSubmit}>
                                 <label className='block' htmlFor='favoriteFood'>Favorite Food:</label>
-                                <input className='block' type='text' value={favoriteFood} onChange={handleFavoriteFood} />
+                                <input className='block w-52' type='text' placeholder='Enter your favorite food here' value={favoriteFood} onChange={handleFavoriteFood} />
                                 <button type='submit'>submit</button>
                             </form>
                             <ol>

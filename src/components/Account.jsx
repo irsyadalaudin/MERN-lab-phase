@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
@@ -11,6 +11,7 @@ const Account = () => {
     const [favoriteFood, setFavoriteFood] = useState('')
     const [submitedFavoriteFood, setSubmitedFavoriteFood] = useState([])
     const [editFavoriteFood, setEditFavoriteFood] = useState({ id: null, text: '' })  // STATE FOR EDIT BUTTON
+    const editInputRef = useRef(null)
 
     const moveTab = (tabName) => {
         return () => {
@@ -136,6 +137,12 @@ const Account = () => {
         setEditFavoriteFood({ id: null, text:'' })  // RESET EDIT MODE
     }
 
+    useEffect(() => {
+        if (editFavoriteFood.id !== null) {
+            editInputRef.current.focus()
+        }
+    }, [editFavoriteFood.id])
+
     return (
         <div id='container' className={containerStyle}>
             <div className='text-center pt-8'>
@@ -232,7 +239,7 @@ const Account = () => {
                                         {editFavoriteFood.id === food.id ? (
                                             <div>
                                                 <form onSubmit={() => handleSaveAfterEditFavoriteFood(food.id)}>
-                                                    <input type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} />
+                                                    <input className='bg-transparent outline-none border-none' type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} ref={editInputRef} />
                                                     <button type='submit'>✔</button>
                                                 </form>
                                             </div>

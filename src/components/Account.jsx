@@ -239,7 +239,7 @@ const Account = () => {
                                         {editFavoriteFood.id === food.id ? (
                                             <div>
                                                 <form onSubmit={() => handleSaveAfterEditFavoriteFood(food.id)}>
-                                                    <input className='bg-transparent outline-none border-none' type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} ref={editInputRef} />
+                                                    <input className='bg-transparent outline-none border-none text-base' type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} ref={editInputRef} />
                                                     <button type='submit'>✔</button>
                                                 </form>
                                             </div>

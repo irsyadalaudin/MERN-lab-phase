@@ -136,13 +136,6 @@ const Account = () => {
         setEditFavoriteFood({ id: null, text:'' })  // RESET EDIT MODE
     }
 
-    const handleEnterFavoriteFood = (e, food) => {
-        if (e.key === 'Enter') {
-            e.preventDefault()
-            handleSaveAfterEditFavoriteFood(food.id)
-        }
-    }
-
     return (
         <div id='container' className={containerStyle}>
             <div className='text-center pt-8'>

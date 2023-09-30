@@ -235,20 +235,26 @@ const Account = () => {
                             </form>
                             <ol>
                                 {submitedFavoriteFood.map((food) => (
-                                    <li key={food.id}>
+                                    <li className='w-64' key={food.id}>
                                         {editFavoriteFood.id === food.id ? (
-                                            <div>
-                                                <form onSubmit={() => handleSaveAfterEditFavoriteFood(food.id)}>
-                                                    <input className='bg-transparent outline-none border-none text-base' type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} ref={editInputRef} />
-                                                    <button type='submit'>✔</button>
-                                                </form>
-                                            </div>
+                                            <form onSubmit={() => handleSaveAfterEditFavoriteFood(food.id)}>
+                                                <input className='bg-transparent outline-none border-none text-base' type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} ref={editInputRef} />
+                                                <button type='submit'>✔</button>
+                                            </form>
                                         ) : (
-                                            <div>
+                                            // <form className='inline w-12'>
+                                            // <form className='flex items-center'>
+                                            //     {food.favoriteFood}
+                                            //     <button onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
+                                            //     <button onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
+                                            // </form>
+                                            <form className='flex items-center w-52'>
                                                 {food.favoriteFood}
-                                                <button onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
-                                                <button onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
-                                            </div>
+                                                <div className='ml-auto'>
+                                                    <button onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
+                                                    <button onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
+                                                </div>
+                                            </form>
                                         )}
                                     </li>
                                 ))}

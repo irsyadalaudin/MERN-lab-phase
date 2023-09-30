@@ -242,12 +242,6 @@ const Account = () => {
                                                 <button type='submit'>✔</button>
                                             </form>
                                         ) : (
-                                            // <form className='inline w-12'>
-                                            // <form className='flex items-center'>
-                                            //     {food.favoriteFood}
-                                            //     <button onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
-                                            //     <button onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
-                                            // </form>
                                             <form className='flex items-center w-52'>
                                                 {food.favoriteFood}
                                                 <div className='ml-auto'>

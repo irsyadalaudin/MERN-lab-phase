@@ -231,7 +231,9 @@ const Account = () => {
                             <form onSubmit={handleSubmit}>
                                 <label className='block' htmlFor='favoriteFood'>Favorite Food:</label>
                                 <input className='block w-60' type='text' placeholder='Enter your favorite food here' value={favoriteFood} onChange={handleFavoriteFood} />
-                                <button type='submit'>submit</button>
+                                <div className='flex w-62 mt-0.5'>
+                                    <button className='ml-auto' type='submit'>submit</button>
+                                </div>
                             </form>
                             <ol>
                                 {submitedFavoriteFood.map((food) => (

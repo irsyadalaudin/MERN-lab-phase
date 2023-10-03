@@ -4,26 +4,53 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const Recipe = () => {
-    const [ingredients, setIngredients] = useState('')
+    // const [ingredients, setIngredients] = useState('')
+    const [ingredients, setIngredients] = useState([])
     const [recipes, setRecipes] = useState([])
     const [contentExceddHeight, setContentExceddHeight] = useState(false)
+    const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
+
+    // const searchRecipe = async () => {
+    //     try {
+    //         const response = await
+    //         axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`)
+    //         setRecipes(response.data.meals)
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
     const searchRecipe = async () => {
         try {
-            const response = await
-            axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`)
-            setRecipes(response.data.meals)
-        } catch (error) {
+            const joinedIngredients = ingredients.join(',')
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)
+            setRecipes(response.data.meals || [])
+            setShowNoRecipesMessage(response.data.meals ? false : true)  // AFTER GETTING THE RESULTS, SET THE MESSAGE DISPLAY BASED ON THE RESULTS
+        }
+        catch (error) {
             console.error(error)
         }
     }
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    // }
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        if (ingredients.length > 0) {
+            searchRecipe()
+        }
     }
 
+    // const handleIngredients = (e) => {
+    //     setIngredients(e.target.value)
+    // }
+
     const handleIngredients = (e) => {
-        setIngredients(e.target.value)
+        const input = e.target.value
+        const ingredientsArray = input.split(/[\s,]/).filter(ingredients => ingredients.length > 0)
+        setIngredients(ingredientsArray)
     }
 
     useEffect(() => {
@@ -50,7 +77,16 @@ const Recipe = () => {
             <form onSubmit={handleSubmit} className='flex justify-center px-28 mt-4'>
                 <textarea onChange={handleIngredients} className='placeholder-white focus:outline-none resize-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></textarea>
             </form>
-            <button onClick={searchRecipe} className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
+            <button onClick={searchRecipe} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
+            {/* {recipes.map(recipe => (
+                <div key={recipe.idMeal}>
+                    <h2>{recipe.strMeal}</h2>
+                    <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+                </div>
+            ))} */}
+            {showNoRecipesMessage && (
+                <p>No recipes found for the specified ingredients</p>
+            )}
             {recipes.map(recipe => (
                 <div key={recipe.idMeal}>
                     <h2>{recipe.strMeal}</h2>

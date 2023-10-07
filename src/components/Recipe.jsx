@@ -8,6 +8,7 @@ const Recipe = () => {
     const [contentExceddHeight, setContentExceddHeight] = useState(false)
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(null)
+    const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
 
 
     const searchRecipe = async () => {
@@ -76,15 +77,26 @@ const Recipe = () => {
                 <p>No recipes found for the specified ingredients</p>
             )}
 
-            {recipes.map(recipe => (
+            {/* {recipes.map(recipe => (
                 <div key={recipe.idMeal}>
                     <h2>{recipe.strMeal}</h2>
                     <img src={recipe.strMealThumb} alt={recipe.strMeal} />
                     <button onClick={() => getRecipeDetail(recipe.idMeal)}>Recipe</button>
                 </div>
+            ))} */}
+
+            {!isRecipeDetailVisible && recipes.map(recipe => (
+                <div key={recipe.idMeal}>
+                    <h2>{recipe.strMeal}</h2>
+                    <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+                    <button onClick={() => {
+                        setIsRecipeDetailVisible(true)
+                        getRecipeDetail(recipe.idMeal)
+                    }}>Recipe</button>
+                </div>
             ))}
 
-            {selectedRecipeDetail && (
+            {/* {selectedRecipeDetail && (
                 <div>
                     <h2>Recipe Detail for: {selectedRecipeDetail.strMeal}</h2>
                     <h3>Ingredients:</h3>
@@ -100,6 +112,28 @@ const Recipe = () => {
                     </ul>
                     <h3>Cooking Instructions:</h3>
                     <p>{selectedRecipeDetail.strInstructions}</p>
+                </div>
+            )} */}
+
+            {isRecipeDetailVisible && selectedRecipeDetail && (
+                <div>
+                    <h2>Recipe Detail for: {selectedRecipeDetail.strMeal}</h2>
+                    <img src={selectedRecipeDetail.strMealThumb} alt={selectedRecipeDetail.strMeal} />
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        {Array.from({ length: 20 }, (v, i) => i + 1)
+                            .filter((index) => selectedRecipeDetail[`strIngredient${index}`])
+                            .map((index) => (
+                                <li key={index}>
+                                    {selectedRecipeDetail[`strIngredient${index}`]} - {' '}
+                                    {selectedRecipeDetail[`strMeasure${index}`]}
+                                </li>
+                            ))}
+                    </ul>
+                    <h3>Cooking Instructions:</h3>
+                    <p>{selectedRecipeDetail.strInstructions}</p>
+                    <button onClick={() => setIsRecipeDetailVisible(false)}>⬅</button>
+                    {/* <button onClick={() => setRecipeDetailVisible(false)}><span role="img" aria-label="Back" style="font-size: 24px;">🔙</span></button> */}
                 </div>
             )}
         </div>

@@ -96,14 +96,15 @@ const Recipe = () => {
                     <img src={selectedRecipeDetail.strMealThumb} alt={selectedRecipeDetail.strMeal} />
                     <h3>Ingredients:</h3>
                     <ul>
-                        {Array.from({ length: 20 }, (v, i) => i + 1)
+                        {Array.from({ length: 20 }, (v, index) => index + 1)
                             .filter((index) => selectedRecipeDetail[`strIngredient${index}`])
                             .map((index) => (
                                 <li key={index}>
                                     {selectedRecipeDetail[`strIngredient${index}`]} - {' '}
                                     {selectedRecipeDetail[`strMeasure${index}`]}
                                 </li>
-                            ))}
+                            ))
+                        }
                     </ul>
                     <h3>Cooking Instructions:</h3>
                     <p>{selectedRecipeDetail.strInstructions}</p>

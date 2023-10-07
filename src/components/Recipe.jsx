@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 
 const Recipe = () => {
@@ -9,7 +9,7 @@ const Recipe = () => {
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(null)
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
-
+    const inputRef = useRef(null)
 
     const searchRecipe = async () => {
         try {
@@ -17,6 +17,7 @@ const Recipe = () => {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)        // THIS ENSURES THAT IF joinedIngredients CONTAINS SPECIAL CHARACTERS OR SPACE, THOSE CHARACTERS WILL BE CONVERTED TO A PRECENTAGE REPRESENTATION THAT IS SAFE FOR USE IN URLs
             setRecipes(response.data.meals || [])
             setShowNoRecipesMessage(response.data.meals ? false : true)  // AFTER GETTING THE RESULTS, SET THE MESSAGE DISPLAY BASED ON THE RESULTS  // WHEN response.data.meals HAS A VALUE (truthly), THEN setShowNoRecipesMessage BECOMES (false), AND THE MESSAGE `No recipes found for the specified ingredients` IS NOT DISPLAYED
+            inputRef.current.value = ''
         }
         catch (error) {
             console.error(error)
@@ -39,6 +40,8 @@ const Recipe = () => {
             searchRecipe()
         }
     }
+
+    const isInputEmpty = ingredients.length === 0
 
     const handleIngredients = (e) => {
         const input = e.target.value
@@ -69,9 +72,9 @@ const Recipe = () => {
             </div>
 
             <form onSubmit={handleSubmit} className='flex px-28 mt-4'>
-                <input onChange={handleIngredients} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></input>
+                <input onChange={handleIngredients} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></input>
             </form>
-            <button onClick={searchRecipe} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
+            <button onClick={searchRecipe} disabled={isInputEmpty} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
 
             {showNoRecipesMessage && (
                 <p>No recipes found for the specified ingredients</p>

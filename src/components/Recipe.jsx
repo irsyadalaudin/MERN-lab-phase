@@ -17,7 +17,7 @@ const Recipe = () => {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)        // THIS ENSURES THAT IF joinedIngredients CONTAINS SPECIAL CHARACTERS OR SPACE, THOSE CHARACTERS WILL BE CONVERTED TO A PRECENTAGE REPRESENTATION THAT IS SAFE FOR USE IN URLs
             setRecipes(response.data.meals || [])
             setShowNoRecipesMessage(response.data.meals ? false : true)  // AFTER GETTING THE RESULTS, SET THE MESSAGE DISPLAY BASED ON THE RESULTS  // WHEN response.data.meals HAS A VALUE (truthly), THEN setShowNoRecipesMessage BECOMES (false), AND THE MESSAGE `No recipes found for the specified ingredients` IS NOT DISPLAYED
-            inputRef.current.value = ''
+            inputRef.current.value = ''                                  // CLEAR THE INPUT AFTER SEARCH
         }
         catch (error) {
             console.error(error)
@@ -59,7 +59,7 @@ const Recipe = () => {
         } else {
             setContentExceddHeight(false)
         }
-    }, [recipes])  // MONITOR CHANGES TO 'RECIPES'
+    }, [recipes])                            // MONITOR CHANGES TO 'RECIPES'
 
     const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
 

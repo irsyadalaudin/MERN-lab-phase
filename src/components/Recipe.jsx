@@ -74,7 +74,7 @@ const Recipe = () => {
             <form onSubmit={handleSubmit} className='flex px-28 mt-4'>
                 <input onChange={handleIngredients} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></input>
             </form>
-            <button onClick={searchRecipe} disabled={isInputEmpty} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
+            <button onClick={searchRecipe} disabled={isInputEmpty|| !inputRef.current.value} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>
 
             {showNoRecipesMessage && (
                 <p>No recipes found for the specified ingredients</p>

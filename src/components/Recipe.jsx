@@ -109,7 +109,6 @@ const Recipe = () => {
                     <h3>Cooking Instructions:</h3>
                     <p>{selectedRecipeDetail.strInstructions}</p>
                     <button onClick={() => setIsRecipeDetailVisible(false)}>⬅</button>
-                    {/* <button onClick={() => setRecipeDetailVisible(false)}><span role="img" aria-label="Back" style="font-size: 24px;">🔙</span></button> */}
                 </div>
             )}
         </div>

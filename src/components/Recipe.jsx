@@ -7,6 +7,7 @@ const Recipe = () => {
     const [recipes, setRecipes] = useState([])
     const [contentExceddHeight, setContentExceddHeight] = useState(false)
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
+    const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(null)
 
 
     const searchRecipe = async () => {
@@ -18,6 +19,16 @@ const Recipe = () => {
         }
         catch (error) {
             console.error(error)
+        }
+    }
+
+    const getRecipeDetail = async (mealId) => {
+        try {
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+            setSelectedRecipeDetail(response.data.meals[0])
+        }
+        catch (error) {
+            console.error('Error fetching recipe details:', error)
         }
     }
 
@@ -66,8 +77,28 @@ const Recipe = () => {
                 <div key={recipe.idMeal}>
                     <h2>{recipe.strMeal}</h2>
                     <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+                    <button onClick={() => getRecipeDetail(recipe.idMeal)}>Recipe</button>
                 </div>
             ))}
+
+            {selectedRecipeDetail && (
+                <div>
+                    <h2>Recipe Detail for: {selectedRecipeDetail.strMeal}</h2>
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        {Array.from({ length: 20 }, (v, i) => i + 1)
+                            .filter((index) => selectedRecipeDetail[`strIngredient${index}`])
+                            .map((index) => (
+                                <li key={index}>
+                                    {selectedRecipeDetail[`strIngredient${index}`]} - {' '}
+                                    {selectedRecipeDetail[`strMeasure${index}`]}
+                                </li>
+                            ))}
+                    </ul>
+                    <h3>Cooking Instructions:</h3>
+                    <p>{selectedRecipeDetail.strInstructions}</p>
+                </div>
+            )}
         </div>
     )
 }

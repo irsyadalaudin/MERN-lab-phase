@@ -47,6 +47,12 @@ const Recipe = () => {
         }
     }
 
+    // const disableSubmit = (ingredients.length === 0 || !inputRef.current.value)      // VARIABLE DECLARATION WITH EXPRESSION
+    // const disableSubmit = () => ingredients.length === 0 || !inputRef.current.value  // ARROW FUNCTION WITH IMPLICT RETURN (WITHOUT RETURN)
+    const disableSubmit = () => {                                                       // ARROW FUNCTION WITH RETURN
+        return ingredients.length === 0 || !inputRef.current.value
+    }
+
     const handleIngredients = (e) => {
         const input = e.target.value
         const ingredientsArray = input.split(/[\s,]/).filter(ingredients => ingredients.length > 0)  // input IS THE VALUE THAT THE USER ENTERS FROM e.target.value INTO input // split IS A METHOD ON STRINGS THAT SPLITS A STRING INTO A SUBSTRING ARRAY USING CERTAIN SEPARATIONS (/[\s,]/), SO THE STRING WILL BE SPLIT EVERY TIME THERE IS A SPACE OR A COMMA   // ingredients.length > 0 IS A FUNCTION THAT ENSURES THAT ONLY ELEMENTS THAT HAVE LENGTH MORE THAN 0 WILL BE INSERTED INTO THE ARRAY OF THE FILTERS
@@ -78,7 +84,7 @@ const Recipe = () => {
             <form onSubmit={handleSubmit} className='flex px-28 mt-4'>
                 <input onChange={handleIngredients} onKeyDown={disableEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></input>
             </form>
-            <button onClick={searchRecipe} disabled={ingredients.length === 0|| !inputRef.current.value} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+            <button onClick={searchRecipe} disabled={disableSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
 
             {showNoRecipesMessage && (
                 <p>No recipes found for the specified ingredients</p>

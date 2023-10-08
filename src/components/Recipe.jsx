@@ -41,13 +41,13 @@ const Recipe = () => {
         }
     }
 
+    const disabledSubmit = () => ingredients.length === 0 || !inputRef.current.value  // ARROW FUNCTION WITH IMPLICT RETURN (WITHOUT RETURN)
+
     const disabledEnter = (e) => {
         if (e.key === 'Enter' && (ingredients.length === 0|| !inputRef.current.value)) {
             e.preventDefault()
         }
     }
-
-    const disabledSubmit = () => ingredients.length === 0 || !inputRef.current.value  // ARROW FUNCTION WITH IMPLICT RETURN (WITHOUT RETURN)
 
     const handleIngredients = (e) => {
         const input = e.target.value

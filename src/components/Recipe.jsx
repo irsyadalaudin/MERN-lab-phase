@@ -41,6 +41,12 @@ const Recipe = () => {
         }
     }
 
+    const disableEnter = (e) => {
+        if (e.key === 'Enter' && (ingredients.length === 0|| !inputRef.current.value)) {
+            e.preventDefault()
+        }
+    }
+
     const handleIngredients = (e) => {
         const input = e.target.value
         const ingredientsArray = input.split(/[\s,]/).filter(ingredients => ingredients.length > 0)  // input IS THE VALUE THAT THE USER ENTERS FROM e.target.value INTO input // split IS A METHOD ON STRINGS THAT SPLITS A STRING INTO A SUBSTRING ARRAY USING CERTAIN SEPARATIONS (/[\s,]/), SO THE STRING WILL BE SPLIT EVERY TIME THERE IS A SPACE OR A COMMA   // ingredients.length > 0 IS A FUNCTION THAT ENSURES THAT ONLY ELEMENTS THAT HAVE LENGTH MORE THAN 0 WILL BE INSERTED INTO THE ARRAY OF THE FILTERS
@@ -70,7 +76,7 @@ const Recipe = () => {
             </div>
 
             <form onSubmit={handleSubmit} className='flex px-28 mt-4'>
-                <input onChange={handleIngredients} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></input>
+                <input onChange={handleIngredients} onKeyDown={disableEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></input>
             </form>
             <button onClick={searchRecipe} disabled={ingredients.length === 0|| !inputRef.current.value} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
 

@@ -41,8 +41,6 @@ const Recipe = () => {
         }
     }
 
-    // const isInputEmpty = ingredients.length === 0
-
     const handleIngredients = (e) => {
         const input = e.target.value
         const ingredientsArray = input.split(/[\s,]/).filter(ingredients => ingredients.length > 0)  // input IS THE VALUE THAT THE USER ENTERS FROM e.target.value INTO input // split IS A METHOD ON STRINGS THAT SPLITS A STRING INTO A SUBSTRING ARRAY USING CERTAIN SEPARATIONS (/[\s,]/), SO THE STRING WILL BE SPLIT EVERY TIME THERE IS A SPACE OR A COMMA   // ingredients.length > 0 IS A FUNCTION THAT ENSURES THAT ONLY ELEMENTS THAT HAVE LENGTH MORE THAN 0 WILL BE INSERTED INTO THE ARRAY OF THE FILTERS

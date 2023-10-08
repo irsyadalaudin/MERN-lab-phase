@@ -47,11 +47,7 @@ const Recipe = () => {
         }
     }
 
-    // const disableSubmit = (ingredients.length === 0 || !inputRef.current.value)      // VARIABLE DECLARATION WITH EXPRESSION
-    // const disableSubmit = () => ingredients.length === 0 || !inputRef.current.value  // ARROW FUNCTION WITH IMPLICT RETURN (WITHOUT RETURN)
-    const disableSubmit = () => {                                                       // ARROW FUNCTION WITH RETURN
-        return ingredients.length === 0 || !inputRef.current.value
-    }
+    const disableSubmit = () => ingredients.length === 0 || !inputRef.current.value  // ARROW FUNCTION WITH IMPLICT RETURN (WITHOUT RETURN)
 
     const handleIngredients = (e) => {
         const input = e.target.value

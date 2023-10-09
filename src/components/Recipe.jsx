@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState, useRef } from 'react'
+// import { useEffect, useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import axios from 'axios'
 
 const Recipe = () => {
@@ -8,6 +9,7 @@ const Recipe = () => {
     const [contentExceddHeight, setContentExceddHeight] = useState(false)
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(null)
+    const [isRecipeVisible, setIsRecipeVisible] = useState(false)
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
     const inputRef = useRef(null)
 
@@ -55,17 +57,34 @@ const Recipe = () => {
         setIngredients(ingredientsArray)
     }
 
-    useEffect(() => {
-        const container = document.getElementById('recipe')
-        const contentHeight = container.scrollHeight
-        const containerHeight = container.clientHeight
+    // FOKUS DISINI
+    const backFromVisibleRecipe = () => {
+        setIsRecipeVisible(false)
+        setIsRecipeDetailVisible(false)
+        setSelectedRecipeDetail(null)
+        setContentExceddHeight(false)
+    }
+    // FOKUS DISINI
 
-        if (contentHeight > containerHeight) {
-            setContentExceddHeight(true)
-        } else {
-            setContentExceddHeight(false)
-        }
-    }, [recipes])                            // MONITOR CHANGES TO 'RECIPES'
+    // const handleKeyPress = (e) => {
+    //     if (e.key === 'Enter' && !disabledSubmit()) {
+    //         e.preventDefault()  // Mencegah perilaku default dari tombol "Enter"
+    //         searchRecipe()
+    //         setIsRecipeVisible(true)
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     const container = document.getElementById('recipe')
+    //     const contentHeight = container.scrollHeight
+    //     const containerHeight = container.clientHeight
+
+    //     if (contentHeight > containerHeight) {
+    //         setContentExceddHeight(true)
+    //     } else {
+    //         setContentExceddHeight(false)
+    //     }
+    // }, [recipes])                            // MONITOR CHANGES TO 'RECIPES'
 
     const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
 
@@ -77,26 +96,35 @@ const Recipe = () => {
                 <p className='text-2xl text-justify mt-4'>"Have you ever been confused about what to eat? Want to buy food, but afraid of wasting money or having little money? Want to cook, but can't cook? Or can cook, but the ingredients are limited? Now we are here to provide a solution, especially for students who can still cook and eat deliciously, even with limited and cheap ingredients! Have you ever found yourself in a situation where you're not sure what to eat? Perhaps you're considering buying food, but you're worried about spending too much money or you have a tight budget. Maybe you have a desire to cook your own meals, but you lack the culinary skills. Or perhaps you're a skilled cook, but you find yourself with limited ingredients. We are here to offer a solution to these challenges, and our focus is particularly on students who want to enjoy delicious meals. Even with limited resources and budget-friendly ingredients, you can still prepare and savor tasty dishes!"</p>    
             </div>
 
-            <form onSubmit={handleSubmit} className='flex px-28 mt-4'>
-                <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients'></input>
+            {/* <form onSubmit={handleSubmit} className='flex px-28 mt-4'>
+                <input onChange={handleIngredients} onKeyDown={handleKeyPress || disabledEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-97 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
             </form>
-            <button onClick={searchRecipe} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+            <button onClick={() => { searchRecipe(); setIsRecipeVisible(true) }} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-28 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+
+            <form onSubmit={handleSubmit} className='px-28 mt-4'>
+                <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
+                <button onClick={() => { searchRecipe(); setIsRecipeVisible(true); setContentExceddHeight(true) }} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+            </form>
 
             {showNoRecipesMessage && (
                 <p>No recipes found for the specified ingredients</p>
             )}
 
             {/* {recipes.map(recipe => ( */}
-            {!isRecipeDetailVisible && recipes.map(recipe => (
-                <div key={recipe.idMeal}>
-                    <h2>{recipe.strMeal}</h2>
-                    <img src={recipe.strMealThumb} alt={recipe.strMeal} />
-                    <button onClick={() => {
-                        setIsRecipeDetailVisible(true)
-                        getRecipeDetail(recipe.idMeal)
-                    }}>Recipe</button>
+            {!isRecipeDetailVisible && isRecipeVisible && (
+                <div>
+                    {/* FOKUS DISINI */}
+                    <button onClick={backFromVisibleRecipe}>⬅</button>
+                    {/* FOKUS DISINI */}
+                    {recipes.map(recipe => (
+                        <div key={recipe.idMeal}>
+                            <h2>{recipe.strMeal}</h2>
+                            <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+                            <button onClick={() => { setIsRecipeDetailVisible(true); getRecipeDetail(recipe.idMeal) }}>Recipe</button>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            )}
 
             {/* {selectedRecipeDetail && ( */}
             {isRecipeDetailVisible && selectedRecipeDetail && (

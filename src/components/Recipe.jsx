@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 const Recipe = () => {
@@ -62,6 +62,22 @@ const Recipe = () => {
         setContentExceddHeight(false)
     }
 
+    const backIntoSelecetdRecipeDetail = () => {
+        setIsRecipeDetailVisible(true)
+        setContentExceddHeight(true)
+    }
+
+    useEffect(() => {
+    const container = document.getElementById('recipe')
+    const contentHeight = container.scrollHeight
+    const containerHeight = container.clientHeight
+        if (contentHeight > containerHeight) {
+            setContentExceddHeight(true)
+        } else {
+            setContentExceddHeight(false)
+        }
+    }, [recipes]) 
+
     const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
 
 
@@ -84,6 +100,7 @@ const Recipe = () => {
             {/* {recipes.map(recipe => ( */}
             {!isRecipeDetailVisible && isRecipeVisible && (
                 <div>
+                    <button onClick={backIntoSelecetdRecipeDetail}>back into selecetdRecipeDetail</button>
                     <button onClick={backIntoEmptyRecipe}>⬅</button>
                     {recipes.map(recipe => (
                         <div key={recipe.idMeal}>

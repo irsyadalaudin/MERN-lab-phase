@@ -64,27 +64,6 @@ const Recipe = () => {
         setSelectedRecipeDetail(null)
         setContentExceddHeight(false)
     }
-    // FOKUS DISINI
-
-    // const handleKeyPress = (e) => {
-    //     if (e.key === 'Enter' && !disabledSubmit()) {
-    //         e.preventDefault()  // Mencegah perilaku default dari tombol "Enter"
-    //         searchRecipe()
-    //         setIsRecipeVisible(true)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     const container = document.getElementById('recipe')
-    //     const contentHeight = container.scrollHeight
-    //     const containerHeight = container.clientHeight
-
-    //     if (contentHeight > containerHeight) {
-    //         setContentExceddHeight(true)
-    //     } else {
-    //         setContentExceddHeight(false)
-    //     }
-    // }, [recipes])                            // MONITOR CHANGES TO 'RECIPES'
 
     const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
 
@@ -108,9 +87,7 @@ const Recipe = () => {
             {/* {recipes.map(recipe => ( */}
             {!isRecipeDetailVisible && isRecipeVisible && (
                 <div>
-                    {/* FOKUS DISINI */}
                     <button onClick={backFromVisibleRecipe}>⬅</button>
-                    {/* FOKUS DISINI */}
                     {recipes.map(recipe => (
                         <div key={recipe.idMeal}>
                             <h2>{recipe.strMeal}</h2>

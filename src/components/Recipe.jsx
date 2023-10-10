@@ -59,8 +59,6 @@ const Recipe = () => {
     // FOKUS DISINI
     const backFromVisibleRecipe = () => {
         setIsRecipeVisible(false)
-        // setIsRecipeDetailVisible(false)
-        // setSelectedRecipeDetail(null)
         setContentExceddHeight(false)
     }
 

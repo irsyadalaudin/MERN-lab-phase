@@ -74,7 +74,7 @@ const Recipe = () => {
 
             <form onSubmit={handleSubmit} className='px-28 mt-4'>
                 <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
-                <button onClick={() => { searchRecipe(); setIsRecipeVisible(true); setContentExceddHeight(true) }} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+                <button onClick={() => { searchRecipe(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceddHeight(true) }} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
             </form>
 
             {showNoRecipesMessage && (

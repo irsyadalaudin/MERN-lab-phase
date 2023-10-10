@@ -10,6 +10,7 @@ const Recipe = () => {
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(null)
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
+    const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true)
     const inputRef = useRef(null)
 
     const searchRecipe = async () => {
@@ -68,6 +69,14 @@ const Recipe = () => {
     }
 
     useEffect(() => {
+        if(selectedRecipeDetail) {
+            setIsBackButtonDisabled(false)
+        } else {
+            setIsBackButtonDisabled(true)
+        }
+    }, [selectedRecipeDetail])
+
+    useEffect(() => {
     const container = document.getElementById('recipe')
     const contentHeight = container.scrollHeight
     const containerHeight = container.clientHeight
@@ -100,7 +109,7 @@ const Recipe = () => {
             {/* {recipes.map(recipe => ( */}
             {!isRecipeDetailVisible && isRecipeVisible && (
                 <div>
-                    <button onClick={backIntoSelecetdRecipeDetail}>back into selecetdRecipeDetail</button>
+                    <button onClick={backIntoSelecetdRecipeDetail} disabled={isBackButtonDisabled} className={`${isBackButtonDisabled ? 'bg-slate-100 text-white' : ''}`}>back into selecetdRecipeDetail</button>
                     <button onClick={backIntoEmptyRecipe}>⬅</button>
                     {recipes.map(recipe => (
                         <div key={recipe.idMeal}>

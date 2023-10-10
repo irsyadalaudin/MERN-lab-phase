@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-// import { useEffect, useState, useRef } from 'react'
 import { useState, useRef } from 'react'
 import axios from 'axios'
 
@@ -60,8 +59,8 @@ const Recipe = () => {
     // FOKUS DISINI
     const backFromVisibleRecipe = () => {
         setIsRecipeVisible(false)
-        setIsRecipeDetailVisible(false)
-        setSelectedRecipeDetail(null)
+        // setIsRecipeDetailVisible(false)
+        // setSelectedRecipeDetail(null)
         setContentExceddHeight(false)
     }
 

@@ -57,7 +57,7 @@ const Recipe = () => {
     }
 
     // FOKUS DISINI
-    const backFromVisibleRecipe = () => {
+    const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
         setContentExceddHeight(false)
     }
@@ -84,7 +84,7 @@ const Recipe = () => {
             {/* {recipes.map(recipe => ( */}
             {!isRecipeDetailVisible && isRecipeVisible && (
                 <div>
-                    <button onClick={backFromVisibleRecipe}>⬅</button>
+                    <button onClick={backIntoEmptyRecipe}>⬅</button>
                     {recipes.map(recipe => (
                         <div key={recipe.idMeal}>
                             <h2>{recipe.strMeal}</h2>
@@ -92,7 +92,7 @@ const Recipe = () => {
                             <button onClick={() => { setIsRecipeDetailVisible(true); getRecipeDetail(recipe.idMeal) }}>Recipe</button>
                         </div>
                     ))}
-                    <button onClick={backFromVisibleRecipe}>⬅</button>
+                    <button onClick={backIntoEmptyRecipe}>⬅</button>
                 </div>
             )}
 

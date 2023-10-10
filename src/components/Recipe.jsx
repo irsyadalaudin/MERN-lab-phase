@@ -92,6 +92,7 @@ const Recipe = () => {
                             <button onClick={() => { setIsRecipeDetailVisible(true); getRecipeDetail(recipe.idMeal) }}>Recipe</button>
                         </div>
                     ))}
+                    <button onClick={backFromVisibleRecipe}>⬅</button>
                 </div>
             )}
 

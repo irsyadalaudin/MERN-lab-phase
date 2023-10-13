@@ -57,7 +57,6 @@ const Recipe = () => {
         setIngredients(ingredientsArray)
     }
 
-    // FOKUS DISINI
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
         setContentExceddHeight(false)

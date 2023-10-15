@@ -153,7 +153,7 @@ const Account = () => {
                 <div className='w-1/3 mt-5'>
                     <div className='flex flex-col'>
                         <button onClick={moveTab('personal-information')} className='bg-transparent h-24'>Personal Information</button>
-                        <button onClick={moveTab('recipe-history')} className='bg-transparent h-24'>Recipe History</button>4
+                        <button onClick={moveTab('recipe-history')} className='bg-transparent h-24'>Recipe History</button>
                         <button onClick={moveTab('favorite-recipe')} className='bg-transparent h-24'>Favorite Recipe</button>
                         <button onClick={moveTab('favorite-food')} className='bg-transparent h-24'>Favorite Food</button>
                         <button onClick={moveTab('account-setting')} className='bg-transparent h-24'>Account Setting</button>

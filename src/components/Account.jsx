@@ -11,6 +11,7 @@ const Account = () => {
     const [favoriteFood, setFavoriteFood] = useState('')
     const [submitedFavoriteFood, setSubmitedFavoriteFood] = useState([])
     const [editFavoriteFood, setEditFavoriteFood] = useState({ id: null, text: '' })  // STATE FOR EDIT BUTTON
+    const [favoriteRecipe, setFavoriteRecipe] = useState([])
     const editInputRef = useRef(null)
 
     const moveTab = (tabName) => {
@@ -64,6 +65,7 @@ const Account = () => {
 
 
     /* RECIPE HISTORY FUNCTION */
+    // USE EFFECT FOR BACKGROUND STYLING
     useEffect(() => {
         const container = document.getElementById('container')
         const contentHeight = container.scrollHeight
@@ -143,6 +145,16 @@ const Account = () => {
         }
     }, [editFavoriteFood.id])
 
+    /* FAVORITE FOOD */
+    useEffect(() => {
+        const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
+        if (storedFavoriteRecipe) {
+            const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
+            setFavoriteRecipe(parsedFavoriteRecipe)
+        }
+    }, [])
+
+
     return (
         <div id='container' className={containerStyle}>
             <div className='text-center pt-8'>
@@ -191,7 +203,26 @@ const Account = () => {
 
                     {selectedTab === 'favorite-recipe' && (
                         <div>
-
+                            <h2>Favorite Recipe:</h2>
+                                {favoriteRecipe.map((recipe, index) => (
+                                    <div key={index}>
+                                        <h2>{recipe.favoriteRecipeName}</h2>
+                                        <img src={recipe.favoriteRecipeThumb} alt={recipe.strMeal} />
+                                        <h3>Ingredients:</h3>
+                                        <ul>
+                                        {Array.from({ length: 20 }, (v, index) => index + 1)
+                                            .filter((ingredientIndex) => recipe[`favoriteRecipeIngredients${ingredientIndex}`])
+                                            .map((ingredientIndex) => (
+                                            <li key={ingredientIndex}>
+                                                {recipe[`favoriteRecipeIngredients${ingredientIndex}`]} -{' '}
+                                                {/* {recipe[`strMeasure${ingredientIndex}`]} */}
+                                            </li>
+                                            ))}
+                                        </ul>
+                                        <h3>Cooking Instructions:</h3>
+                                        <p>{recipe.favoriteRecipeInstructions}</p>
+                                    </div>
+                                ))}
                         </div>
                     )}
 

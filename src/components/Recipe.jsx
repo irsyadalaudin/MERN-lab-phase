@@ -26,20 +26,20 @@ const Recipe = () => {
         }
     }
 
-    const getRecipeDetail = async (mealId) => {
+    const handleSearch = (e) => {
+        e.preventDefault()
+        if (ingredients.length > 0) {
+            searchRecipe()
+        }
+    }
+
+    const handleRecipeDetail = async (mealId) => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
             setSelectedRecipeDetail(response.data.meals[0])
         }
         catch (error) {
             console.error('Error fetching recipe details:', error)
-        }
-    }
-
-    const handleSearch = (e) => {
-        e.preventDefault()
-        if (ingredients.length > 0) {
-            searchRecipe()
         }
     }
 
@@ -67,6 +67,21 @@ const Recipe = () => {
         setContentExceddHeight(true)
     }
 
+    const addToFavorite = () => {
+        const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
+        const updatedFavoriteRecipe = storedFavoriteRecipe ? JSON.parse(storedFavoriteRecipe) : []
+    
+        const favoriteRecipeName = selectedRecipeDetail.strMeal
+        const favoriteRecipeThumb = selectedRecipeDetail.strMealThumb
+        const favoriteRecipeIngredients = selectedRecipeDetail.strIngredient
+        const favoriteRecipeInstructions = selectedRecipeDetail.strInstructions
+        updatedFavoriteRecipe.push({favoriteRecipeName, favoriteRecipeThumb, favoriteRecipeIngredients, favoriteRecipeInstructions})
+
+        localStorage.setItem('favorite-recipe', JSON.stringify(updatedFavoriteRecipe))
+        alert('Recipe added to favorites!')
+        console.log(updatedFavoriteRecipe)
+    }
+
     useEffect(() => {
         if(selectedRecipeDetail) {
             setIsBackButtonDisabled(false)
@@ -75,10 +90,12 @@ const Recipe = () => {
         }
     }, [selectedRecipeDetail])
 
+
+    // USE EFFECT FOR BACKGROUND STYLING
     useEffect(() => {
-    const container = document.getElementById('recipe')
-    const contentHeight = container.scrollHeight
-    const containerHeight = container.clientHeight
+        const container = document.getElementById('recipe')
+        const contentHeight = container.scrollHeight
+        const containerHeight = container.clientHeight
         if (contentHeight > containerHeight) {
             setContentExceddHeight(true)
         } else {
@@ -89,6 +106,16 @@ const Recipe = () => {
     const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
 
 
+    // USE EFFECT FOR LOCAL STORAGE
+    useEffect(() => {
+        const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
+        if (storedFavoriteRecipe) {
+            const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
+            setSelectedRecipeDetail(parsedFavoriteRecipe)
+            setIsRecipeDetailVisible(true)
+        }
+    }, [])
+
     return (
         <div id='recipe' className={containerStyle}>
             <div>
@@ -98,7 +125,7 @@ const Recipe = () => {
 
             <form onSubmit={handleSearch} className='px-28 mt-4'>
                 <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
-                <button onClick={() => { searchRecipe(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceddHeight(true) }} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+                <button onClick={() => {searchRecipe(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceddHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
             </form>
 
             {showNoRecipesMessage && (
@@ -114,7 +141,7 @@ const Recipe = () => {
                         <div key={recipe.idMeal}>
                             <h2>{recipe.strMeal}</h2>
                             <img src={recipe.strMealThumb} alt={recipe.strMeal} />
-                            <button onClick={() => { setIsRecipeDetailVisible(true); getRecipeDetail(recipe.idMeal) }}>Recipe</button>
+                            <button onClick={() => {handleRecipeDetail(recipe.idMeal); setIsRecipeDetailVisible(true)}}>Recipe</button>
                         </div>
                     ))}
                     <button onClick={backIntoEmptyRecipe}>⬅</button>
@@ -141,7 +168,7 @@ const Recipe = () => {
                     <h3>Cooking Instructions:</h3>
                     <p>{selectedRecipeDetail.strInstructions}</p>
                     <button onClick={() => setIsRecipeDetailVisible(false)}>⬅</button>
-                    <button>Add To Favorite Recipe</button>
+                    <button onClick={addToFavorite}>Add To Favorite Recipe</button>
                 </div>
             )}
         </div>

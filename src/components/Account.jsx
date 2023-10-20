@@ -189,6 +189,12 @@ const Account = () => {
                         </div>
                     )}
 
+                    {selectedTab === 'favorite-recipe' && (
+                        <div>
+
+                        </div>
+                    )}
+
                     {selectedTab === 'favorite-food' && (
                         <div>
                             <form onSubmit={handleSubmit}>
@@ -222,12 +228,6 @@ const Account = () => {
                                     <button onClick={handleDeleteAll}>deleteAll</button>
                                 )
                             }
-                        </div>
-                    )}
-
-                    {selectedTab === 'favorite-recipe' && (
-                        <div>
-
                         </div>
                     )}
 

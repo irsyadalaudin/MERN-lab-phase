@@ -5,7 +5,7 @@ import axios from 'axios'
 const Recipe = () => {
     const [ingredients, setIngredients] = useState([])
     const [recipes, setRecipes] = useState([])
-    const [contentExceddHeight, setContentExceddHeight] = useState(false)
+    const [contentExceedHeight, setContentExceedHeight] = useState(false)
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
     const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(null)
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
@@ -59,12 +59,12 @@ const Recipe = () => {
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
-        setContentExceddHeight(false)
+        setContentExceedHeight(false)
     }
 
     const backIntoSelecetdRecipeDetail = () => {
         setIsRecipeDetailVisible(true)
-        setContentExceddHeight(true)
+        setContentExceedHeight(true)
     }
 
     const addToFavorite = () => {
@@ -97,13 +97,13 @@ const Recipe = () => {
         const contentHeight = container.scrollHeight
         const containerHeight = container.clientHeight
         if (contentHeight > containerHeight) {
-            setContentExceddHeight(true)
+            setContentExceedHeight(true)
         } else {
-            setContentExceddHeight(false)
+            setContentExceedHeight(false)
         }
     }, [recipes]) 
 
-    const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
+    const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'h-full' : 'h-90'}`
 
 
     // USE EFFECT FOR LOCAL STORAGE
@@ -125,7 +125,7 @@ const Recipe = () => {
 
             <form onSubmit={handleSearch} className='px-28 mt-4'>
                 <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
-                <button onClick={() => {searchRecipe(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceddHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+                <button onClick={() => {searchRecipe(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceedHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
             </form>
 
             {showNoRecipesMessage && (

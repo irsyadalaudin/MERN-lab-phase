@@ -82,6 +82,13 @@ const Recipe = () => {
         console.log(updatedFavoriteRecipe)
     }
 
+    const hideSelectedRecipeDetail = () => {
+        setSelectedRecipeDetail(null)
+        setContentExceedHeight(false)
+    }
+
+
+    /* USE EFFECT */
     useEffect(() => {
         if(selectedRecipeDetail) {
             setIsBackButtonDisabled(false)
@@ -113,8 +120,10 @@ const Recipe = () => {
             const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
             setSelectedRecipeDetail(parsedFavoriteRecipe)
             setIsRecipeDetailVisible(true)
+            hideSelectedRecipeDetail()
         }
     }, [])
+
 
     return (
         <div id='recipe' className={containerStyle}>
@@ -169,6 +178,7 @@ const Recipe = () => {
                     <p>{selectedRecipeDetail.strInstructions}</p>
                     <button onClick={() => setIsRecipeDetailVisible(false)}>⬅</button>
                     <button onClick={addToFavorite}>Add To Favorite Recipe</button>
+                    <button onClick={hideSelectedRecipeDetail}>hide this selectedRecipeDetail</button>
                 </div>
             )}
         </div>

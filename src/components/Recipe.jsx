@@ -14,7 +14,7 @@ const Recipe = () => {
     const [inputValue, setInputValue] = useState('')
     const inputRef = useRef(null)
 
-    const searchRecipe = async () => {
+    const searchRecipeButton = async () => {
         try {
             const joinedIngredients = ingredients.join(',')
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)        // THIS ENSURES THAT IF joinedIngredients CONTAINS SPECIAL CHARACTERS OR SPACE, THOSE CHARACTERS WILL BE CONVERTED TO A PRECENTAGE REPRESENTATION THAT IS SAFE FOR USE IN URLs
@@ -26,11 +26,10 @@ const Recipe = () => {
         }
     }
 
-    const handleSearch = (e) => {
+    const handleSearchForm = (e) => {
+        searchRecipeButton()
         e.preventDefault()
-        if (ingredients.length > 0) {
-            searchRecipe()
-        }
+        setInputValue('')
     }
 
     const handleRecipeDetail = async (mealId) => {
@@ -51,7 +50,7 @@ const Recipe = () => {
         }
     }
 
-    const handleIngredients = (e) => {
+    const handleIngredientsInput = (e) => {
         const input = e.target.value
         const ingredientsArray = input.split(/[\s,]/).filter(ingredients => ingredients.length > 0)  // input IS THE VALUE THAT THE USER ENTERS FROM e.target.value INTO input // split IS A METHOD ON STRINGS THAT SPLITS A STRING INTO A SUBSTRING ARRAY USING CERTAIN SEPARATIONS (/[\s,]/), SO THE STRING WILL BE SPLIT EVERY TIME THERE IS A SPACE OR A COMMA   // ingredients.length > 0 IS A FUNCTION THAT ENSURES THAT ONLY ELEMENTS THAT HAVE LENGTH MORE THAN 0 WILL BE INSERTED INTO THE ARRAY OF THE FILTERS
         setIngredients(ingredientsArray)
@@ -136,9 +135,9 @@ const Recipe = () => {
                 <p className='text-2xl text-justify mt-4'>"Have you ever been confused about what to eat? Want to buy food, but afraid of wasting money or having little money? Want to cook, but can't cook? Or can cook, but the ingredients are limited? Now we are here to provide a solution, especially for students who can still cook and eat deliciously, even with limited and cheap ingredients! Have you ever found yourself in a situation where you're not sure what to eat? Perhaps you're considering buying food, but you're worried about spending too much money or you have a tight budget. Maybe you have a desire to cook your own meals, but you lack the culinary skills. Or perhaps you're a skilled cook, but you find yourself with limited ingredients. We are here to offer a solution to these challenges, and our focus is particularly on students who want to enjoy delicious meals. Even with limited resources and budget-friendly ingredients, you can still prepare and savor tasty dishes!"</p>    
             </div>
 
-            <form onSubmit={handleSearch} className='px-28 mt-4'>
-                <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} value={inputValue} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
-                <button onClick={() => {searchRecipe(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceedHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+            <form onSubmit={handleSearchForm} className='px-28 mt-4'>
+                <input onChange={handleIngredientsInput} onKeyDown={disabledEnter} ref={inputRef} value={inputValue} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
+                <button onClick={() => {searchRecipeButton(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceedHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
             </form>
 
             {showNoRecipesMessage && (

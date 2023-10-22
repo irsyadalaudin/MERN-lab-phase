@@ -11,6 +11,7 @@ const Recipe = () => {
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
     const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true)
+    const [inputValue, setInputValue] = useState('')
     const inputRef = useRef(null)
 
     const searchRecipe = async () => {
@@ -55,7 +56,17 @@ const Recipe = () => {
         const input = e.target.value
         const ingredientsArray = input.split(/[\s,]/).filter(ingredients => ingredients.length > 0)  // input IS THE VALUE THAT THE USER ENTERS FROM e.target.value INTO input // split IS A METHOD ON STRINGS THAT SPLITS A STRING INTO A SUBSTRING ARRAY USING CERTAIN SEPARATIONS (/[\s,]/), SO THE STRING WILL BE SPLIT EVERY TIME THERE IS A SPACE OR A COMMA   // ingredients.length > 0 IS A FUNCTION THAT ENSURES THAT ONLY ELEMENTS THAT HAVE LENGTH MORE THAN 0 WILL BE INSERTED INTO THE ARRAY OF THE FILTERS
         setIngredients(ingredientsArray)
+
+        const value = e.target.value
+        setInputValue(value)
+        setShowNoRecipesMessage(false) // IF THE USER STARTS TYPING, HIDE THE "No recipes found" MESSAGE
     }
+
+    // const handleInputChange = (e) => {
+    //     const value = e.target.value
+    //     setInputValue(value)
+    //     setShowNoRecipesMessage(false)   // IF THE USER STARTS TYPING, HIDE THE "No recipes found" MESSAGE
+    // }
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
@@ -133,7 +144,7 @@ const Recipe = () => {
             </div>
 
             <form onSubmit={handleSearch} className='px-28 mt-4'>
-                <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
+                <input onChange={handleIngredients} onKeyDown={disabledEnter} ref={inputRef} value={inputValue} className='placeholder-white focus:outline-none text-xl p-3 w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
                 <button onClick={() => {searchRecipe(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceedHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
             </form>
 

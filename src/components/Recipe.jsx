@@ -62,12 +62,6 @@ const Recipe = () => {
         setShowNoRecipesMessage(false) // IF THE USER STARTS TYPING, HIDE THE "No recipes found" MESSAGE
     }
 
-    // const handleInputChange = (e) => {
-    //     const value = e.target.value
-    //     setInputValue(value)
-    //     setShowNoRecipesMessage(false)   // IF THE USER STARTS TYPING, HIDE THE "No recipes found" MESSAGE
-    // }
-
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
         setContentExceedHeight(false)

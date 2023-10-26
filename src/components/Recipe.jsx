@@ -7,7 +7,7 @@ const Recipe = () => {
     const [recipes, setRecipes] = useState([])
     const [contentExceedHeight, setContentExceedHeight] = useState(false)
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
-    const [selectedRecipeDetail, setSelectedRecipeDetail] = useState(null)
+    const [selectedRecipeDetail, setSelectedRecipeDetail] = useState()
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
     const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true)
@@ -86,7 +86,7 @@ const Recipe = () => {
     }
 
     const hideSelectedRecipeDetail = () => {
-        setSelectedRecipeDetail(null)
+        setSelectedRecipeDetail()
         setContentExceedHeight(false)
     }
 

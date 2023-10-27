@@ -24,11 +24,11 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='bg-yellow-800 text-neutral-100 h-14 flex justify-between items-center px-28 sticky top-0 hover:cursor-pointer'>
+        <nav className='bg-yellow-800 text-neutral-100 md:h-20 lg:h-14 flex-col lg:flex-row flex justify-between items-center px-0 md:px-28 sticky top-0 hover:cursor-pointer'>
             <h1>
                 <Link to='/' onClick={scrollToTopHome}>AYO MASAK</Link>
             </h1>
-            <div className='flex gap-4 no-underline'>
+            <div className='mt-5 md:mt-0 flex gap-4 no-underline'>
                 <Link to='/' onClick={scrollToTopHome} className='text-neutral-100 no-underline'>Home</Link>
                 <Link to='/' onClick={scrollToBottomRecipe} className='text-neutral-100 no-underline'>Recipe</Link>
                 <Link to='/contact-us' className='text-neutral-100 no-underline'>Contact us</Link>

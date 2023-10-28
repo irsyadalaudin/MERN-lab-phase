@@ -24,7 +24,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='bg-yellow-800 text-neutral-100 md:h-20 lg:h-14 flex-col lg:flex-row flex justify-between items-center px-0 md:px-28 sticky top-0 hover:cursor-pointer'>
+        <nav className='bg-yellow-800 text-neutral-100 md:h-20 lg:h-14 py-3 lg:py-0 px-0 md:px-28 flex-col lg:flex-row flex justify-between items-center sticky top-0 hover:cursor-pointer'>
             <h1>
                 <Link to='/' onClick={scrollToTopHome}>AYO MASAK</Link>
             </h1>

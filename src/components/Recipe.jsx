@@ -113,7 +113,11 @@ const Recipe = () => {
         }
     }, [recipes]) 
 
-    const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'h-full' : 'h-90'}`
+    const containerStyle = `bg-yellow-600 px-28 h-full ${contentExceedHeight ? 'h-full' : 'lg:h-90'}`
+    // const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'lg:h-full' : 'lg:h-90'} ${contentExceedHeight ? 'h-full' : 'h-full'}`;
+    // const containerStyle = `bg-yellow-600 px-28 sm:h-975 md:h-935 ${contentExceedHeight ? 'lg:h-full' : 'lg:h-90'}`
+    // const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'lg:h-full' : (contentExceedHeight === 'condition2' ? 'lg:h-90' : 'h-screen')}`;
+
 
 
     // USE EFFECT FOR LOCAL STORAGE
@@ -129,6 +133,7 @@ const Recipe = () => {
 
 
     return (
+        // <div id='recipe' className='bg-yellow-600 px-28 h-90'>
         <div id='recipe' className={containerStyle}>
             <div>
                 <h1 className='text-4xl flex justify-center pt-10'>Let's cook !</h1>
@@ -139,7 +144,9 @@ const Recipe = () => {
                 <div className='flex justify-center'>
                     <input onChange={handleIngredientsInput} onKeyDown={disabledEnter} ref={inputRef} value={inputValue} className='placeholder-white focus:outline-none text-xl p-3 w-30 md:w-full xl:w-94 h-20 bg-yellow-800 text-white rounded-md block' placeholder='Enter your ingredients' />
                 </div>
-                <button onClick={() => {searchRecipeButton(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceedHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-0 xl:mx-45 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+                <div className='flex justify-center md:justify-end'>
+                    <button onClick={() => {searchRecipeButton(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceedHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-0 xl:mx-45 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+                </div>
             </form>
 
             {showNoRecipesMessage && (

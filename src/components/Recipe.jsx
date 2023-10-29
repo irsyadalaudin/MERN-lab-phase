@@ -114,7 +114,7 @@ const Recipe = () => {
         }
     }, [recipes]) 
 
-    const containerStyle = `bg-yellow-600 px-28 h-full ${contentExceedHeight ? 'h-full' : 'lg:h-90'}`
+    const containerStyle = `bg-yellow-600 px-10 lg:px-28 h-full ${contentExceedHeight ? 'h-full' : 'lg:h-90'}`
 
 
     // USE EFFECT TO UPDATE MINIMIZE RESPONSIVE WINDOW WIDTH BACKGROUND
@@ -180,16 +180,18 @@ const Recipe = () => {
             {/* {recipes.map(recipe => ( */}
             {!isRecipeDetailVisible && isRecipeVisible && (
                 <div>
-                    <div className='flex justify-start mt-4'>
+                    <div className='flex justify-start mt-4 gap-1'>
                         <button onClick={backIntoSelecetdRecipeDetail} disabled={isBackButtonDisabled} className={`h-8 w-56 ml-4 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900 ${isBackButtonDisabled ? 'bg-slate-100' : 'bg-yellow-800'}`}>back into selecetdRecipeDetail</button>
-                        <button onClick={backIntoEmptyRecipe} className='h-8 w-20 ml-1 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
+                        <button onClick={backIntoEmptyRecipe} className='h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
                     </div>
                     <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                         {recipes.map(recipe => (
                             <div key={recipe.idMeal} className='border p-4'>
                                 <h2 className='text-xl'>{recipe.strMeal}</h2>
-                                <img src={recipe.strMealThumb} alt={recipe.strMeal} className='w-full h-48 object-cover' />
-                                <button onClick={() => {handleRecipeDetail(recipe.idMeal); setIsRecipeDetailVisible(true)}}  className='mt-2 bg-yellow-800 text-white px-1.5 py-1.5 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Recipe</button>
+                                <img src={recipe.strMealThumb} alt={recipe.strMeal} className='w-full h-48 object-cover rounded-md' />
+                                <div className='flex justify-end'>
+                                    <button onClick={() => {handleRecipeDetail(recipe.idMeal); setIsRecipeDetailVisible(true)}}  className='mt-2 bg-yellow-800 text-white px-1.5 py-1.5 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Recipe</button>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -202,10 +204,11 @@ const Recipe = () => {
             {/* {selectedRecipeDetail && ( */}
             {isRecipeDetailVisible && selectedRecipeDetail && (
                 <div>
-                    <h2>Recipe Detail for: {selectedRecipeDetail.strMeal}</h2>
-                    <img src={selectedRecipeDetail.strMealThumb} alt={selectedRecipeDetail.strMeal} />
+                    <button onClick={() => setIsRecipeDetailVisible(false)} className='mb-4 h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
+                    <h2 className='text-xl mb-4'>Recipe Detail for: {selectedRecipeDetail.strMeal}</h2>
+                    <img src={selectedRecipeDetail.strMealThumb} alt={selectedRecipeDetail.strMeal} className='w-96 h-80 mb-4 rounded-md mx-auto sm:mx-0 block sm:inline' />
                     <h3>Ingredients:</h3>
-                    <ul>
+                    <ul className='mb-4'>
                         {Array.from({ length: 20 }, (v, index) => index + 1)
                             .filter((index) => selectedRecipeDetail[`strIngredient${index}`])
                             .map((index) => (
@@ -217,10 +220,12 @@ const Recipe = () => {
                         }
                     </ul>
                     <h3>Cooking Instructions:</h3>
-                    <p>{selectedRecipeDetail.strInstructions}</p>
-                    <button onClick={() => setIsRecipeDetailVisible(false)}>⬅</button>
-                    <button onClick={addToFavorite}>Add To Favorite Recipe</button>
-                    <button onClick={hideSelectedRecipeDetail}>hide this selectedRecipeDetail</button>
+                    <p className='mb-4'>{selectedRecipeDetail.strInstructions}</p>
+                    <div className='pb-4 flex justify-start gap-1'>
+                        <button onClick={() => setIsRecipeDetailVisible(false)} className='h-12 sm:h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
+                        <button onClick={addToFavorite} className='h-12 sm:h-8 w-52 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Add To Favorite Recipe</button>
+                        <button onClick={hideSelectedRecipeDetail} className='h-12 sm:h-8 w-56 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>hide this selectedRecipeDetail</button>
+                    </div>
                 </div>
             )}
         </div>

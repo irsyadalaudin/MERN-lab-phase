@@ -21,7 +21,10 @@ export default {
 				'450': '450px',
 			},
 			fontSize: {
-				'4xl':['2.5rem', '2rem']
+				'4xl': '2.5rem',
+			},
+			lineHeight: {
+				'4xl': '1rem'
 			},
 		},
 	},

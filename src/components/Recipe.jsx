@@ -180,16 +180,22 @@ const Recipe = () => {
             {/* {recipes.map(recipe => ( */}
             {!isRecipeDetailVisible && isRecipeVisible && (
                 <div>
-                    <button onClick={backIntoSelecetdRecipeDetail} disabled={isBackButtonDisabled} className={`${isBackButtonDisabled ? 'bg-slate-100 text-white' : ''}`}>back into selecetdRecipeDetail</button>
-                    <button onClick={backIntoEmptyRecipe}>⬅</button>
-                    {recipes.map(recipe => (
-                        <div key={recipe.idMeal}>
-                            <h2>{recipe.strMeal}</h2>
-                            <img src={recipe.strMealThumb} alt={recipe.strMeal} />
-                            <button onClick={() => {handleRecipeDetail(recipe.idMeal); setIsRecipeDetailVisible(true)}}>Recipe</button>
-                        </div>
-                    ))}
-                    <button onClick={backIntoEmptyRecipe}>⬅</button>
+                    <div className='flex justify-start mt-4'>
+                        <button onClick={backIntoSelecetdRecipeDetail} disabled={isBackButtonDisabled} className={`h-8 w-56 ml-4 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900 ${isBackButtonDisabled ? 'bg-slate-100' : 'bg-yellow-800'}`}>back into selecetdRecipeDetail</button>
+                        <button onClick={backIntoEmptyRecipe} className='h-8 w-20 ml-1 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
+                    </div>
+                    <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                        {recipes.map(recipe => (
+                            <div key={recipe.idMeal} className='border p-4'>
+                                <h2 className='text-xl'>{recipe.strMeal}</h2>
+                                <img src={recipe.strMealThumb} alt={recipe.strMeal} className='w-full h-48 object-cover' />
+                                <button onClick={() => {handleRecipeDetail(recipe.idMeal); setIsRecipeDetailVisible(true)}}  className='mt-2 bg-yellow-800 text-white px-1.5 py-1.5 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Recipe</button>
+                            </div>
+                        ))}
+                    </div>
+                    <div className='flex justify-center'>
+                        <button onClick={backIntoEmptyRecipe} className='h-8 w-full mt-2 mb-4 mx-0 xl:mx-4 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
+                    </div>
                 </div>
             )}
 

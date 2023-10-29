@@ -12,6 +12,7 @@ const Recipe = () => {
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
     const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true)
     const [inputValue, setInputValue] = useState('')
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const inputRef = useRef(null)
 
     const searchRecipeButton = async () => {
@@ -114,11 +115,34 @@ const Recipe = () => {
     }, [recipes]) 
 
     const containerStyle = `bg-yellow-600 px-28 h-full ${contentExceedHeight ? 'h-full' : 'lg:h-90'}`
-    // const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'lg:h-full' : 'lg:h-90'} ${contentExceedHeight ? 'h-full' : 'h-full'}`;
-    // const containerStyle = `bg-yellow-600 px-28 sm:h-975 md:h-935 ${contentExceedHeight ? 'lg:h-full' : 'lg:h-90'}`
-    // const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'lg:h-full' : (contentExceedHeight === 'condition2' ? 'lg:h-90' : 'h-screen')}`;
 
 
+    // USE EFFECT TO UPDATE MINIMIZE RESPONSIVE WINDOW WIDTH BACKGROUND
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
+    // UPDATE setContentExceedHeight BASED ON WINDOW WIDTH AND isRecipeVisible
+    useEffect(() => {
+        if (isRecipeVisible) {
+            if (windowWidth >= 551) {
+                setContentExceedHeight(true)
+            } else {
+                setContentExceedHeight(false)
+            }
+        } else {
+            setContentExceedHeight(false)
+        }
+    }, [isRecipeVisible, windowWidth])
+    
 
     // USE EFFECT FOR LOCAL STORAGE
     useEffect(() => {

@@ -157,7 +157,6 @@ const Recipe = () => {
 
 
     return (
-        // <div id='recipe' className='bg-yellow-600 px-28 h-90'>
         <div id='recipe' className={containerStyle}>
             <div>
                 <h1 className='text-4xl flex justify-center pt-10'>Let's cook !</h1>

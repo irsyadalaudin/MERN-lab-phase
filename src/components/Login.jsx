@@ -47,9 +47,6 @@ const Login = () => {
                 </form>
             </div>
             {/* IMAGE */}
-            {/* <div className='w-1/3 xl:w-1/2 flex items-center ml-36 lg:ml-0'>
-                <img className='w-96 lg:w-96 xl:w-400' src='https://i.postimg.cc/GpDsrkWB/tofu-5.png' alt='tofu-login' style={{ objectFit: 'contain'}}/>
-            </div> */}
             <div className='bg-yellow-600 h-90 flex items-center pl-10 lg:pl-28 overflow-hidden'>
                 <img className='xl:w-90 2xl:w-93 sm:h-full xl:h-90' src='https://i.postimg.cc/GpDsrkWB/tofu-5.png' alt='tofu-image' />
             </div>

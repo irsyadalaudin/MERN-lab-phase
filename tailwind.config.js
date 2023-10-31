@@ -20,7 +20,7 @@ export default {
 				'95': '57.7rem',
 				'97': '73rem',
 				'98': '85rem',
-				'450': '450px',
+				'400': '40rem',
 			},
 			fontSize: {
 				'4xl': '2.5rem',

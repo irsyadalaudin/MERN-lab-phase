@@ -28,7 +28,7 @@ const Navbar = () => {
             <h1>
                 <Link to='/' onClick={scrollToTopHome}>AYO MASAK</Link>
             </h1>
-            <div className='mt-5 md:mt-0 flex gap-4 no-underline'>
+            <div className='mt-5 md:mt-0 flex gap-4 no-underline text-sm sm:text-base'>
                 <Link to='/' onClick={scrollToTopHome} className='text-neutral-100 no-underline'>Home</Link>
                 <Link to='/' onClick={scrollToBottomRecipe} className='text-neutral-100 no-underline'>Recipe</Link>
                 <Link to='/contact-us' className='text-neutral-100 no-underline'>Contact us</Link>

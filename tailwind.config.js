@@ -7,9 +7,11 @@ export default {
 	theme: {
 		extend: {
 			spacing: {
+				'18': '4.5rem',
 				'22': '5.76rem',
 				'26': '6.6rem',
 				'45': '11.2rem',
+				'61': '15.3rem',
 				'62': '15.45rem',
 				'85': '21.2rem',
 				'90': '92.5vh',

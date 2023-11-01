@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
-    const [contentExceddHeight, setContentExceddHeight] = useState(false)
+    const [contentExceedHeight, setContentExceedHeight] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editId, setEditId] = useState(null)
     const [name, setName] = useState('Joko')
@@ -72,13 +72,13 @@ const Account = () => {
         const containerHeight = container.clientHeight
 
         if (contentHeight > containerHeight) {
-            setContentExceddHeight(true)
+            setContentExceedHeight(true)
         } else {
-            setContentExceddHeight(false)
+            setContentExceedHeight(false)
         }
     }, [selectedTab])
 
-    const containerStyle = `bg-yellow-600 px-28 ${contentExceddHeight ? 'h-full' : 'h-90'}`
+    const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'h-full' : 'h-90'}`
 
 
     /* FAVORITE FOOD FUNCTION */

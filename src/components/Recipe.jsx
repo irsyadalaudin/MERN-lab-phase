@@ -1,19 +1,61 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+    // ingredients,
+    // recipes,
+    // selectedRecipeDetail,
+    // contentExceedHeight,
+    setIngredients,
+    setRecipes,
+    setSelectedRecipeDetail,
+    clearSelectedRecipeDetail,
+    setContentExceedHeight,
+    clearContentExceedHeight
+} from './store/action/Action'
 
 const Recipe = () => {
-    const [ingredients, setIngredients] = useState([])
-    const [recipes, setRecipes] = useState([])
-    const [contentExceedHeight, setContentExceedHeight] = useState(false)
+    const ingredients = useSelector((state) => state.ingredients)
+    const recipes = useSelector((state) => state.recipes)
+    const selectedRecipeDetail = useSelector((state) => state.selectedRecipeDetail)
+    const contentExceedHeight = useSelector((state) => state.selectedRecipeDetail)
+    const dispatch = useDispatch()
+    // const [ingredients, setIngredients] = useState([])
+    // const [recipes, setRecipes] = useState([])
+    // const [contentExceedHeight, setContentExceedHeight] = useState(false)
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
-    const [selectedRecipeDetail, setSelectedRecipeDetail] = useState()
+    // const [selectedRecipeDetail, setSelectedRecipeDetail] = useState()
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
     const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true)
     const [inputValue, setInputValue] = useState('')
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const inputRef = useRef(null)
+
+    const updateIngredients = (newIngredients) => {
+        dispatch (setIngredients(newIngredients))
+    }
+
+    const updateRecipes = (newRecipes) => {
+        dispatch(setRecipes(newRecipes));
+    };
+    
+    const updateSelectedRecipeDetail = (recipeDetail) => {
+        dispatch(setSelectedRecipeDetail(recipeDetail));
+    };
+    
+    const clearSelectedRecipe = () => {
+        dispatch(clearSelectedRecipeDetail());
+    };
+    
+    const updateContentExceedHeight = (isExceeding) => {
+        dispatch(setContentExceedHeight(isExceeding));
+    };
+    
+    const clearContentExceedHeightFlag = () => {
+        dispatch(clearContentExceedHeight());
+    };
 
     const searchRecipeButton = async () => {
         try {
@@ -29,6 +71,7 @@ const Recipe = () => {
 
     const handleSearchForm = (e) => {
         searchRecipeButton()
+        
         e.preventDefault()
         setInputValue('')
     }

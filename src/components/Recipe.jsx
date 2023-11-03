@@ -1,31 +1,24 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'    // Menggunakan useDispatch
 import {
-    // ingredients,
-    // recipes,
-    // selectedRecipeDetail,
-    // contentExceedHeight,
     setIngredients,
     setRecipes,
     setSelectedRecipeDetail,
-    clearSelectedRecipeDetail,
+    clearSelectedRecipeDetail,    // Perbaikan nama action
     setContentExceedHeight,
-    clearContentExceedHeight
+    clearContentExceedHeight,     // Perbaikan nama action
 } from './store/action/Action'
 
 const Recipe = () => {
     const ingredients = useSelector((state) => state.ingredients)
     const recipes = useSelector((state) => state.recipes)
     const selectedRecipeDetail = useSelector((state) => state.selectedRecipeDetail)
-    const contentExceedHeight = useSelector((state) => state.selectedRecipeDetail)
-    const dispatch = useDispatch()
-    // const [ingredients, setIngredients] = useState([])
-    // const [recipes, setRecipes] = useState([])
-    // const [contentExceedHeight, setContentExceedHeight] = useState(false)
+    const contentExceedHeight = useSelector((state) => state.contentExceedHeight)    // Perbaikan, harus menggunakan state.contentExceedHeight
+    const dispatch = useDispatch()    // Menggunakan useDispatch
+
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
-    // const [selectedRecipeDetail, setSelectedRecipeDetail] = useState()
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
     const [isRecipeDetailVisible, setIsRecipeDetailVisible] = useState(false)
     const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true)
@@ -33,45 +26,19 @@ const Recipe = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const inputRef = useRef(null)
 
-    const updateIngredients = (newIngredients) => {
-        dispatch (setIngredients(newIngredients))
-    }
-
-    const updateRecipes = (newRecipes) => {
-        dispatch(setRecipes(newRecipes));
-    };
-    
-    const updateSelectedRecipeDetail = (recipeDetail) => {
-        dispatch(setSelectedRecipeDetail(recipeDetail));
-    };
-    
-    const clearSelectedRecipe = () => {
-        dispatch(clearSelectedRecipeDetail());
-    };
-    
-    const updateContentExceedHeight = (isExceeding) => {
-        dispatch(setContentExceedHeight(isExceeding));
-    };
-    
-    const clearContentExceedHeightFlag = () => {
-        dispatch(clearContentExceedHeight());
-    };
-
     const searchRecipeButton = async () => {
         try {
             const joinedIngredients = ingredients.join(',')
-            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)        // THIS ENSURES THAT IF joinedIngredients CONTAINS SPECIAL CHARACTERS OR SPACE, THOSE CHARACTERS WILL BE CONVERTED TO A PRECENTAGE REPRESENTATION THAT IS SAFE FOR USE IN URLs
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)
             setRecipes(response.data.meals || [])
-            setShowNoRecipesMessage(response.data.meals ? false : true)  // AFTER GETTING THE RESULTS, SET THE MESSAGE DISPLAY BASED ON THE RESULTS  // WHEN response.data.meals HAS A VALUE (truthly), THEN setShowNoRecipesMessage BECOMES (false), AND THE MESSAGE `No recipes found for the specified ingredients` IS NOT DISPLAYED
-        }
-        catch (error) {
+            setShowNoRecipesMessage(response.data.meals ? false : true)
+        } catch (error) {
             console.error(error)
         }
     }
 
     const handleSearchForm = (e) => {
         searchRecipeButton()
-        
         e.preventDefault()
         setInputValue('')
     }
@@ -80,49 +47,52 @@ const Recipe = () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
             setSelectedRecipeDetail(response.data.meals[0])
-        }
-        catch (error) {
+        } catch (error) {
             console.error('Error fetching recipe details:', error)
         }
     }
 
-    const disabledSubmit = () => ingredients.length === 0 || !inputRef.current.value  // ARROW FUNCTION WITH IMPLICT RETURN (WITHOUT RETURN)
+    const disabledSubmit = () => ingredients.length === 0 || !inputRef.current.value
 
     const disabledEnter = (e) => {
-        if (e.key === 'Enter' && (ingredients.length === 0|| !inputRef.current.value)) {
+        if (e.key === 'Enter' && (ingredients.length === 0 || !inputRef.current.value)) {
             e.preventDefault()
         }
     }
 
     const handleIngredientsInput = (e) => {
         const input = e.target.value
-        const ingredientsArray = input.split(/[\s,]/).filter(ingredients => ingredients.length > 0)  // input IS THE VALUE THAT THE USER ENTERS FROM e.target.value INTO input // split IS A METHOD ON STRINGS THAT SPLITS A STRING INTO A SUBSTRING ARRAY USING CERTAIN SEPARATIONS (/[\s,]/), SO THE STRING WILL BE SPLIT EVERY TIME THERE IS A SPACE OR A COMMA   // ingredients.length > 0 IS A FUNCTION THAT ENSURES THAT ONLY ELEMENTS THAT HAVE LENGTH MORE THAN 0 WILL BE INSERTED INTO THE ARRAY OF THE FILTERS
-        setIngredients(ingredientsArray)
-
+        const ingredientsArray = input.split(/[\s,]/).filter(ingredient => ingredient.length > 0)
+        dispatch(setIngredients(ingredientsArray))
         const value = e.target.value
         setInputValue(value)
-        setShowNoRecipesMessage(false) // IF THE USER STARTS TYPING, HIDE THE "No recipes found" MESSAGE
+        setShowNoRecipesMessage(false)
     }
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
-        setContentExceedHeight(false)
+        dispatch(clearContentExceedHeight()) // Membersihkan contentExceedHeight
     }
 
-    const backIntoSelecetdRecipeDetail = () => {
+    const backIntoSelectedRecipeDetail = () => {
         setIsRecipeDetailVisible(true)
-        setContentExceedHeight(true)
+        dispatch(setContentExceedHeight(true))
     }
 
     const addToFavorite = () => {
         const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
         const updatedFavoriteRecipe = storedFavoriteRecipe ? JSON.parse(storedFavoriteRecipe) : []
-    
+
         const favoriteRecipeName = selectedRecipeDetail.strMeal
         const favoriteRecipeThumb = selectedRecipeDetail.strMealThumb
         const favoriteRecipeIngredients = selectedRecipeDetail.strIngredient
         const favoriteRecipeInstructions = selectedRecipeDetail.strInstructions
-        updatedFavoriteRecipe.push({favoriteRecipeName, favoriteRecipeThumb, favoriteRecipeIngredients, favoriteRecipeInstructions})
+        updatedFavoriteRecipe.push({
+            favoriteRecipeName,
+            favoriteRecipeThumb,
+            favoriteRecipeIngredients,
+            favoriteRecipeInstructions
+        })
 
         localStorage.setItem('favorite-recipe', JSON.stringify(updatedFavoriteRecipe))
         alert('Recipe added to favorites!')
@@ -130,20 +100,18 @@ const Recipe = () => {
     }
 
     const hideSelectedRecipeDetail = () => {
-        setSelectedRecipeDetail()
-        setContentExceedHeight(false)
+        dispatch(clearSelectedRecipeDetail()) // Membersihkan selectedRecipeDetail
+        dispatch(clearContentExceedHeight()) // Membersihkan contentExceedHeight
     }
-
 
     /* USE EFFECT */
     useEffect(() => {
-        if(selectedRecipeDetail) {
+        if (selectedRecipeDetail) {
             setIsBackButtonDisabled(false)
         } else {
             setIsBackButtonDisabled(true)
         }
     }, [selectedRecipeDetail])
-
 
     // USE EFFECT FOR BACKGROUND STYLING
     useEffect(() => {
@@ -151,14 +119,13 @@ const Recipe = () => {
         const contentHeight = container.scrollHeight
         const containerHeight = container.clientHeight
         if (contentHeight > containerHeight) {
-            setContentExceedHeight(true)
+            dispatch(setContentExceedHeight(true))
         } else {
-            setContentExceedHeight(false)
+            dispatch(setContentExceedHeight(false))
         }
-    }, [recipes]) 
+    }, [recipes])
 
     const containerStyle = `bg-yellow-600 px-10 lg:px-28 h-full ${contentExceedHeight ? 'h-full' : 'xl:h-90'}`
-
 
     // USE EFFECT TO UPDATE MINIMIZE RESPONSIVE WINDOW WIDTH BACKGROUND
     useEffect(() => {
@@ -177,26 +144,25 @@ const Recipe = () => {
     useEffect(() => {
         if (isRecipeVisible) {
             if (windowWidth >= 551) {
-                setContentExceedHeight(true)
+                dispatch(setContentExceedHeight(true))
             } else {
-                setContentExceedHeight(false)
+                dispatch(setContentExceedHeight(false))
             }
         } else {
-            setContentExceedHeight(false)
+            dispatch(setContentExceedHeight(false))
         }
     }, [isRecipeVisible, windowWidth])
-    
 
     // USE EFFECT FOR LOCAL STORAGE
     useEffect(() => {
         const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
         if (storedFavoriteRecipe) {
             const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
-            setSelectedRecipeDetail(parsedFavoriteRecipe)
+            dispatch(setSelectedRecipeDetail(parsedFavoriteRecipe))
             setIsRecipeDetailVisible(true)
             hideSelectedRecipeDetail()
         }
-    }, [])
+    }, [dispatch])
 
 
     return (
@@ -223,7 +189,7 @@ const Recipe = () => {
             {!isRecipeDetailVisible && isRecipeVisible && (
                 <div>
                     <div className='flex justify-start mt-4 gap-1'>
-                        <button onClick={backIntoSelecetdRecipeDetail} disabled={isBackButtonDisabled} className={`h-8 w-56 ml-4 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900 ${isBackButtonDisabled ? 'bg-slate-100' : 'bg-yellow-800'}`}>back into selecetdRecipeDetail</button>
+                        <button onClick={backIntoSelectedRecipeDetail} disabled={isBackButtonDisabled} className={`h-8 w-56 ml-4 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900 ${isBackButtonDisabled ? 'bg-slate-100' : 'bg-yellow-800'}`}>back into selecetdRecipeDetail</button>
                         <button onClick={backIntoEmptyRecipe} className='h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
                     </div>
                     <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>

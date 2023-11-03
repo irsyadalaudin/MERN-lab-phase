@@ -19,12 +19,12 @@ const recipesReducer = (state = [], action) => {
 }
 
 // const initialState = undefined
-const selectedRecipeDetailReducer = (state = undefined, action) => {
+const selectedRecipeDetailReducer = (state = null, action) => {
     switch (action.type) {
         case 'SET_SELECTED_RECIPE_DETAIL':
             return action.selectedRecipeDetail;
         case 'CLEAR_SELECTED_RECIPE_DETAIL':
-            return undefined
+            return null
         default:
             return state
     }

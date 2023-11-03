@@ -14,7 +14,7 @@ export const setSelectedRecipeDetail = (selectedRecipeDetail) => ({
 })
 
 export const clearSelectedRecipeDetail = () => ({
-    type: 'SET_SELECTED_RECIPE_DETAIL',
+    type: 'CLEAR_SELECTED_RECIPE_DETAIL',
     selectedRecipeDetail: undefined
 })
 
@@ -24,6 +24,6 @@ export const setContentExceedHeight = (contentExceedHeight) => ({
 })
 
 export const clearContentExceedHeight = () => ({
-    type: 'SET_CONTENT_EXCEED_HEIGHT',
+    type: 'CLEAR_CONTENT_EXCEED_HEIGHT',
     contentExceedHeight: false,
 })

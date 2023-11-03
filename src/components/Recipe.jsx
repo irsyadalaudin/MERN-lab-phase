@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'    // Menggunakan useDispatch
 import {
@@ -30,7 +30,7 @@ const Recipe = () => {
         try {
             const joinedIngredients = ingredients.join(',')
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)
-            setRecipes(response.data.meals || [])
+            dispatch(setRecipes(response.data.meals || []))
             setShowNoRecipesMessage(response.data.meals ? false : true)
         } catch (error) {
             console.error(error)
@@ -46,7 +46,7 @@ const Recipe = () => {
     const handleRecipeDetail = async (mealId) => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
-            setSelectedRecipeDetail(response.data.meals[0])
+            dispatch(setSelectedRecipeDetail(response.data.meals[0]))
         } catch (error) {
             console.error('Error fetching recipe details:', error)
         }
@@ -99,10 +99,15 @@ const Recipe = () => {
         console.log(updatedFavoriteRecipe)
     }
 
-    const hideSelectedRecipeDetail = () => {
-        dispatch(clearSelectedRecipeDetail()) // Membersihkan selectedRecipeDetail
-        dispatch(clearContentExceedHeight()) // Membersihkan contentExceedHeight
-    }
+    // const hideSelectedRecipeDetail = () => {
+    //     dispatch(clearSelectedRecipeDetail())   // Membersihkan selectedRecipeDetail
+    //     dispatch(clearContentExceedHeight())    // Membersihkan contentExceedHeight
+    // }
+
+    const hideSelectedRecipeDetail = useCallback(() => {
+        dispatch(clearSelectedRecipeDetail())
+        dispatch(clearContentExceedHeight())
+    }, [dispatch])
 
     /* USE EFFECT */
     useEffect(() => {
@@ -123,7 +128,7 @@ const Recipe = () => {
         } else {
             dispatch(setContentExceedHeight(false))
         }
-    }, [recipes])
+    }, [recipes, dispatch])
 
     const containerStyle = `bg-yellow-600 px-10 lg:px-28 h-full ${contentExceedHeight ? 'h-full' : 'xl:h-90'}`
 
@@ -151,7 +156,7 @@ const Recipe = () => {
         } else {
             dispatch(setContentExceedHeight(false))
         }
-    }, [isRecipeVisible, windowWidth])
+    }, [isRecipeVisible, windowWidth, dispatch])
 
     // USE EFFECT FOR LOCAL STORAGE
     useEffect(() => {
@@ -162,7 +167,7 @@ const Recipe = () => {
             setIsRecipeDetailVisible(true)
             hideSelectedRecipeDetail()
         }
-    }, [dispatch])
+    }, [hideSelectedRecipeDetail, dispatch])
 
 
     return (

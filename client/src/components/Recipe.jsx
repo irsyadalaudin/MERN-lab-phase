@@ -99,11 +99,6 @@ const Recipe = () => {
         console.log(updatedFavoriteRecipe)
     }
 
-    // const hideSelectedRecipeDetail = () => {
-    //     dispatch(clearSelectedRecipeDetail())   // Membersihkan selectedRecipeDetail
-    //     dispatch(clearContentExceedHeight())    // Membersihkan contentExceedHeight
-    // }
-
     const hideSelectedRecipeDetail = useCallback(() => {
         dispatch(clearSelectedRecipeDetail())
         dispatch(clearContentExceedHeight())

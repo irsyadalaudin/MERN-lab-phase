@@ -3,13 +3,13 @@
 // const routes = require('./routes/index')
 import express from 'express';
 import mongoose from 'mongoose';
-import routes from './routes/index.js';
+import routes from './routes/recipeRoutes.js';
 
 const app = express();
 const port = process.env.port || 3000;
 
 mongoose.connect(process.env.MONGO_URI, {
-	useNewUrlPasrser: true,
+	useNewUrlParser: true,
 	useUnifiedTopology: true
 })
 	.then(() => {

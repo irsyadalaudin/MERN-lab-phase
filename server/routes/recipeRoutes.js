@@ -28,7 +28,7 @@ routes.post('/recipe', async (req, res) => {
 
 /* PUT (update) A RECIPE BY ID */
 routes.put('/recipe/:id', async (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
     const {meal, mealThumb, ingredients, cookingInstructions} = req.body;
     try {
         const updateRecipe = await Recipe.findByIdAndUpdate(id, {meal, mealThumb, ingredients, cookingInstructions}, {new: true});
@@ -39,7 +39,7 @@ routes.put('/recipe/:id', async (req, res) => {
 });
 
 routes.delete('/recipe/:id', async (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
     const {meal, mealThumb, ingredients, cookingInstructions} = req.body;
     try {
         const deleteRecipe = await Recipe.findByIdAndDelete(id, {meal, mealThumb, ingredients, cookingInstructions}, {new: true});

@@ -38,7 +38,7 @@ routes.put('/recipe/:id', async (req, res) => {
     }
 });
 
-routes.delete('/recipes/:id', async (req, res) => {
+routes.delete('/recipe/:id', async (req, res) => {
     const id = req.params;
     const {meal, mealThumb, ingredients, cookingInstructions} = req.body;
     try {

@@ -18,77 +18,77 @@ Recipe.deleteMany({})
         console.error('Error deleting documents:', err);
 })
 */
-/*
+
 Recipe.create([
-    {
-        idMeal: '1',
-        meal: 'Nasi Goreng',
-        mealThumb: 'https://example.com/nasi-goreng.jpg',
-        ingredients: ['Nasi', 'Bawang merah', 'Bawang putih', 'Telur', 'Kecap', 'Minyak goreng'],
-        cookingInstructions: '1. Tumis bawang merah dan bawang putih hingga harum. 2. Masukkan telur dan aduk rata. 3. Tambahkan nasi dan kecap, aduk hingga matang. 4. Sajikan.'
+        {
+        idMeal: "1",
+        meal: "Fried Rice",
+        mealThumb: "https://i.postimg.cc/pr3mcJ5z/1-Nasi-Goreng.jpg",
+        ingredients: ["Rice", "Red onion", "Garlic", "Egg", "Soy sauce", "Cooking oil"],
+        cookingInstructions: "1. Sauté red onion and garlic until fragrant. 2. Add egg and stir until well-mixed. 3. Add rice and soy sauce, stir until cooked. 4. Serve."
     },
     {
-        idMeal: '2',
-        meal: 'Sate Ayam',
-        mealThumb: 'https://example.com/sate-ayam.jpg',
-        ingredients: ['Daging ayam', 'Bumbu kacang', 'Bawang merah', 'Bawang putih', 'Kecap manis'],
-        cookingInstructions: '1. Tusuk daging ayam dengan tusukan sate. 2. Panggang sate hingga matang. 3. Sajikan dengan bumbu kacang dan nasi.'
+        idMeal: "2",
+        meal: "Chicken Satay",
+        mealThumb: "https://i.postimg.cc/8CwjgSr1/2-Sate-Ayam.jpg",
+        ingredients: ["Chicken", "Peanut sauce", "Red onion", "Garlic", "Sweet soy sauce"],
+        cookingInstructions: "1. Skewer chicken meat with satay sticks. 2. Grill satay until cooked. 3. Serve with peanut sauce and rice."
     },
     {
-        idMeal: '3',
-        meal: 'Rendang',
-        mealThumb: 'https://example.com/rendang.jpg',
-        ingredients: ['Daging sapi', 'Bumbu rendang', 'Santan', 'Serai', 'Daun jeruk'],
-        cookingInstructions: '1. Tumis bumbu rendang hingga harum. 2. Tambahkan daging sapi dan santan. 3. Masak hingga daging empuk. 4. Sajikan dengan nasi.'
+        idMeal: "3",
+        meal: "Rendang",
+        mealThumb: "https://i.postimg.cc/VNNb6vwS/3-Rendang.jpg",
+        ingredients: ["Beef", "Rendang spices", "Coconut milk", "Lemongrass", "Kaffir lime leaves"],
+        cookingInstructions: "1. Sauté rendang spices until fragrant. 2. Add beef and coconut milk. 3. Cook until the meat is tender. 4. Serve with rice."
     },
     {
-        idMeal: '4',
-        meal: 'Gado-Gado',
-        mealThumb: 'https://example.com/gado-gado.jpg',
-        ingredients: ['Lontong', 'Sayuran segar', 'Tahu', 'Tempe', 'Telur', 'Bumbu kacang'],
-        cookingInstructions: '1. Rebus sayuran dan telur. 2. Goreng tahu dan tempe. 3. Sajikan dengan lontong dan bumbu kacang.'
+        idMeal: "4",
+        meal: "Gado-Gado",
+        mealThumb: "https://i.postimg.cc/3rZ7LBmT/4-Gado-Gado.jpgJ",
+        ingredients: ["Lontong", "Fresh vegetables", "Tofu", "Tempeh", "Egg", "Peanut sauce"],
+        cookingInstructions: "1. Boil vegetables and eggs. 2. Fry tofu and tempeh. 3. Serve with lontong and peanut sauce."
     },
     {
-        idMeal: '5',
-        meal: 'Mie Goreng',
-        mealThumb: 'https://example.com/mie-goreng.jpg',
-        ingredients: ['Mie', 'Bawang merah', 'Bawang putih', 'Sayuran', 'Telur', 'Kecap'],
-        cookingInstructions: '1. Tumis bawang merah dan bawang putih hingga harum. 2. Tambahkan sayuran dan telur. 3. Masak mie dengan kecap. 4. Sajikan.'
+        idMeal: "5",
+        meal: "Fried Noodles",
+        mealThumb: "https://i.postimg.cc/HxJk8F7M/5-Mie-Goreng.jpg",
+        ingredients: ["Noodles", "Red onion", "Garlic", "Vegetables", "Egg", "Soy sauce"],
+        cookingInstructions: "1. Sauté red onion and garlic until fragrant. 2. Add vegetables and egg. 3. Cook noodles with soy sauce. 4. Serve."
     },
     {
-        idMeal: '6',
-        meal: 'Soto Ayam',
-        mealThumb: 'https://example.com/soto-ayam.jpg',
-        ingredients: ['Daging ayam', 'Bawang merah', 'Bawang putih', 'Kecap manis', 'Lontong'],
-        cookingInstructions: '1. Rebus daging ayam hingga empuk. 2. Tumis bawang merah dan bawang putih. 3. Sajikan dengan lontong dan kecap.'
+        idMeal: "6",
+        meal: "Chicken Soto",
+        mealThumb: "https://i.postimg.cc/65KBB8zn/6-Soto-Ayam.jpg",
+        ingredients: ["Chicken meat", "Red onion", "Garlic", "Sweet soy sauce", "Lontong"],
+        cookingInstructions: "1. Boil chicken meat until tender. 2. Sauté red onion and garlic. 3. Serve with lontong and sweet soy sauce."
     },
     {
-        idMeal: '7',
-        meal: 'Ayam Bakar',
-        mealThumb: 'https://example.com/ayam-bakar.jpg',
-        ingredients: ['Daging ayam', 'Bumbu bakar', 'Santan', 'Lengkuas', 'Serai'],
-        cookingInstructions: '1. Marinasi daging ayam dengan bumbu bakar. 2. Bakar ayam hingga matang. 3. Sajikan dengan nasi.'
+        idMeal: "7",
+        meal: "Grilled Chicken",
+        mealThumb: "https://i.postimg.cc/N0936tpQ/7-Ayam-Bakar.jpg",
+        ingredients: ["Chicken meat", "Grilling spices", "Coconut milk", "Galangal", "Lemongrass"],
+        cookingInstructions: "1. Marinate chicken meat with grilling spices. 2. Grill chicken until cooked. 3. Serve with rice."
     },
     {
-        idMeal: '8',
-        meal: 'Nasi Padang',
-        mealThumb: 'https://example.com/nasi-padang.jpg',
-        ingredients: ['Nasi', 'Rendang', 'Sambal', 'Kerupuk', 'Sayuran'],
-        cookingInstructions: '1. Sajikan nasi dengan rendang, sambal, kerupuk, dan sayuran.'
+        idMeal: "8",
+        meal: "Satay Padang",
+        mealThumb: "https://i.postimg.cc/QdTCfF8z/8-Sate-Padang.jpg",
+        ingredients: ["Beef or chicken slices, marinated in Padang-style spices", "Rendang sauce",  "Sambal (spicy chili sauce)", "Kerupuk (crackers)", "Sliced vegetables (cucumber, tomatoes, and shallots)"],
+        cookingInstructions: "1. Marinate beef or chicken slices in Padang-style spices. 2. Skewer the marinated meat and grill until cooked. 3. Heat the rendang sauce. 4. Serve the satay with rendang sauce, sambal, kerupuk, and sliced vegetables."
     },
     {
-        idMeal: '9',
-        meal: 'Pecel Lele',
-        mealThumb: 'https://example.com/pecel-lele.jpg',
-        ingredients: ['Lele', 'Bumbu pecel', 'Lalapan', 'Sambal'],
-        cookingInstructions: '1. Goreng lele hingga krispi. 2. Sajikan dengan bumbu pecel, lalapan, dan sambal.'
+        idMeal: "9",
+        meal: "Catfish Pecel",
+        mealThumb: "https://i.postimg.cc/CxTSLm0v/9-Pecel-Lele.jpg",
+        ingredients: ["Catfish", "Pecel spices", "Fresh vegetables", "Sambal"],
+        cookingInstructions: "1. Fry catfish until crispy. 2. Serve with pecel spices, fresh vegetables, and sambal."
     },
     {
-        idMeal: '10',
-        meal: 'Martabak',
-        mealThumb: 'https://example.com/martabak.jpg',
-        ingredients: ['Daging sapi', 'Telur', 'Bawang merah', 'Bawang putih', 'Tepung', 'Minyak goreng'],
-        cookingInstructions: '1. Tumis daging sapi dengan bawang merah dan bawang putih. 2. Buat adonan martabak dan goreng hingga kecoklatan. 3. Sajikan.'
+        idMeal: "10",
+        meal: "Martabak",
+        mealThumb: "https://i.postimg.cc/7Y7bVCYW/10-Martabak.jpg",
+        ingredients: ["Beef", "Egg", "Red onion", "Garlic", "Flour", "Cooking oil"],
+        cookingInstructions: "1. Sauté beef with red onion and garlic. 2. Make martabak dough and fry until golden brown. 3. Serve."
     }
 ])
     .then(doc => {
@@ -97,4 +97,3 @@ Recipe.create([
     .catch(err => {
         console.log('error while creating recipe', err)
     })
-*/

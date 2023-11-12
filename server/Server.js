@@ -1,9 +1,12 @@
 // const express = require('express')
 // const mongoose = require('mongoose')
 // const routes = require('./routes/index')
+import dotenv from 'dotenv';
+dotenv.config({ path: './config/.env' });
+
 import express from 'express';
 import mongoose from 'mongoose';
-import routes from './routes/recipeRoutes.js';
+import { routes } from './routes/recipeRoutes.js';
 
 const app = express();
 const port = process.env.port || 3000;

@@ -8,9 +8,17 @@ const recipeSchema = new mongoose.Schema({
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
-// module.exports = Recipe;
 export default Recipe;
-
+/*
+Recipe.deleteMany({})
+    .then(doc => {
+        console.log('All documents deleted:', doc);
+    })
+    .catch(err => {
+        console.error('Error deleting documents:', err);
+})
+*/
+/*
 Recipe.create([
     {
         idMeal: '1',
@@ -89,3 +97,4 @@ Recipe.create([
     .catch(err => {
         console.log('error while creating recipe', err)
     })
+*/

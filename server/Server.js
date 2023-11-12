@@ -1,6 +1,3 @@
-// const express = require('express')
-// const mongoose = require('mongoose')
-// const routes = require('./routes/index')
 import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
 

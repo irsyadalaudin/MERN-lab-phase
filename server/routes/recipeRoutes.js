@@ -2,7 +2,7 @@ import express from 'express';
 import { Router } from 'express';
 import Recipe from '../models/Recipe.js';
 
-const routes = Router()
+export const routes = Router()
 
 /* GET ALL RECIPES */
 routes.get('/', async (req, res) => {

@@ -6,45 +6,16 @@ export const routes = Router()
 
 /* GET ALL RECIPES */
 routes.get('/', async (req, res) => {
+    // const { ingredients } = req.query;
     try {
+        // const joinedIngredients = ingredients.split(',').map(encodeURIComponent).join(',');
+        // const response = await axios.get(`http://localhost:4000/?ingredients=${encodeURIComponent(joinedIngredients)}`)
+        const {ingredients} = req.body;
         const recipe = await Recipe.find();
-        res.status(200).json({recipe});
+        console.log('Recipes:', recipe);
+        res.status(200).json({ recipe });
+        // res.json(response.data);
     } catch(err) {
-        res.status(400).json({message: 'error getting recipe'})
-    }
-});
-
-/* POST NEW RECIPE */
-routes.post('/recipe', async (req, res) => {
-    const {meal, mealThumb, ingredients, cookingInstructions} = req.body;
-    try {
-        const newRecipe = new Recipe({meal, mealThumb, ingredients, cookingInstructions});
-        await newRecipe.save();
-        res.status(200).json({newRecipe});
-    } catch(err) {
-        res.status(400).json({message: 'error creating recipe'})
-    }
-});
-
-/* PUT (update) A RECIPE BY ID */
-routes.put('/recipe/:id', async (req, res) => {
-    const id = req.params.id;
-    const {meal, mealThumb, ingredients, cookingInstructions} = req.body;
-    try {
-        const updateRecipe = await Recipe.findByIdAndUpdate(id, {meal, mealThumb, ingredients, cookingInstructions}, {new: true});
-        res.status(200).json(updateRecipe);
-    } catch(err) {
-        res.status(400).json({message: 'error updating recipe'})
-    }
-});
-
-routes.delete('/recipe/:id', async (req, res) => {
-    const id = req.params.id;
-    const {meal, mealThumb, ingredients, cookingInstructions} = req.body;
-    try {
-        const deleteRecipe = await Recipe.findByIdAndDelete(id, {meal, mealThumb, ingredients, cookingInstructions}, {new: true});
-        res.status(200).json(deleteRecipe);
-    } catch(err) {
-        res.status(400).json({message: 'error deleting recipe'})
+        res.status(400).json({ err: 'error getting recipe' })
     }
 });

@@ -32,7 +32,7 @@ const Login = () => {
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' placeholder='Password' />
                     <div className='flex justify-center xl:justify-end'>
                         <p className='mt-2 mr-4 ml-0 xl:ml-9'>Don't have an account?<a onClick={handleToggleSignUp} href='#' className='ml-1 no-underline'>sign up</a></p>
-                        <button type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-9 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Login</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+                        <button type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-10 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Login</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
                     </div>
                 </form>
                 {/* SIGN UP */}

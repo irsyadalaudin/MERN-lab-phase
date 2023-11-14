@@ -4,6 +4,7 @@ dotenv.config({ path: './config/.env' });
 import express from 'express';
 import mongoose from 'mongoose';
 import { routes } from './routes/recipeRoutes.js';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.port || 3000;
@@ -20,6 +21,8 @@ mongoose.connect(process.env.MONGO_URI, {
 	})
 
 app.use(express.json());
+
+app.use(cors());
 
 app.use('/', routes);
 

@@ -26,12 +26,31 @@ const Recipe = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const inputRef = useRef(null)
 
+    console.log(selectedRecipeDetail);
+
     const searchRecipeButton = async () => {
         try {
-            const joinedIngredients = ingredients.join(',')
-            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)
-            dispatch(setRecipes(response.data.meals || []))
-            setShowNoRecipesMessage(response.data.meals ? false : true)
+            console.log(ingredients);
+            const tmp = []
+            // const joinedIngredients = ingredients.join(',')
+            // const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)
+            // const response = await axios.get(`http://localhost:4000/?ingredients=${encodeURIComponent(joinedIngredients)}`)
+            const {data} = await axios.get('http://localhost:4000/')
+            // console.log(data.recipe);
+            for (let i = 0; i < data.recipe.length; i++) {
+                const res = data.recipe[i]
+                for (let x = 0; x < res.ingredients.length; x++) {
+                    const ingredient = res.ingredients[x]
+                    for (let y = 0; y < ingredients.length; y++) {
+                        if(ingredient.toLowerCase() === ingredients[y]){
+                            tmp.push(res)
+                        }
+                    }
+                }
+            }
+            console.log(tmp);
+            dispatch(setRecipes(tmp || []))
+            setShowNoRecipesMessage(tmp.length == 0 ? true : false)
         } catch (error) {
             console.error(error)
         }
@@ -43,15 +62,21 @@ const Recipe = () => {
         setInputValue('')
     }
 
-    const handleRecipeDetail = async (mealId) => {
+    const handleRecipeDetail = async (val) => {
         try {
-            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
-            dispatch(setSelectedRecipeDetail(response.data.meals[0]))
+            // const {data} = await axios.get('http://localhost:4000');
+            // const recipeDetail = {
+            //     ingredients: data.ingredients,
+            //     cookingInstructions: data.cookingInstructions,
+            // };
+    
+            dispatch(setSelectedRecipeDetail(val))
+            setIsRecipeDetailVisible(true)
         } catch (error) {
             console.error('Error fetching recipe details:', error)
         }
-    }
-
+    };
+/*
     const disabledSubmit = () => ingredients.length === 0 || !inputRef.current.value
 
     const disabledEnter = (e) => {
@@ -59,11 +84,12 @@ const Recipe = () => {
             e.preventDefault()
         }
     }
-
+*/
     const handleIngredientsInput = (e) => {
         const input = e.target.value
-        const ingredientsArray = input.split(/[\s,]/).filter(ingredient => ingredient.length > 0)
+        const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
         dispatch(setIngredients(ingredientsArray))
+        setIngredients(ingredientsArray); // Tetapkan ke state lokal
         const value = e.target.value
         setInputValue(value)
         setShowNoRecipesMessage(false)
@@ -174,10 +200,10 @@ const Recipe = () => {
 
             <form onSubmit={handleSearchForm} className='mx-28 xl:mx-0 mt-4'>
                 <div className='flex justify-center sm:mx-0 xl:mx-48 2xl:mx-0'>
-                    <input onChange={handleIngredientsInput} onKeyDown={disabledEnter} ref={inputRef} value={inputValue} className='placeholder-white focus:outline-none resize-none text-xl p-2 w-30 sm:w-full xl:w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' />
+                    <input onChange={handleIngredientsInput}  ref={inputRef} value={inputValue} className='placeholder-white focus:outline-none resize-none text-xl p-2 w-30 sm:w-full xl:w-94 h-20 bg-yellow-800 text-white rounded-md' placeholder='Enter your ingredients' required />
                 </div>
                 <div className='flex justify-center sm:justify-end pb-4 xl:pb-0'>
-                    <button onClick={() => {searchRecipeButton(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false); setContentExceedHeight(true)}} disabled={disabledSubmit()} type='submit' className='float-right self-end h-8 w-20 mt-2 mx-0 xl:mx-48 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
+                    <button onClick={() => {searchRecipeButton(); setIsRecipeVisible(true); setIsRecipeDetailVisible(false)}}  type='submit' className='float-right self-end h-8 w-20 mt-2 mx-0 xl:mx-48 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Search</button>  {/* IF input empty OR isRecipeAvailable IS TRUE, then SEARCH BUTTON WILL BE DISABLED */}
                 </div>
             </form>
 
@@ -195,10 +221,10 @@ const Recipe = () => {
                     <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                         {recipes.map(recipe => (
                             <div key={recipe.idMeal} className='border p-4'>
-                                <h2 className='text-xl'>{recipe.strMeal}</h2>
-                                <img src={recipe.strMealThumb} alt={recipe.strMeal} className='w-full h-48 object-cover rounded-md' />
+                                <h2 className='text-xl'>{recipe.meal}</h2>
+                                <img src={recipe.mealThumb} alt={recipe.meal} className='w-full h-48 object-cover rounded-md' />
                                 <div className='flex justify-end'>
-                                    <button onClick={() => {handleRecipeDetail(recipe.idMeal); setIsRecipeDetailVisible(true)}}  className='mt-2 bg-yellow-800 text-white px-1.5 py-1.5 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Recipe</button>
+                                    <button onClick={() => {handleRecipeDetail(recipe); setIsRecipeDetailVisible(true)}}  className='mt-2 bg-yellow-800 text-white px-1.5 py-1.5 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Recipe</button>
                                 </div>
                             </div>
                         ))}
@@ -213,22 +239,28 @@ const Recipe = () => {
             {isRecipeDetailVisible && selectedRecipeDetail && (
                 <div>
                     <button onClick={() => setIsRecipeDetailVisible(false)} className='mb-4 h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
-                    <h2 className='text-xl mb-4'>Recipe Detail for: {selectedRecipeDetail.strMeal}</h2>
-                    <img src={selectedRecipeDetail.strMealThumb} alt={selectedRecipeDetail.strMeal} className='w-96 h-80 mb-4 rounded-md mx-auto sm:mx-0 block sm:inline' />
+                    <h2 className='text-xl mb-4'>Recipe Detail for: {selectedRecipeDetail.meal}</h2>
+                    <img src={selectedRecipeDetail.mealThumb} alt={selectedRecipeDetail.meal} className='w-96 h-80 mb-4 rounded-md mx-auto sm:mx-0 block sm:inline' />
                     <h3>Ingredients:</h3>
                     <ul className='mb-4'>
-                        {Array.from({ length: 20 }, (v, index) => index + 1)
-                            .filter((index) => selectedRecipeDetail[`strIngredient${index}`])
+                        {/* {Array.from({ length: 20 }, (v, index) => index + 1)
+                            .filter((index) => selectedRecipeDetail[`ingredients${index}`])
                             .map((index) => (
                                 <li key={index}>
-                                    {selectedRecipeDetail[`strIngredient${index}`]} - {' '}
-                                    {selectedRecipeDetail[`strMeasure${index}`]}
+                                    {selectedRecipeDetail[`ingredients${index}`]} - {' '}
+                                    {selectedRecipeDetail[`measure${index}`]}
                                 </li>
                             ))
-                        }
+                        } */}
+                        <ul>
+                            {/* <li>test</li> */}
+                            {selectedRecipeDetail.ingredients.map((ingredient, i) => {
+                                return <li key={i}>{ingredient}</li>
+                            })}
+                        </ul>
                     </ul>
                     <h3>Cooking Instructions:</h3>
-                    <p className='mb-4'>{selectedRecipeDetail.strInstructions}</p>
+                    <p className='mb-4'>{selectedRecipeDetail.cookingInstructions}</p>
                     <div className='pb-4 flex justify-start gap-1'>
                         <button onClick={() => setIsRecipeDetailVisible(false)} className='h-12 sm:h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
                         <button onClick={addToFavorite} className='h-12 sm:h-8 w-52 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Add To Favorite Recipe</button>

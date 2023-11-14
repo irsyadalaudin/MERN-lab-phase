@@ -113,6 +113,7 @@ const Recipe = () => {
         dispatch(clearContentExceedHeight())
     }, [dispatch])
 
+
     /* USE EFFECT */
     useEffect(() => {
         if (selectedRecipeDetail) {
@@ -121,6 +122,7 @@ const Recipe = () => {
             setIsBackButtonDisabled(true)
         }
     }, [selectedRecipeDetail])
+
 
     // USE EFFECT FOR BACKGROUND STYLING
     useEffect(() => {
@@ -136,6 +138,7 @@ const Recipe = () => {
 
     const containerStyle = `bg-yellow-600 px-10 lg:px-28 h-full ${contentExceedHeight ? 'h-full' : 'xl:h-90'}`
 
+
     // USE EFFECT TO UPDATE MINIMIZE RESPONSIVE WINDOW WIDTH BACKGROUND
     useEffect(() => {
         const handleResize = () => {
@@ -149,6 +152,7 @@ const Recipe = () => {
         }
     }, [])
 
+
     // UPDATE setContentExceedHeight BASED ON WINDOW WIDTH AND isRecipeVisible
     useEffect(() => {
         if (isRecipeVisible) {
@@ -161,6 +165,7 @@ const Recipe = () => {
             dispatch(setContentExceedHeight(false))
         }
     }, [isRecipeVisible, windowWidth, dispatch])
+
 
     // USE EFFECT FOR LOCAL STORAGE
     useEffect(() => {

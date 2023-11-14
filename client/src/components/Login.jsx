@@ -19,7 +19,7 @@ const Login = () => {
 
     return (
         // <div className='bg-yellow-600 h-full xl:h-90 px-28 flex justify-center items-center'>
-        <div className='bg-yellow-600 h-90 flex items-center pl-10 overflow-hidden'>
+        <div className='bg-yellow-600 h-89 flex items-center pl-10 overflow-hidden'>
             <div className='w-2/3 xl:w-1/2 text-center'>
                 <div className='flex justify-center'>
                     <p className='mb-6 text-2xl text-justify flex justify-center w-85'>Embark on a delightful culinary journey with us at AYO MASAK! &ensp; Let's make every meal an enjoyable and budget-friendly experience</p>

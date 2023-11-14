@@ -6,9 +6,9 @@ import {
     setIngredients,
     setRecipes,
     setSelectedRecipeDetail,
-    clearSelectedRecipeDetail,    // Perbaikan nama action
+    clearSelectedRecipeDetail,                           // Perbaikan nama action
     setContentExceedHeight,
-    clearContentExceedHeight,     // Perbaikan nama action
+    clearContentExceedHeight,                            // Perbaikan nama action
 } from './store/action/Action'
 
 const Recipe = () => {
@@ -16,7 +16,7 @@ const Recipe = () => {
     const recipes = useSelector((state) => state.recipes)
     const selectedRecipeDetail = useSelector((state) => state.selectedRecipeDetail)
     const contentExceedHeight = useSelector((state) => state.contentExceedHeight)    // Perbaikan, harus menggunakan state.contentExceedHeight
-    const dispatch = useDispatch()    // Menggunakan useDispatch
+    const dispatch = useDispatch()                                                   // Menggunakan useDispatch
 
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
@@ -32,11 +32,7 @@ const Recipe = () => {
         try {
             console.log(ingredients);
             const tmp = []
-            // const joinedIngredients = ingredients.join(',')
-            // const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(joinedIngredients)}`)
-            // const response = await axios.get(`http://localhost:4000/?ingredients=${encodeURIComponent(joinedIngredients)}`)
             const {data} = await axios.get('http://localhost:4000/')
-            // console.log(data.recipe);
             for (let i = 0; i < data.recipe.length; i++) {
                 const res = data.recipe[i]
                 for (let x = 0; x < res.ingredients.length; x++) {
@@ -64,11 +60,6 @@ const Recipe = () => {
 
     const handleRecipeDetail = async (val) => {
         try {
-            // const {data} = await axios.get('http://localhost:4000');
-            // const recipeDetail = {
-            //     ingredients: data.ingredients,
-            //     cookingInstructions: data.cookingInstructions,
-            // };
     
             dispatch(setSelectedRecipeDetail(val))
             setIsRecipeDetailVisible(true)
@@ -76,20 +67,12 @@ const Recipe = () => {
             console.error('Error fetching recipe details:', error)
         }
     };
-/*
-    const disabledSubmit = () => ingredients.length === 0 || !inputRef.current.value
 
-    const disabledEnter = (e) => {
-        if (e.key === 'Enter' && (ingredients.length === 0 || !inputRef.current.value)) {
-            e.preventDefault()
-        }
-    }
-*/
     const handleIngredientsInput = (e) => {
         const input = e.target.value
         const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
         dispatch(setIngredients(ingredientsArray))
-        setIngredients(ingredientsArray); // Tetapkan ke state lokal
+        setIngredients(ingredientsArray);               // Tetapkan ke state lokal
         const value = e.target.value
         setInputValue(value)
         setShowNoRecipesMessage(false)
@@ -97,7 +80,7 @@ const Recipe = () => {
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
-        dispatch(clearContentExceedHeight()) // Membersihkan contentExceedHeight
+        dispatch(clearContentExceedHeight())            // Membersihkan contentExceedHeight
     }
 
     const backIntoSelectedRecipeDetail = () => {
@@ -243,21 +226,9 @@ const Recipe = () => {
                     <img src={selectedRecipeDetail.mealThumb} alt={selectedRecipeDetail.meal} className='w-96 h-80 mb-4 rounded-md mx-auto sm:mx-0 block sm:inline' />
                     <h3>Ingredients:</h3>
                     <ul className='mb-4'>
-                        {/* {Array.from({ length: 20 }, (v, index) => index + 1)
-                            .filter((index) => selectedRecipeDetail[`ingredients${index}`])
-                            .map((index) => (
-                                <li key={index}>
-                                    {selectedRecipeDetail[`ingredients${index}`]} - {' '}
-                                    {selectedRecipeDetail[`measure${index}`]}
-                                </li>
-                            ))
-                        } */}
-                        <ul>
-                            {/* <li>test</li> */}
-                            {selectedRecipeDetail.ingredients.map((ingredient, i) => {
+                        {selectedRecipeDetail.ingredients.map((ingredient, i) => {
                                 return <li key={i}>{ingredient}</li>
-                            })}
-                        </ul>
+                        })}
                     </ul>
                     <h3>Cooking Instructions:</h3>
                     <p className='mb-4'>{selectedRecipeDetail.cookingInstructions}</p>

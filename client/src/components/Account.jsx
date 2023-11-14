@@ -64,23 +64,6 @@ const Account = () => {
     }
 
 
-    /* RECIPE HISTORY FUNCTION */
-    // USE EFFECT FOR BACKGROUND STYLING
-    // useEffect(() => {
-    //     const container = document.getElementById('container')
-    //     const contentHeight = container.scrollHeight
-    //     const containerHeight = container.clientHeight
-
-    //     if (contentHeight > containerHeight) {
-    //         setContentExceedHeight(true)
-    //     } else {
-    //         setContentExceedHeight(false)
-    //     }
-    // }, [selectedTab])
-
-    // const containerStyle = `bg-yellow-600 px-28 ${contentExceedHeight ? 'h-full' : 'h-90'}`
-
-
     /* FAVORITE FOOD FUNCTION */
     const handleSubmit = (e) => {
         // USE CORRESPONDING INPUT BASED ON EDIT MODE 
@@ -136,7 +119,7 @@ const Account = () => {
             }
         })
         setSubmitedFavoriteFood(updatetFavoriteFoodList)
-        setEditFavoriteFood({ id: null, text:'' })  // RESET EDIT MODE
+        setEditFavoriteFood({ id: null, text:'' })        // RESET EDIT MODE
     }
 
     useEffect(() => {

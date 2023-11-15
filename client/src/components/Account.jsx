@@ -70,16 +70,6 @@ const Account = () => {
     };
 
     const handleDeleteRecipe = (index) => {
-        // const updatedRecipes = [...favoriteRecipe]
-        // updatedRecipes.splice(index, 1)
-        // setFavoriteRecipe(updatedRecipes)
-        // alert(Favorite Recipe deleted successfully!)
-
-        // const updatedRecipes = [...favoriteRecipe]
-        // updatedRecipes.splice(index, 1)
-        // setFavoriteRecipe(updatedRecipes)
-        // updateLocalStorage(updatedRecipes)
-        // alert('Favorite Recipe deleted successfully!').
 
         const isConfirmed = window.confirm('Are you sure you want to delete this recipe?')
         if (isConfirmed) {
@@ -165,13 +155,6 @@ const Account = () => {
 
 
     /* RECIPE HISTORY  */
-    // useEffect(() => {
-    //     const storedRecipeHistory = localStorage.getItem('recipe-history')
-    //     if (storedRecipeHistory) {
-    //         const parsedRecipeHistory = JSON.parse(storedRecipeHistory)
-    //         setRecipeHistory(parsedRecipeHistory);
-    //     }
-    // }, [])
     const storedRecipeHistory = JSON.parse(localStorage.getItem('recipe-history')) || [];
     const newRecipeHistory = [...storedRecipeHistory];
     localStorage.setItem('recipe-history', JSON.stringify(newRecipeHistory))
@@ -184,10 +167,6 @@ const Account = () => {
         }
     }, [])
 
-    // useEffect(() => {
-    //     localStorage.setItem('recipe-history', JSON.stringify(recipeHistory));
-    // }, [recipeHistory])
-    
     /* FAVORITE RECIPE */
     useEffect(() => {
         const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')

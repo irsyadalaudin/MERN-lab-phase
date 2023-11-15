@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 
 const Account = () => {
     const [selectedTab, setSelectedTab] = useState('personal-information')
-    // const [contentExceedHeight, setContentExceedHeight] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editId, setEditId] = useState(null)
     const [name, setName] = useState('Joko')

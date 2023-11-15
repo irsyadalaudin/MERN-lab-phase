@@ -64,6 +64,20 @@ const Account = () => {
     }
 
 
+    /* RECIPE HISTORY  */
+    const storedRecipeHistory = JSON.parse(localStorage.getItem('recipe-history')) || [];
+    const newRecipeHistory = [...storedRecipeHistory];
+    localStorage.setItem('recipe-history', JSON.stringify(newRecipeHistory))
+
+    useEffect(() => {
+        const storedRecipeHistory = localStorage.getItem('recipe-history');
+    
+        if (storedRecipeHistory) {
+            setRecipeHistory(JSON.parse(storedRecipeHistory));
+        }
+    }, [])
+
+
     /* FAVORITE RECIPE FUNCTION */
     const updateLocalStorage = (updatedRecipes) => {
         localStorage.setItem('favorite-recipe', JSON.stringify(updatedRecipes))
@@ -93,6 +107,14 @@ const Account = () => {
             alert('All Deletion canceled!')
         }
     }
+
+    useEffect(() => {
+        const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
+        if (storedFavoriteRecipe) {
+            // const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
+            setFavoriteRecipe(JSON.parse(storedFavoriteRecipe))
+        }
+    }, [])
 
 
     /* FAVORITE FOOD FUNCTION */
@@ -128,11 +150,13 @@ const Account = () => {
         const deleteFavoriteFood = submitedFavoriteFood.filter(food => food.id !== id)
         setSubmitedFavoriteFood(deleteFavoriteFood)
         console.log(deleteFavoriteFood)
+        localStorage.removeItem('submitedFavoriteFood')
     }
 
     const handleDeleteAll = () => {
         setSubmitedFavoriteFood([])
         console.log(submitedFavoriteFood)
+        localStorage.clear()
     }
 
     const handleEditFavoriteFood = (id) => {
@@ -153,35 +177,22 @@ const Account = () => {
         setEditFavoriteFood({ id: null, text:'' })        // RESET EDIT MODE
     }
 
-
-    /* RECIPE HISTORY  */
-    const storedRecipeHistory = JSON.parse(localStorage.getItem('recipe-history')) || [];
-    const newRecipeHistory = [...storedRecipeHistory];
-    localStorage.setItem('recipe-history', JSON.stringify(newRecipeHistory))
-
-    useEffect(() => {
-        const storedRecipeHistory = localStorage.getItem('recipe-history');
-    
-        if (storedRecipeHistory) {
-            setRecipeHistory(JSON.parse(storedRecipeHistory));
-        }
-    }, [])
-
-    /* FAVORITE RECIPE */
-    useEffect(() => {
-        const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
-        if (storedFavoriteRecipe) {
-            // const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
-            setFavoriteRecipe(JSON.parse(storedFavoriteRecipe))
-        }
-    }, [])
-    
-    /* FAVORITE FOOD */
     useEffect(() => {
         if (editFavoriteFood.id !== null) {
             editInputRef.current.focus()
         }
     }, [editFavoriteFood.id])
+
+    useEffect(() => {
+        const storedData = localStorage.getItem('submitedFavoriteFood');
+        if (storedData) {
+            setSubmitedFavoriteFood(JSON.parse(storedData));
+        }
+    }, []);
+    
+    useEffect(() => {
+        localStorage.setItem('submitedFavoriteFood', JSON.stringify(submitedFavoriteFood));
+    }, [submitedFavoriteFood])
 
 
     return (
@@ -299,15 +310,15 @@ const Account = () => {
                         <form>
                             <div>
                                 <label className='block' htmlFor='currentPassword'>Current Password:</label>
-                                <input type='password' placeholder='*****' />
+                                <input className='rounded-md' type='password' placeholder='*****' />
                             </div>
                             <div>
                                 <label className='block' htmlFor='newPassword'>New Password:</label>
-                                <input type='password' placeholder='*****' />
+                                <input className='rounded-md' type='password' placeholder='*****' />
                             </div>
                             <div>
                                 <label className='block' htmlFor='confirmNewPassword'>Confirm New Password:</label>
-                                <input type='password' placeholder='*****' />
+                                <input className='rounded-md' type='password' placeholder='*****' />
                             </div>
                             <button>Save</button>
                         </form>

@@ -320,7 +320,7 @@ const Account = () => {
                                 <label className='block' htmlFor='confirmNewPassword'>Confirm New Password:</label>
                                 <input className='rounded-md' type='password' placeholder='*****' />
                             </div>
-                            <button>Save</button>
+                            <button className='mt-3 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Save</button>
                         </form>
                     )}
                 </div>

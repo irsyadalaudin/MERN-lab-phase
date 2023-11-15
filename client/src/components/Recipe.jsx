@@ -228,7 +228,7 @@ const Recipe = () => {
                 <div>
                     <button onClick={() => setIsRecipeDetailVisible(false)} className='mb-4 h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
                     <h2 className='text-xl mb-4'>Recipe Detail for: {selectedRecipeDetail.meal}</h2>
-                    <img src={selectedRecipeDetail.mealThumb} alt={selectedRecipeDetail.meal} className='w-96 h-80 mb-4 rounded-md mx-auto sm:mx-0 block sm:inline' />
+                    <img src={selectedRecipeDetail.mealThumb} alt={selectedRecipeDetail.meal} className='mb-4 w-96 h-72 object-cover rounded-md mx-auto sm:mx-0 block sm:inline' />
                     <h3>Ingredients:</h3>
                     <ul className='mb-4'>
                         {selectedRecipeDetail.ingredients.map((ingredient, i) => {

@@ -158,21 +158,21 @@ const Account = () => {
                         <form action='#'>
                             <div>
                                 <label className='block' htmlFor='name'>Name:</label>
-                                <input onChange={editName} onKeyDown={handleSaveWithEnter} type='text' value={name} disabled={!isEditing || (editId && editId !== 'name') } autoComplete='off'/>
-                                <button onClick={handleEditName}>✎</button>
-                                <button onClick={handleSave}>save</button>
+                                <input className='rounded-md' onChange={editName} onKeyDown={handleSaveWithEnter} type='text' value={name} disabled={!isEditing || (editId && editId !== 'name') } autoComplete='off'/>
+                                <button className='rounded-md' onClick={handleEditName}>✎</button>
+                                <button className='rounded-md' onClick={handleSave}>save</button>
                             </div>
                             <div>
                                 <label className='block' htmlFor='userName'>Username:</label>
-                                <input onChange={editUserName} onKeyDown={handleSaveWithEnter} type='text' value={userName} disabled={!isEditing || (editId && editId !== 'userName') } autoComplete='off'/>
-                                <button onClick={handleEditUserName}>✎</button>
-                                <button onClick={handleSave}>save</button>
+                                <input className='rounded-md' onChange={editUserName} onKeyDown={handleSaveWithEnter} type='text' value={userName} disabled={!isEditing || (editId && editId !== 'userName') } autoComplete='off'/>
+                                <button className='rounded-md' onClick={handleEditUserName}>✎</button>
+                                <button className='rounded-md' onClick={handleSave}>save</button>
                             </div>
                             <div>
                                 <label className='block' htmlFor='email'>Email:</label>
-                                <input onChange={editEmail} onKeyDown={handleSaveWithEnter} type='text' value={email} disabled={!isEditing || (editId && editId !== 'email') } autoComplete='off'/>
-                                <button onClick={handleEditEmail}>✎</button>
-                                <button onClick={handleSave}>save</button>
+                                <input className='rounded-md' onChange={editEmail} onKeyDown={handleSaveWithEnter} type='text' value={email} disabled={!isEditing || (editId && editId !== 'email') } autoComplete='off'/>
+                                <button className='rounded-md' onClick={handleEditEmail}>✎</button>
+                                <button className='rounded-md' onClick={handleSave}>save</button>
                             </div>
                         </form>
                     )}

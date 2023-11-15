@@ -11,6 +11,7 @@ const Account = () => {
     const [submitedFavoriteFood, setSubmitedFavoriteFood] = useState([])
     const [editFavoriteFood, setEditFavoriteFood] = useState({ id: null, text: '' })  // STATE FOR EDIT BUTTON
     const [favoriteRecipe, setFavoriteRecipe] = useState([])
+    const [recipeHistory, setRecipeHistory] = useState([])
     const editInputRef = useRef(null)
 
     const moveTab = (tabName) => {
@@ -162,39 +163,65 @@ const Account = () => {
         setEditFavoriteFood({ id: null, text:'' })        // RESET EDIT MODE
     }
 
+
+    /* RECIPE HISTORY  */
+    // useEffect(() => {
+    //     const storedRecipeHistory = localStorage.getItem('recipe-history')
+    //     if (storedRecipeHistory) {
+    //         const parsedRecipeHistory = JSON.parse(storedRecipeHistory)
+    //         setRecipeHistory(parsedRecipeHistory);
+    //     }
+    // }, [])
+    const storedRecipeHistory = JSON.parse(localStorage.getItem('recipe-history')) || [];
+    const newRecipeHistory = [...storedRecipeHistory];
+    localStorage.setItem('recipe-history', JSON.stringify(newRecipeHistory))
+
+    useEffect(() => {
+        const storedRecipeHistory = localStorage.getItem('recipe-history');
+    
+        if (storedRecipeHistory) {
+            setRecipeHistory(JSON.parse(storedRecipeHistory));
+        }
+    }, [])
+
+    // useEffect(() => {
+    //     localStorage.setItem('recipe-history', JSON.stringify(recipeHistory));
+    // }, [recipeHistory])
+    
+    /* FAVORITE RECIPE */
+    useEffect(() => {
+        const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
+        if (storedFavoriteRecipe) {
+            // const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
+            setFavoriteRecipe(JSON.parse(storedFavoriteRecipe))
+        }
+    }, [])
+    
+    /* FAVORITE FOOD */
     useEffect(() => {
         if (editFavoriteFood.id !== null) {
             editInputRef.current.focus()
         }
     }, [editFavoriteFood.id])
 
-    /* FAVORITE FOOD */
-    useEffect(() => {
-        const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
-        if (storedFavoriteRecipe) {
-            const parsedFavoriteRecipe = JSON.parse(storedFavoriteRecipe)
-            setFavoriteRecipe(parsedFavoriteRecipe)
-        }
-    }, [])
-
 
     return (
-        <div id='container' className='bg-yellow-600 px-28 h-full'>
+        <div id='container' className='bg-yellow-600 px-10 md:px-28 h-full'>
             <div className='text-center pt-4'>
                 <h1 className='text-4xl'>Account</h1>
                 <p className='text-2xl'>Manage your personal information, including phone numbers and email address where you can be contacted</p>
             </div>
-            <div className='flex flex-grow gap-14'>
-                <div className='w-1/3 mt-5'>
-                    <div className='flex flex-col pb-2,5'>
-                        <button onClick={moveTab('personal-information')} className='bg-transparent h-24'>Personal Information</button>
-                        <button onClick={moveTab('recipe-history')} className='bg-transparent h-24'>Recipe History</button>
-                        <button onClick={moveTab('favorite-recipe')} className='bg-transparent h-24'>Favorite Recipe</button>
-                        <button onClick={moveTab('favorite-food')} className='bg-transparent h-24'>Favorite Food</button>
-                        <button onClick={moveTab('account-setting')} className='bg-transparent h-24'>Account Setting</button>
+            <div className='md:flex gap-14'>
+                <div className='md:w-1/3 mt-5'>
+                    <div className='flex flex-row md:flex-col gap-1 mb-8 md:mb-2,5'>
+                        <button onClick={moveTab('personal-information')} className='bg-yellow-800 rounded-md text-white h-14 mb-2'>Personal Information</button>
+                        <button onClick={moveTab('recipe-history')} className='bg-yellow-800 rounded-md text-white h-14 mb-2'>Recipe History</button>
+                        <button onClick={moveTab('favorite-recipe')} className='bg-yellow-800 rounded-md text-white h-14 mb-2'>Favorite Recipe</button>
+                        <button onClick={moveTab('favorite-food')} className='bg-yellow-800 rounded-md text-white h-14 mb-2'>Favorite Food</button>
+                        <button onClick={moveTab('account-setting')} className='bg-yellow-800 rounded-md text-white h-14 mb-2'>Account Setting</button>
                     </div>
                 </div>
-                <div className='w-2/3 mt-5'>
+                <div className='md:w-2/3 mt-5'>
                     {selectedTab === 'personal-information' && (
                         <form action='#'>
                             <div>
@@ -220,7 +247,12 @@ const Account = () => {
 
                     {selectedTab === 'recipe-history' && (
                         <div>
-
+                            <h2>Recipe History</h2>
+                            <ul>
+                                {recipeHistory.map((recipe, index) => (
+                                <li key={index}>{recipe}</li>
+                                ))}
+                            </ul>
                         </div>
                     )}
 
@@ -233,8 +265,8 @@ const Account = () => {
                                         <img className='mb-4 w-96 h-72 object-cover rounded-md mx-auto sm:mx-0 block sm:inline' src={recipe.favoriteRecipeThumb} alt={recipe.meal} />
                                         <h3>Ingredients:</h3>
                                         <ul className='mb-4'>
-                                            {recipe.favoriteRecipeIngredients.map((ingredient, i) => {
-                                                return <li key={i}>{ingredient}</li>
+                                            {recipe.favoriteRecipeIngredients.map((ingredient, index) => {
+                                                return <li key={index}>{ingredient}</li>
                                             })}
                                         </ul>
                                         <h3>Cooking Instructions:</h3>
@@ -252,9 +284,9 @@ const Account = () => {
                         <div>
                             <form onSubmit={handleSubmit}>
                                 <label className='block' htmlFor='favoriteFood'>Favorite Food:</label>
-                                <input className='block w-60' type='text' placeholder='Enter your favorite food here' value={favoriteFood} onChange={handleFavoriteFood} />
+                                <input className='rounded-md block w-60' type='text' placeholder='Enter your favorite food here' value={favoriteFood} onChange={handleFavoriteFood} />
                                 <div className='flex w-62 mt-0.5'>
-                                    <button className='ml-auto' type='submit'>submit</button>
+                                    <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900 ml-auto' type='submit'>submit</button>
                                 </div>
                             </form>
                             <ol>
@@ -263,14 +295,14 @@ const Account = () => {
                                         {editFavoriteFood.id === food.id ? (
                                             <form onSubmit={() => handleSaveAfterEditFavoriteFood(food.id)}>
                                                 <input className='bg-transparent outline-none border-none text-base' type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} ref={editInputRef} />
-                                                <button type='submit'>✔</button>
+                                                <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' type='submit'>✔</button>
                                             </form>
                                         ) : (
                                             <form className='flex items-center w-52'>
                                                 {food.favoriteFood}
                                                 <div className='ml-auto'>
-                                                    <button onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
-                                                    <button onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
+                                                    <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
+                                                    <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
                                                 </div>
                                             </form>
                                         )}
@@ -278,7 +310,7 @@ const Account = () => {
                                 ))}
                             </ol>
                             {submitedFavoriteFood.length > 0 && (
-                                    <button onClick={handleDeleteAll}>deleteAll</button>
+                                    <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={handleDeleteAll}>deleteAll</button>
                                 )
                             }
                         </div>

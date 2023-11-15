@@ -63,6 +63,47 @@ const Account = () => {
     }
 
 
+    /* FAVORITE RECIPE FUNCTION */
+    const updateLocalStorage = (updatedRecipes) => {
+        localStorage.setItem('favorite-recipe', JSON.stringify(updatedRecipes))
+    };
+
+    const handleDeleteRecipe = (index) => {
+        // const updatedRecipes = [...favoriteRecipe]
+        // updatedRecipes.splice(index, 1)
+        // setFavoriteRecipe(updatedRecipes)
+        // alert(Favorite Recipe deleted successfully!)
+
+        // const updatedRecipes = [...favoriteRecipe]
+        // updatedRecipes.splice(index, 1)
+        // setFavoriteRecipe(updatedRecipes)
+        // updateLocalStorage(updatedRecipes)
+        // alert('Favorite Recipe deleted successfully!').
+
+        const isConfirmed = window.confirm('Are you sure you want to delete this recipe?')
+        if (isConfirmed) {
+            const updatedRecipes = [...favoriteRecipe]
+            updatedRecipes.splice(index, 1)
+            setFavoriteRecipe(updatedRecipes)
+            updateLocalStorage(updatedRecipes)
+            alert('Favorite Recipe deleted successfully!')
+        } else {
+            alert('Deletion canceled !')
+        }
+    }
+
+    const handleDeleteAllRecipes = () => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this recipe?')
+        if (isConfirmed) {
+            setFavoriteRecipe([])
+            localStorage.removeItem('favorite-recipe')
+            alert('All Favorite Recipes deleted successfully!')
+        } else {
+            alert('All Deletion canceled!')
+        }
+    }
+
+
     /* FAVORITE FOOD FUNCTION */
     const handleSubmit = (e) => {
         // USE CORRESPONDING INPUT BASED ON EDIT MODE 
@@ -185,26 +226,25 @@ const Account = () => {
 
                     {selectedTab === 'favorite-recipe' && (
                         <div>
-                            <h2>Favorite Recipe:</h2>
+                            <h2 className='mb-4'>Favorite Recipe:</h2>
                                 {favoriteRecipe.map((recipe, index) => (
-                                    <div key={index}>
-                                        <h2>{recipe.favoriteRecipeName}</h2>
-                                        <img src={recipe.favoriteRecipeThumb} alt={recipe.strMeal} />
+                                    <div className='mb-4' key={index}>
+                                        <h2 className='text-xl mb-4'>{recipe.favoriteRecipeMeal}</h2>
+                                        <img className='mb-4 w-96 h-72 object-cover rounded-md mx-auto sm:mx-0 block sm:inline' src={recipe.favoriteRecipeThumb} alt={recipe.meal} />
                                         <h3>Ingredients:</h3>
-                                        <ul>
-                                        {Array.from({ length: 20 }, (v, index) => index + 1)
-                                            .filter((ingredientIndex) => recipe[`favoriteRecipeIngredients${ingredientIndex}`])
-                                            .map((ingredientIndex) => (
-                                            <li key={ingredientIndex}>
-                                                {recipe[`favoriteRecipeIngredients${ingredientIndex}`]} -{' '}
-                                                {/* {recipe[`strMeasure${ingredientIndex}`]} */}
-                                            </li>
-                                            ))}
+                                        <ul className='mb-4'>
+                                            {recipe.favoriteRecipeIngredients.map((ingredient, i) => {
+                                                return <li key={i}>{ingredient}</li>
+                                            })}
                                         </ul>
                                         <h3>Cooking Instructions:</h3>
-                                        <p>{recipe.favoriteRecipeInstructions}</p>
+                                        <p className='mb-4'>{recipe.favoriteRecipeCookingInstructions}</p>
+                                        <button className='h-12 sm:h-8 w-16 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteRecipe(index)}>Delete</button>
                                     </div>
                                 ))}
+                                {favoriteRecipe.length > 0 &&(
+                                    <button className='mb-4 h-12 sm:h-8 w-30 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={handleDeleteAllRecipes}>Delete All Recipes</button>
+                                )}
                         </div>
                     )}
 

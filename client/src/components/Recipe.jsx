@@ -26,11 +26,10 @@ const Recipe = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const inputRef = useRef(null)
 
-    console.log(selectedRecipeDetail);
 
     const searchRecipeButton = async () => {
         try {
-            console.log(ingredients);
+            // console.log(ingredients)
             const tmp = []
             const {data} = await axios.get('http://localhost:4000/')
             for (let i = 0; i < data.recipe.length; i++) {
@@ -44,9 +43,12 @@ const Recipe = () => {
                     }
                 }
             }
-            console.log(tmp);
+            console.log(tmp)
             dispatch(setRecipes(tmp || []))
             setShowNoRecipesMessage(tmp.length == 0 ? true : false)
+            const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || []
+            const newIngredients = [...previousIngredients, ...ingredients]
+            localStorage.setItem('recipe-history', JSON.stringify(newIngredients))
         } catch (error) {
             console.error(error)
         }
@@ -167,7 +169,16 @@ const Recipe = () => {
     }, [isRecipeVisible, windowWidth, dispatch])
 
 
-    // USE EFFECT FOR LOCAL STORAGE
+    // USE EFFECT FOR RECIPE HISTORY LOCAL STORAGE
+    useEffect(() => {
+        const storedRecipeHistory = localStorage.getItem('recipe-history')
+        if (storedRecipeHistory) {
+            const parsedRecipeHistory = JSON.parse(storedRecipeHistory)
+            dispatch(setRecipes(parsedRecipeHistory))
+        }
+    }, [dispatch])
+
+    // USE EFFECT FOR FAVORITE FOOD LOCAL STORAGE
     useEffect(() => {
         const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
         if (storedFavoriteRecipe) {
@@ -177,6 +188,7 @@ const Recipe = () => {
             hideSelectedRecipeDetail()
         }
     }, [hideSelectedRecipeDetail, dispatch])
+
 
 
     return (
@@ -231,8 +243,8 @@ const Recipe = () => {
                     <img className='mb-4 w-96 h-72 object-cover rounded-md mx-auto sm:mx-0 block sm:inline' src={selectedRecipeDetail.mealThumb} alt={selectedRecipeDetail.meal} />
                     <h3>Ingredients:</h3>
                     <ul className='mb-4'>
-                        {selectedRecipeDetail.ingredients.map((ingredient, i) => {
-                            return <li key={i}>{ingredient}</li>
+                        {selectedRecipeDetail.ingredients.map((ingredient, index) => {
+                            return <li key={index}>{ingredient}</li>
                         })}
                     </ul>
                     <h3>Cooking Instructions:</h3>

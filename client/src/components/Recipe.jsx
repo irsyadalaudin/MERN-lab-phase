@@ -92,15 +92,15 @@ const Recipe = () => {
         const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
         const updatedFavoriteRecipe = storedFavoriteRecipe ? JSON.parse(storedFavoriteRecipe) : []
 
-        const favoriteRecipeName = selectedRecipeDetail.strMeal
-        const favoriteRecipeThumb = selectedRecipeDetail.strMealThumb
-        const favoriteRecipeIngredients = selectedRecipeDetail.strIngredient
-        const favoriteRecipeInstructions = selectedRecipeDetail.strInstructions
+        const favoriteRecipeMeal = selectedRecipeDetail.meal
+        const favoriteRecipeThumb = selectedRecipeDetail.mealThumb
+        const favoriteRecipeIngredients = selectedRecipeDetail.ingredients
+        const favoriteRecipeCookingInstructions = selectedRecipeDetail.cookingInstructions
         updatedFavoriteRecipe.push({
-            favoriteRecipeName,
+            favoriteRecipeMeal,
             favoriteRecipeThumb,
             favoriteRecipeIngredients,
-            favoriteRecipeInstructions
+            favoriteRecipeCookingInstructions
         })
 
         localStorage.setItem('favorite-recipe', JSON.stringify(updatedFavoriteRecipe))
@@ -228,11 +228,11 @@ const Recipe = () => {
                 <div>
                     <button onClick={() => setIsRecipeDetailVisible(false)} className='mb-4 h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
                     <h2 className='text-xl mb-4'>Recipe Detail for: {selectedRecipeDetail.meal}</h2>
-                    <img src={selectedRecipeDetail.mealThumb} alt={selectedRecipeDetail.meal} className='mb-4 w-96 h-72 object-cover rounded-md mx-auto sm:mx-0 block sm:inline' />
+                    <img className='mb-4 w-96 h-72 object-cover rounded-md mx-auto sm:mx-0 block sm:inline' src={selectedRecipeDetail.mealThumb} alt={selectedRecipeDetail.meal} />
                     <h3>Ingredients:</h3>
                     <ul className='mb-4'>
                         {selectedRecipeDetail.ingredients.map((ingredient, i) => {
-                                return <li key={i}>{ingredient}</li>
+                            return <li key={i}>{ingredient}</li>
                         })}
                     </ul>
                     <h3>Cooking Instructions:</h3>
@@ -240,7 +240,7 @@ const Recipe = () => {
                     <div className='pb-4 flex justify-start gap-1'>
                         <button onClick={() => setIsRecipeDetailVisible(false)} className='h-12 sm:h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
                         <button onClick={addToFavorite} className='h-12 sm:h-8 w-52 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Add To Favorite Recipe</button>
-                        <button onClick={hideSelectedRecipeDetail} className='h-12 sm:h-8 w-56 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>hide this selectedRecipeDetail</button>
+                        <button onClick={hideSelectedRecipeDetail} className='h-12 sm:h-8 w-56 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Hide this selectedRecipeDetail</button>
                     </div>
                 </div>
             )}

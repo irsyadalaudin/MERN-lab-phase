@@ -74,7 +74,7 @@ const Recipe = () => {
         const input = e.target.value
         const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
         dispatch(setIngredients(ingredientsArray))
-        setIngredients(ingredientsArray);                                            // SET TO LOCAL STATE
+        setIngredients(ingredientsArray)                                             // SET TO LOCAL STATE
         const value = e.target.value
         setInputValue(value)
         setShowNoRecipesMessage(false)

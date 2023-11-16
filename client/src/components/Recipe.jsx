@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'   // USING useDispatch()
+import { useSelector, useDispatch } from 'react-redux'                               // USING useDispatch()
 import {
     setIngredients,
     setRecipes,
     setSelectedRecipeDetail,
-    clearSelectedRecipeDetail,                           // FIXED ACTION NAME
+    clearSelectedRecipeDetail,                                                       // FIXED ACTION NAME
     setContentExceedHeight,
-    clearContentExceedHeight,                            // FIXED ACTION NAME
+    clearContentExceedHeight,                                                        // FIXED ACTION NAME
 } from './store/action/Action'
 
 const Recipe = () => {
@@ -74,7 +74,7 @@ const Recipe = () => {
         const input = e.target.value
         const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
         dispatch(setIngredients(ingredientsArray))
-        setIngredients(ingredientsArray);               // SET TO LOCAL STATE
+        setIngredients(ingredientsArray);                                            // SET TO LOCAL STATE
         const value = e.target.value
         setInputValue(value)
         setShowNoRecipesMessage(false)
@@ -82,7 +82,7 @@ const Recipe = () => {
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
-        dispatch(clearContentExceedHeight())            // CLEARING contentExceedHeight
+        dispatch(clearContentExceedHeight())                                         // CLEARING contentExceedHeight
     }
 
     const backIntoSelectedRecipeDetail = () => {

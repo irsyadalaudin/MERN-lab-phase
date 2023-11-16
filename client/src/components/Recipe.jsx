@@ -1,22 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'   // Menggunakan useDispatch
+import { useSelector, useDispatch } from 'react-redux'   // USING useDispatch()
 import {
     setIngredients,
     setRecipes,
     setSelectedRecipeDetail,
-    clearSelectedRecipeDetail,                           // Perbaikan nama action
+    clearSelectedRecipeDetail,                           // FIXED ACTION NAME
     setContentExceedHeight,
-    clearContentExceedHeight,                            // Perbaikan nama action
+    clearContentExceedHeight,                            // FIXED ACTION NAME
 } from './store/action/Action'
 
 const Recipe = () => {
     const ingredients = useSelector((state) => state.ingredients)
     const recipes = useSelector((state) => state.recipes)
     const selectedRecipeDetail = useSelector((state) => state.selectedRecipeDetail)
-    const contentExceedHeight = useSelector((state) => state.contentExceedHeight)    // Perbaikan, harus menggunakan state.contentExceedHeight
-    const dispatch = useDispatch()                                                   // Menggunakan useDispatch
+    const contentExceedHeight = useSelector((state) => state.contentExceedHeight)    // REPAIR, MUST USE state.contentExceedHeight
+    const dispatch = useDispatch()                                                   // USIING useDispatch()
 
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
@@ -27,9 +27,9 @@ const Recipe = () => {
     const inputRef = useRef(null)
 
 
-    const searchRecipeButton = async () => {
+    const searchRecipeButton = async () => {``
         try {
-            // console.log(ingredients)
+            console.log(ingredients)
             const tmp = []
             const {data} = await axios.get('http://localhost:4000/')
             for (let i = 0; i < data.recipe.length; i++) {
@@ -74,7 +74,7 @@ const Recipe = () => {
         const input = e.target.value
         const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
         dispatch(setIngredients(ingredientsArray))
-        setIngredients(ingredientsArray);               // Tetapkan ke state lokal
+        setIngredients(ingredientsArray);               // SET TO LOCAL STATE
         const value = e.target.value
         setInputValue(value)
         setShowNoRecipesMessage(false)
@@ -82,7 +82,7 @@ const Recipe = () => {
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
-        dispatch(clearContentExceedHeight())            // Membersihkan contentExceedHeight
+        dispatch(clearContentExceedHeight())            // CLEARING contentExceedHeight
     }
 
     const backIntoSelectedRecipeDetail = () => {

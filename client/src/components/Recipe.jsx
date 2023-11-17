@@ -30,19 +30,17 @@ const Recipe = () => {
     const searchRecipeButton = async () => {
         try {
             console.log(ingredients)
-            // ARRAY TEMPORARY
-            // const tmp = []
             // USE Set() TO SAVE UNIQUE RECIPES
             const uniqueRecipes = new Set()
             const { data } = await axios.get('http://localhost:4000/')
 
             // LOOPING TO SEARCH FOR INGREDIENTS THAT WILL BRING UP THE RECIPE
             for (let i = 0; i < data.recipe.length; i++) {
-                const res = data.recipe[i];
+                const res = data.recipe[i]
                 for (let x = 0; x < res.ingredients.length; x++) {
-                    const ingredient = res.ingredients[x];
+                    const ingredient = res.ingredients[x].toLowerCase()
                     for (let y = 0; y < ingredients.length; y++) {
-                        if (ingredient.toLowerCase().includes(ingredients[y])) {
+                        if (ingredient.toLowerCase().includes(ingredients[y].toLowerCase())) {
                             // tmp.push(res)
                             // ADD RECIPE TO Set()
                             uniqueRecipes.add(res)
@@ -61,7 +59,7 @@ const Recipe = () => {
             // UPDATE THE STORED RECIPE HISTORY IF NEEDED
             const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || []
             // USE SET TO REMOVE DUPLICATES
-            const newIngredients = [...new Set([...previousIngredients, ...ingredients])]           
+            const newIngredients = [...new Set([...previousIngredients, ...ingredients.map(i => i.toLowerCase())])]           
             localStorage.setItem('recipe-history', JSON.stringify(newIngredients))
         } catch (error) {
             console.error(error)
@@ -85,7 +83,7 @@ const Recipe = () => {
     }
 
     const handleIngredientsInput = (e) => {
-        const input = e.target.value
+        const input = e.target.value.toLowerCase()
         const ingredientsArray = input.split(/[,]/).filter((ingredient) => ingredient.length > 0)
         dispatch(setIngredients(ingredientsArray))
         setIngredients(ingredientsArray)
@@ -94,7 +92,7 @@ const Recipe = () => {
         setShowNoRecipesMessage(false)
 
         // STORE USER INPUT IN localStorage
-        const userInput = value.toLowerCase();
+        const userInput = value.toLowerCase()
         const storedInputs = JSON.parse(localStorage.getItem('recipe-history')) || []
         if (!storedInputs.includes(userInput)) {
             const newInputs = [...storedInputs, userInput]

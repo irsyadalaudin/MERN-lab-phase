@@ -1,22 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'                               // USING useDispatch()
+import { useSelector, useDispatch } from 'react-redux'
 import {
     setIngredients,
     setRecipes,
     setSelectedRecipeDetail,
-    clearSelectedRecipeDetail,                                                       // FIXED ACTION NAME
+    clearSelectedRecipeDetail,
     setContentExceedHeight,
-    clearContentExceedHeight,                                                        // FIXED ACTION NAME
+    clearContentExceedHeight,
 } from './store/action/Action'
 
 const Recipe = () => {
     const ingredients = useSelector((state) => state.ingredients)
     const recipes = useSelector((state) => state.recipes)
     const selectedRecipeDetail = useSelector((state) => state.selectedRecipeDetail)
-    const contentExceedHeight = useSelector((state) => state.contentExceedHeight)    // REPAIR, MUST USE state.contentExceedHeight
-    const dispatch = useDispatch()                                                   // USIING useDispatch()
+    const contentExceedHeight = useSelector((state) => state.contentExceedHeight)
+    const dispatch = useDispatch()
 
     const [showNoRecipesMessage, setShowNoRecipesMessage] = useState(false)
     const [isRecipeVisible, setIsRecipeVisible] = useState(false)
@@ -27,27 +27,36 @@ const Recipe = () => {
     const inputRef = useRef(null)
 
 
-    const searchRecipeButton = async () => {``
+    const searchRecipeButton = async () => {
         try {
             console.log(ingredients)
+            // ARRAY TEMPORARY
             const tmp = []
-            const {data} = await axios.get('http://localhost:4000/')
+            const { data } = await axios.get('http://localhost:4000/');
+    
+
+            // LOOPING TO SEARCH FOR INGREDIENTS THAT WILL BRING UP THE RECIPE
             for (let i = 0; i < data.recipe.length; i++) {
-                const res = data.recipe[i]
+                const res = data.recipe[i];
                 for (let x = 0; x < res.ingredients.length; x++) {
-                    const ingredient = res.ingredients[x]
+                    const ingredient = res.ingredients[x];
                     for (let y = 0; y < ingredients.length; y++) {
-                        if(ingredient.toLowerCase() === ingredients[y]){
+                        if (ingredient.toLowerCase().includes(ingredients[y])) {
                             tmp.push(res)
+                            // BREAK THE INNER LOOP ONCE A MATCH IS FOUND
+                            break                                                  
                         }
                     }
                 }
             }
-            console.log(tmp)
-            dispatch(setRecipes(tmp || []))
-            setShowNoRecipesMessage(tmp.length == 0 ? true : false)
+    
+            dispatch(setRecipes(tmp || []));
+            setShowNoRecipesMessage(tmp.length === 0 ? true : false);
+    
+            // UPDATE THE STORED RECIPE HISTORY IF NEEDED
             const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || []
-            const newIngredients = [...previousIngredients, ...ingredients]
+            // USE SET TO REMOVE DUPLICATES
+            const newIngredients = [...new Set([...previousIngredients, ...ingredients])]           
             localStorage.setItem('recipe-history', JSON.stringify(newIngredients))
         } catch (error) {
             console.error(error)
@@ -69,20 +78,53 @@ const Recipe = () => {
             console.error('Error fetching recipe details:', error)
         }
     };
-
+    /*
     const handleIngredientsInput = (e) => {
         const input = e.target.value
         const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
         dispatch(setIngredients(ingredientsArray))
-        setIngredients(ingredientsArray)                                             // SET TO LOCAL STATE
+        setIngredients(ingredientsArray)
         const value = e.target.value
         setInputValue(value)
         setShowNoRecipesMessage(false)
+    }*/
+    /*
+    const handleIngredientsInput = (e) => {
+        const input = e.target.value
+        const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
+        dispatch(setIngredients(ingredientsArray))
+
+        const storedRecipeHistory = JSON.parse(localStorage.getItem('recipe-history')) || []
+        localStorage.setItem('recipe-history', JSON.stringify(storedRecipeHistory))
+
+        setIngredients(ingredientsArray)
+        const value = e.target.value
+        setInputValue(value)
+        setShowNoRecipesMessage(false)
+    }*/
+    
+    const handleIngredientsInput = (e) => {
+        const input = e.target.value
+        const ingredientsArray = input.split(/[,]/).filter((ingredient) => ingredient.length > 0)
+        dispatch(setIngredients(ingredientsArray))
+        setIngredients(ingredientsArray)
+        const value = e.target.value
+        setInputValue(value)
+        setShowNoRecipesMessage(false)
+
+        // STORE USER INPUT IN localStorage
+        const userInput = value.toLowerCase();
+        const storedInputs = JSON.parse(localStorage.getItem('recipe-history')) || []
+        if (!storedInputs.includes(userInput)) {
+            const newInputs = [...storedInputs, userInput]
+            localStorage.setItem('recipe-history', JSON.stringify(newInputs))
+        }
     }
+    
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)
-        dispatch(clearContentExceedHeight())                                         // CLEARING contentExceedHeight
+        dispatch(clearContentExceedHeight())
     }
 
     const backIntoSelectedRecipeDetail = () => {
@@ -169,7 +211,7 @@ const Recipe = () => {
     }, [isRecipeVisible, windowWidth, dispatch])
 
 
-    // USE EFFECT FOR RECIPE HISTORY LOCAL STORAGE
+    // USE EFFECT FOR RECIPE HISTORY localStorage
     useEffect(() => {
         const storedRecipeHistory = localStorage.getItem('recipe-history')
         if (storedRecipeHistory) {
@@ -178,7 +220,7 @@ const Recipe = () => {
         }
     }, [dispatch])
 
-    // USE EFFECT FOR FAVORITE FOOD LOCAL STORAGE
+    // USE EFFECT FOR FAVORITE FOOD localStorage
     useEffect(() => {
         const storedFavoriteRecipe = localStorage.getItem('favorite-recipe')
         if (storedFavoriteRecipe) {
@@ -219,8 +261,8 @@ const Recipe = () => {
                         <button onClick={backIntoEmptyRecipe} className='h-8 w-20 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>⬅</button>
                     </div>
                     <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                        {recipes.map(recipe => (
-                            <div key={recipe.idMeal} className='border p-4'>
+                        {recipes.map((recipe, index) => (
+                            <div key={recipe.idMeal || index} className='border p-4'>
                                 <h2 className='text-xl'>{recipe.meal}</h2>
                                 <img src={recipe.mealThumb} alt={recipe.meal} className='w-full h-48 object-cover rounded-md' />
                                 <div className='flex justify-end'>

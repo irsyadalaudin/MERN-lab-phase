@@ -113,7 +113,7 @@ Recipe.create([
     },
     {
         idMeal: "14",
-        meal: "Pisang Goreng",
+        meal: "Fried Banana",
         mealThumb: "https://i.postimg.cc/FFJfzRDx/14-Pisang-Goreng.jpg",
         ingredients: ["Bananas", "Flour", "Sugar", "Vanilla extract", "Oil for frying"],
         cookingInstructions: "1. Coat banana slices in a batter made of flour, sugar, and vanilla extract. 2. Fry until golden brown. 3. Serve as a snack or dessert."
@@ -155,21 +155,21 @@ Recipe.create([
     },
     {
         idMeal: "20",
-        meal: "Pepes Ikan",
+        meal: "Fish Pepes",
         mealThumb: "https://i.postimg.cc/rFZF92np/20-Pepes-Ikan.jpg",
         ingredients: ["Fish", "Banana leaves", "Lime leaves", "Galangal", "Chili paste"],
         cookingInstructions: "1. Wrap fish in banana leaves with lime leaves, galangal, and chili paste. 2. Steam until cooked. 3. Unwrap and serve."
     },
     {
         idMeal: "21",
-        meal: "Sate Lilit",
+        meal: "Wrapped Satay",
         mealThumb: "https://i.postimg.cc/fbnsHzxM/21-Sate-Lilit.jpg",
         ingredients: ["Fish", "Coconut", "Lime leaves", "Shallots", "Turmeric"],
         cookingInstructions: "1. Mix fish with grated coconut, lime leaves, shallots, and turmeric. 2. Skewer and grill until cooked. 3. Serve with rice."
     },
     {
         idMeal: "22",
-        meal: "Es Campur",
+        meal: "Mix Ice",
         mealThumb: "https://i.postimg.cc/Y2yJn2HT/22-Es-Campur.jpg",
         ingredients: ["Shaved ice", "Condensed milk", "Red beans", "Grass jelly", "Jackfruit"],
         cookingInstructions: "1. Arrange shaved ice in a bowl. 2. Add condensed milk, red beans, grass jelly, and jackfruit. 3. Enjoy this Indonesian mixed ice dessert."
@@ -183,7 +183,7 @@ Recipe.create([
     },
     {
         idMeal: "24",
-        meal: "Bubur Ketan Hitam",
+        meal: "Black Sticky Porridge",
         mealThumb: "https://i.postimg.cc/7Y3jx37r/24-Bubur-Ketan-Hitam.jpg",
         ingredients: ["Black glutinous rice", "Coconut milk", "Palm sugar", "Pandanus leaves", "Salt"],
         cookingInstructions: "1. Cook black glutinous rice with coconut milk, pandanus leaves, and a pinch of salt. 2. Sweeten with palm sugar. 3. Serve warm as a dessert."
@@ -197,7 +197,7 @@ Recipe.create([
     },
     {
         idMeal: "26",
-        meal: "Pisang Ijo",
+        meal: "Green Banana Ice",
         mealThumb: "https://i.postimg.cc/c40XBVKP/26-Pisang-Ijo.jpg",
         ingredients: ["Bananas", "Rice flour", "Pandan leaves", "Coconut milk", "Palm sugar"],
         cookingInstructions: "1. Coat bananas in green rice flour batter made with pandan leaves. 2. Steam until cooked. 3. Serve with coconut milk and palm sugar."
@@ -211,7 +211,7 @@ Recipe.create([
     },
     {
         idMeal: "28",
-        meal: "Sate Taichan",
+        meal: "Taichan Satay",
         mealThumb: "https://i.postimg.cc/KvC42ynH/28-Sate-Taichan.jpg",
         ingredients: ["Chicken skewers", "Chili", "Lime", "Sweet soy sauce", "Tomatoes"],
         cookingInstructions: "1. Skewer chicken and grill until cooked. 2. Serve with a spicy mixture of chopped chili, lime, sweet soy sauce, and tomatoes."

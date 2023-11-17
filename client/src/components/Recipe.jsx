@@ -32,7 +32,7 @@ const Recipe = () => {
             console.log(ingredients)
             // ARRAY TEMPORARY
             const tmp = []
-            const { data } = await axios.get('http://localhost:4000/');
+            const { data } = await axios.get('http://localhost:4000/')
     
 
             // LOOPING TO SEARCH FOR INGREDIENTS THAT WILL BRING UP THE RECIPE

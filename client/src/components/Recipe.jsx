@@ -52,12 +52,12 @@ const Recipe = () => {
                     }
                 }
             }
-            
+
             // CONVERT Set() BACK TO ARRAY
             const arr = Array.from(uniqueRecipes)
             dispatch(setRecipes(arr || []));
             setShowNoRecipesMessage(arr.length === 0 ? true : false);
-    
+
             // UPDATE THE STORED RECIPE HISTORY IF NEEDED
             const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || []
             // USE SET TO REMOVE DUPLICATES
@@ -67,43 +67,7 @@ const Recipe = () => {
             console.error(error)
         }
     }
-    /*
-    const searchRecipeButton = async () => {
-        try {
-            console.log(ingredients);
-            const uniqueRecipes = new Set();  // Gunakan Set untuk menyimpan resep unik
-    
-            const { data } = await axios.get('http://localhost:4000/');
-    
-            // Looping untuk mencari resep berdasarkan bahan
-            for (let i = 0; i < data.recipe.length; i++) {
-                const res = data.recipe[i];
-                for (let x = 0; x < res.ingredients.length; x++) {
-                    const ingredient = res.ingredients[x];
-                    for (let y = 0; y < ingredients.length; y++) {
-                        if (ingredient.toLowerCase().includes(ingredients[y])) {
-                            uniqueRecipes.add(res); // Tambahkan resep ke Set
-                            break;  // Hentikan iterasi saat sudah menemukan kecocokan
-                        }
-                    }
-                }
-            }
-    
-            const tmp = Array.from(uniqueRecipes);  // Konversi Set kembali ke array
-            dispatch(setRecipes(tmp || []));
-            setShowNoRecipesMessage(tmp.length === 0 ? true : false);
-    
-            // Update riwayat resep di localStorage jika diperlukan
-            const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || [];
-            const newIngredients = [...new Set([...previousIngredients, ...ingredients])];
-            localStorage.setItem('recipe-history', JSON.stringify(newIngredients));
-        } catch (error) {
-            console.error(error);
-        }
-    }*/
 
-    
-    
     const handleSearchForm = (e) => {
         searchRecipeButton()
         e.preventDefault()
@@ -118,32 +82,8 @@ const Recipe = () => {
         } catch (error) {
             console.error('Error fetching recipe details:', error)
         }
-    };
-    /*
-    const handleIngredientsInput = (e) => {
-        const input = e.target.value
-        const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
-        dispatch(setIngredients(ingredientsArray))
-        setIngredients(ingredientsArray)
-        const value = e.target.value
-        setInputValue(value)
-        setShowNoRecipesMessage(false)
-    }*/
-    /*
-    const handleIngredientsInput = (e) => {
-        const input = e.target.value
-        const ingredientsArray = input.split(/[,]/).filter(ingredient => ingredient.length > 0)
-        dispatch(setIngredients(ingredientsArray))
+    }
 
-        const storedRecipeHistory = JSON.parse(localStorage.getItem('recipe-history')) || []
-        localStorage.setItem('recipe-history', JSON.stringify(storedRecipeHistory))
-
-        setIngredients(ingredientsArray)
-        const value = e.target.value
-        setInputValue(value)
-        setShowNoRecipesMessage(false)
-    }*/
-    
     const handleIngredientsInput = (e) => {
         const input = e.target.value
         const ingredientsArray = input.split(/[,]/).filter((ingredient) => ingredient.length > 0)
@@ -161,7 +101,6 @@ const Recipe = () => {
             localStorage.setItem('recipe-history', JSON.stringify(newInputs))
         }
     }
-    
 
     const backIntoEmptyRecipe = () => {
         setIsRecipeVisible(false)

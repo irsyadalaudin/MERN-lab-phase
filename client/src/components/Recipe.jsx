@@ -70,7 +70,6 @@ const Recipe = () => {
 
     const handleRecipeDetail = async (val) => {
         try {
-    
             dispatch(setSelectedRecipeDetail(val))
             setIsRecipeDetailVisible(true)
         } catch (error) {
@@ -86,11 +85,10 @@ const Recipe = () => {
         const value = e.target.value
         setInputValue(value)
         setShowNoRecipesMessage(false)
-
         // UPDATING localStorage ONLY WITH THE LAST INPUT BEFORE SUBMITING ingrediients
         if  (e.key === 'Enter') {
             const lastInput = ingredientsArray[ingredientsArray.length - 1]
-            const storedInputs =JSON.parse(localStorage.getItem('recipe-history')) || []
+            const storedInputs = JSON.parse(localStorage.getItem('recipe-history')) || []
             // STORE USER INPUT IN localStorage
             if (!storedInputs.includes(lastInput)) {
                 const newInputs = [...storedInputs, lastInput]

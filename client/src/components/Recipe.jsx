@@ -33,7 +33,6 @@ const Recipe = () => {
             // USE Set() TO SAVE UNIQUE RECIPES
             const uniqueRecipes = new Set()
             const { data } = await axios.get('http://localhost:4000/')
-
             // LOOPING TO SEARCH FOR INGREDIENTS THAT WILL BRING UP THE RECIPE
             for (let i = 0; i < data.recipe.length; i++) {
                 const res = data.recipe[i]
@@ -41,7 +40,6 @@ const Recipe = () => {
                     const ingredient = res.ingredients[x].toLowerCase()
                     for (let y = 0; y < ingredients.length; y++) {
                         if (ingredient.toLowerCase().includes(ingredients[y].toLowerCase())) {
-                            // tmp.push(res)
                             // ADD RECIPE TO Set()
                             uniqueRecipes.add(res)
                             // BREAK THE INNER LOOP ONCE A MATCH IS FOUND
@@ -50,12 +48,10 @@ const Recipe = () => {
                     }
                 }
             }
-
             // CONVERT Set() BACK TO ARRAY
             const arr = Array.from(uniqueRecipes)
             dispatch(setRecipes(arr || []));
             setShowNoRecipesMessage(arr.length === 0 ? true : false);
-
             // UPDATE THE STORED RECIPE HISTORY IF NEEDED
             const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || []
             // USE SET TO REMOVE DUPLICATES
@@ -95,7 +91,6 @@ const Recipe = () => {
         if  (e.key === 'Enter') {
             const lastInput = ingredientsArray[ingredientsArray.length - 1]
             const storedInputs =JSON.parse(localStorage.getItem('recipe-history')) || []
-
             // STORE USER INPUT IN localStorage
             if (!storedInputs.includes(lastInput)) {
                 const newInputs = [...storedInputs, lastInput]
@@ -149,7 +144,6 @@ const Recipe = () => {
         }
     }, [selectedRecipeDetail])
 
-
     // USE EFFECT FOR BACKGROUND STYLING
     useEffect(() => {
         const container = document.getElementById('recipe')
@@ -161,23 +155,18 @@ const Recipe = () => {
             dispatch(setContentExceedHeight(false))
         }
     }, [recipes, dispatch])
-
     const containerStyle = `bg-yellow-600 px-10 lg:px-28 h-full ${contentExceedHeight ? 'h-full' : 'xl:h-90'}`
-
 
     // USE EFFECT TO UPDATE MINIMIZE RESPONSIVE WINDOW WIDTH BACKGROUND
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
         }
-
         window.addEventListener('resize', handleResize)
-
         return () => {
             window.removeEventListener('resize', handleResize)
         }
     }, [])
-
 
     // UPDATE setContentExceedHeight BASED ON WINDOW WIDTH AND isRecipeVisible
     useEffect(() => {
@@ -191,7 +180,6 @@ const Recipe = () => {
             dispatch(setContentExceedHeight(false))
         }
     }, [isRecipeVisible, windowWidth, dispatch])
-
 
     // USE EFFECT FOR RECIPE HISTORY localStorage
     useEffect(() => {
@@ -212,7 +200,6 @@ const Recipe = () => {
             hideSelectedRecipeDetail()
         }
     }, [hideSelectedRecipeDetail, dispatch])
-
 
 
     return (

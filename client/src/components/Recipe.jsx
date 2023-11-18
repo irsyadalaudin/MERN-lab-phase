@@ -91,12 +91,23 @@ const Recipe = () => {
         setInputValue(value)
         setShowNoRecipesMessage(false)
 
-        // STORE USER INPUT IN localStorage
-        const userInput = value.toLowerCase()
-        const storedInputs = JSON.parse(localStorage.getItem('recipe-history')) || []
-        if (!storedInputs.includes(userInput)) {
-            const newInputs = [...storedInputs, userInput]
-            localStorage.setItem('recipe-history', JSON.stringify(newInputs))
+        // UPDATING localStorage ONLY WITH THE LAST INPUT BEFORE SUBMITING ingrediients
+        if  (e.key === 'Enter') {
+            const lastInput = ingredientsArray[ingredientsArray.length - 1]
+            const storedInputs =JSON.parse(localStorage.getItem('recipe-history')) || []
+
+            // STORE USER INPUT IN localStorage
+            // const userInput = value.toLowerCase()
+            // const storedInputs = JSON.parse(localStorage.getItem('recipe-history')) || []
+            // if (!storedInputs.includes(userInput)) {
+            //     const newInputs = [...storedInputs, userInput]
+            //     localStorage.setItem('recipe-history', JSON.stringify(newInputs))
+            // }
+
+            if (!storedInputs.includes(lastInput)) {
+                const newInputs = [...storedInputs, lastInput]
+                localStorage.setItem('recipe-history', JSON.stringify(newInputs))
+            }
         }
     }
 

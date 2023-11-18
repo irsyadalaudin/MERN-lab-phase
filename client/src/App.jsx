@@ -5,7 +5,6 @@ import Navbar from './components/Navbar'
 import Recipe from './components/Recipe'
 import ContactUs from './components/ContactUs'
 import AboutUs from './components/AboutUs'
-import Login from './components/Login'
 import Account from './components/Account'
 
 const App = () => {
@@ -17,7 +16,6 @@ const App = () => {
 				<Route path='/' element={<Recipe />} />
 				<Route path='/contact-us' element={<ContactUs />} />
 				<Route path='/about-us' element={<AboutUs />} />
-				<Route path='/login' element={<Login />} />
 				<Route path='/account' element={<Account />} />
 			</Routes>
 		</>

@@ -77,6 +77,18 @@ const Account = () => {
         }
     }, [])
 
+    const handleDeleteRecipeHistory = (id) => {
+        const deleteRecipeHistory = recipeHistory.filter(recipe => recipe.id !== id)
+        setRecipeHistory(deleteRecipeHistory)
+        console.log(deleteRecipeHistory)
+        localStorage.removeItem('recipe-history')
+    }
+
+    const handleDeleteRecipeHistoryAll = () => {
+        setRecipeHistory([])
+        console.log(recipeHistory)
+        localStorage.clear()
+    }
 
     /* FAVORITE RECIPE FUNCTION */
     const updateLocalStorage = (updatedRecipes) => {
@@ -240,9 +252,15 @@ const Account = () => {
                             <h2>Recipe History</h2>
                             <ul>
                                 {recipeHistory.map((recipe, index) => (
-                                <li key={index}>{recipe}</li>
+                                    <div className='flex justify-between w-44' key={index}>
+                                        <li className='mb-1' key={index}>{recipe}</li>
+                                        <button className='w-7 h-6 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteRecipeHistory(recipe.id)}>✖</button>
+                                    </div>
                                 ))}
                             </ul>
+                            {recipeHistory.length > 0 && (
+                                <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={handleDeleteRecipeHistoryAll}>Delete All Recipe History</button>
+                            )}
                         </div>
                     )}
 
@@ -255,16 +273,16 @@ const Account = () => {
                                         <img className='mb-4 w-96 h-72 object-cover rounded-md mx-auto sm:mx-0 block sm:inline' src={recipe.favoriteRecipeThumb} alt={recipe.meal} />
                                         <h3>Ingredients:</h3>
                                         <ul className='mb-4'>
-                                            {recipe.favoriteRecipeIngredients.map((ingredient, index) => {
-                                                return <li key={index}>{ingredient}</li>
-                                            })}
+                                            {recipe.favoriteRecipeIngredients.map((ingredient, index) => (
+                                                <li key={index}>{ingredient}</li>
+                                            ))}
                                         </ul>
                                         <h3>Cooking Instructions:</h3>
                                         <p className='mb-4'>{recipe.favoriteRecipeCookingInstructions}</p>
                                         <button className='h-12 sm:h-8 w-16 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteRecipe(index)}>Delete</button>
                                     </div>
                                 ))}
-                                {favoriteRecipe.length > 0 &&(
+                                {favoriteRecipe.length > 0 && (
                                     <button className='mb-4 h-12 sm:h-8 w-30 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={handleDeleteAllRecipes}>Delete All Recipes</button>
                                 )}
                         </div>
@@ -273,9 +291,9 @@ const Account = () => {
                     {selectedTab === 'favorite-food' && (
                         <div>
                             <form onSubmit={handleSubmit}>
-                                <label className='block' htmlFor='favoriteFood'>Favorite Food:</label>
-                                <input className='rounded-md block w-60' type='text' placeholder='Enter your favorite food here' value={favoriteFood} onChange={handleFavoriteFood} />
-                                <div className='flex w-62 mt-0.5'>
+                                <label className='block mb-1' htmlFor='favoriteFood'>Favorite Food:</label>
+                                <input className='rounded-md block mb-2 w-60' type='text' placeholder='Enter your favorite food here' value={favoriteFood} onChange={handleFavoriteFood} />
+                                <div className='flex w-62'>
                                     <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900 ml-auto' type='submit'>submit</button>
                                 </div>
                             </form>
@@ -288,11 +306,18 @@ const Account = () => {
                                                 <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' type='submit'>✔</button>
                                             </form>
                                         ) : (
-                                            <form className='flex items-center w-52'>
+                                            // <form className='flex items-center w-52'>
+                                            //     {food.favoriteFood}
+                                            //     <div className='ml-auto'>
+                                            //         <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
+                                            //         <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
+                                            //     </div>
+                                            // </form>
+                                            <form className='flex justify-between w-52'>
                                                 {food.favoriteFood}
-                                                <div className='ml-auto'>
-                                                    <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
-                                                    <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
+                                                <div className=''>
+                                                    <button className='mb-1 ml-1 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
+                                                    <button className='mb-1 ml-1 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
                                                 </div>
                                             </form>
                                         )}

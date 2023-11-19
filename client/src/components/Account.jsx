@@ -188,7 +188,6 @@ const Account = () => {
                 <div className='md:w-1/3 mt-5'>
                     <div className='flex flex-row md:flex-col gap-1 mb-8 md:mb-2,5'>
                         <button onClick={moveTab('personal-information')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Personal Information</button>
-                        <button onClick={moveTab('recipe-history')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Recipe History</button>
                         <button onClick={moveTab('favorite-recipe')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Favorite Recipe</button>
                         <button onClick={moveTab('favorite-food')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Favorite Food</button>
                         <button onClick={moveTab('account-setting')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Account Setting</button>

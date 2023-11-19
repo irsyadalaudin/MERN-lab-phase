@@ -11,7 +11,6 @@ const Account = () => {
     const [submitedFavoriteFood, setSubmitedFavoriteFood] = useState([])
     const [editFavoriteFood, setEditFavoriteFood] = useState({ id: null, text: '' })  // STATE FOR EDIT BUTTON
     const [favoriteRecipe, setFavoriteRecipe] = useState([])
-    const [recipeHistory, setRecipeHistory] = useState([])
     const editInputRef = useRef(null)
 
     const moveTab = (tabName) => {
@@ -61,32 +60,6 @@ const Account = () => {
             e.preventDefault()
             handleSave()
         }
-    }
-
-
-    /* RECIPE HISTORY  */
-    const storedRecipeHistory = JSON.parse(localStorage.getItem('recipe-history')) || [];
-    const newRecipeHistory = [...storedRecipeHistory];
-    localStorage.setItem('recipe-history', JSON.stringify(newRecipeHistory))
-
-    useEffect(() => {
-        const storedRecipeHistory = localStorage.getItem('recipe-history')
-        if (storedRecipeHistory) {
-            setRecipeHistory(JSON.parse(storedRecipeHistory))
-        }
-    }, [])
-
-    const handleDeleteRecipeHistory = (id) => {
-        const deleteRecipeHistory = recipeHistory.filter(recipe => recipe.id !== id)
-        setRecipeHistory(deleteRecipeHistory)
-        console.log(deleteRecipeHistory)
-        localStorage.removeItem('recipe-history')
-    }
-
-    const handleDeleteRecipeHistoryAll = () => {
-        setRecipeHistory([])
-        console.log(recipeHistory)
-        localStorage.clear()
     }
 
 
@@ -243,23 +216,6 @@ const Account = () => {
                                 <button className='rounded-md' onClick={handleSave}>save</button>
                             </div>
                         </form>
-                    )}
-
-                    {selectedTab === 'recipe-history' && (
-                        <div>
-                            <h2>Recipe History</h2>
-                            <ul>
-                                {recipeHistory.map((recipe, index) => (
-                                    <div className='flex justify-between w-44' key={index}>
-                                        <li className='mb-1' key={index}>{recipe}</li>
-                                        <button className='w-7 h-6 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteRecipeHistory(recipe.id)}>✖</button>
-                                    </div>
-                                ))}
-                            </ul>
-                            {recipeHistory.length > 0 && (
-                                <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={handleDeleteRecipeHistoryAll}>Delete All Recipe History</button>
-                            )}
-                        </div>
                     )}
 
                     {selectedTab === 'favorite-recipe' && (

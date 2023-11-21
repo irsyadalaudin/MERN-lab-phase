@@ -1,5 +1,5 @@
 config/
 node_modules/
-controllers/
+controllers/recipeController.js
 middlewares/
 models/db.json

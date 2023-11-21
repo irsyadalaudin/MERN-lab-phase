@@ -1,15 +1,15 @@
-import User from '../models/User';
+import User from '../models/User.js';
 
-module.exports.signup_get = (req, res) => {
+export const signup_get = (req, res) => {
     res.render('signUp');
 }
 
-module.exports.login_get = (req, res) => {
+export const login_get = (req, res) => {
     res.render('signIn');
 }
 
 // ASYHNCRONOUS FUNCTION
-module.exports.signup_post = async (req, res) => {
+export const signup_post = async (req, res) => {
     const {email, password} = req.body;
     console.log(email, password);
     res.send('user login');
@@ -23,6 +23,6 @@ module.exports.signup_post = async (req, res) => {
     }
 }
 
-module.exports.login_post = (req, res) => {
+export const login_post = (req, res) => {
     res.render('user-signIn');
 }

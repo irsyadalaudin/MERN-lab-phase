@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 
-export const signup_get = (req, res) => {
+export const register_get = (req, res) => {
     res.render('signUp');
 }
 
@@ -9,10 +9,10 @@ export const login_get = (req, res) => {
 }
 
 // ASYHNCRONOUS FUNCTION
-export const signup_post = async (req, res) => {
+export const register_post = async (req, res) => {
     const {email, password} = req.body;
-    console.log(email, password);
-    res.send('user login');
+    // console.log(email, password);
+    // res.send('new signUp');
     
     try {
         const user = await User.create({email, password});
@@ -24,5 +24,7 @@ export const signup_post = async (req, res) => {
 }
 
 export const login_post = (req, res) => {
-    res.render('user-signIn');
+    const {email, password} = req.body;
+    console.log(email, password);
+    res.send('user signIn');
 }

@@ -11,9 +11,6 @@ const Login = () => {
                 </div>
                 {/* BUTTON Link to REGISTER */}
                 <button disabled className='p-1 mb-2 bg-amber-700 rounded-l-lg hover: cursor-pointer hover:bg-amber-800' >Sign In</button>
-                {/* <button id='sign-up-btn' className='p-1 mb-2 bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800'>
-                    <Link to='/register' className='text-white no-underline' id='sign-in-btn'>Sign Up</Link>
-                </button> */}
                 <Link to='/register' id='sign-in-btn'>
                     <button id='sign-up-btn' className='p-1 mb-2 text-white bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800'>Sign Up</button>
                 </Link>
@@ -23,7 +20,7 @@ const Login = () => {
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' placeholder='Password' />
                     <div className='flex justify-center xl:justify-end'>
                         <p className='mt-3 mr-4 ml-0 xl:ml-9'>
-                            <Link to='/register' className='text-black no-underline'>Don't have an account?</Link>
+                            <Link to='/register' className='text-black no-underline'>Don't have an account ? Sign Up here !</Link>
                         </p>
                         <button type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-10 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Login</button>
                     </div>

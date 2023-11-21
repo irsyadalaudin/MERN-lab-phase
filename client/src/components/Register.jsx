@@ -9,14 +9,10 @@ const Register = () => {
                 <div className='flex justify-center'>
                     <p className='mb-6 text-2xl text-justify flex justify-center w-85'>Embark on a delightful culinary journey with us at AYO MASAK! &ensp; Let's make every meal an enjoyable and budget-friendly experience</p>
                 </div>
-                {/* BUTTON Link to LOGIN */}
-                {/* <button className='p-1 mb-2 bg-amber-700 rounded-l-lg hover: cursor-pointer hover:bg-amber-800'>
-                    <Link to='/login' className='text-white no-underline'>Sign In</Link>
-                </button> */}
                 <Link to='/login'>
                     <button className='p-1 mb-2 text-white bg-amber-700 rounded-l-lg hover: cursor-pointer hover:bg-amber-800'>Sign In</button>
                 </Link>
-                <button disabled className='p-1 mb-2 bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800 no-underline'>SignUp</button>
+                <button disabled className='p-1 mb-2 bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800'>SignUp</button>
                 {/* SIGN UP */}
                 <form className='flex flex-col items-center px-0 xl:px-28' >
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' placeholder='Name' />

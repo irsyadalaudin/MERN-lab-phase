@@ -66,8 +66,8 @@ userSchema.statics.register = async function(name, username, email, password) {
     return user
 }
 
-const User = mongoose.model('User', userSchema);
-export default User;
+const User = mongoose.model('User', userSchema)
+export default User
 
 /*
 User.create([

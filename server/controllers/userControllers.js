@@ -5,9 +5,18 @@ export const loginUser = async (req, res) => {
     res.json({message: 'login user'})
 }
 
-// REGISTER USER
+// REGISTER USER  // NYAMBUNG SAMA models/User.js
 export const registerUser = async (req, res) => {
-    res.json({message: 'register user'})
+    const { name, username, email, password } = req.body
+
+    try {
+        const user = await User.register(name, username, email, password)
+        res.status(200).json({ name, username, email, user })              // INI HARUS DITULIS SEMUANYA 
+    } catch (err) {
+        res.status(400).json({ message: 'error', err })
+    }
+
+    // res.json({message: 'register user'})
 }
 
 export default { loginUser, registerUser }

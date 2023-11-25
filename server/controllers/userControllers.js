@@ -8,7 +8,18 @@ const createToken = (_id) => {
 
 // LOGIN USER
 export const loginUser = async (req, res) => {
-    res.json({message: 'login user'})
+    const { email, password } = req.body
+
+    try {
+        const user = await User.login(email, password)
+
+        // CREATE A TOKEN
+        const token = createToken(user._id)
+        res.status(200).json({ email, token })
+    } catch (err) {
+        res.status(400).json({ message: err.message})
+    }
+    // res.json({message: 'login user'})
 }
 
 // REGISTER USER  // NYAMBUNG SAMA models/User.js
@@ -20,7 +31,6 @@ export const registerUser = async (req, res) => {
 
         // CREATE A TOKEN
         const token = createToken(user._id)
-
         // res.status(200).json({ name, username, email, user })              // INI HARUS DITULIS SEMUANYA 
         res.status(200).json({ name, username, email, token })
     } catch (err) {

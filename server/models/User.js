@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import validator from 'validator';
 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     username: {
         type: String,
@@ -26,10 +26,36 @@ const userSchema = new mongoose.Schema({
 
 // STATIC REGISTER (SIGN UP) METHOD  // NYAMBUNG SAMA controllers/userControllers.js
 userSchema.statics.register = async function(name, username, email, password) {
+    // VALIDATION
+    if (!name || !username || !email || !password) {
+        throw Error('All fields must be filled!')
+    }
+    // if (!validator.isName(name)) {
+    //     throw Error('Name must not contain symbol!')
+    // }
+    // if (!validator.isUniqueUsername(username)) {
+    //     throw Error('Username is already axist!')
+    // }
+    if (!validator.isEmail(email)) {
+        throw Error('Email is not valid!')
+    }
+    if (!validator.isStrongPassword(password)) {
+        throw Error('Password is not storng enough!')
+    }
+
+    const isStrongPassword = validator.isStrongPassword(password, {
+        minLength: 8,     // MINIMUM LENGTH 7 CHARACTERS
+        minLowercase: 1,  // MINIMUM 1 LOWERCASE LETTER
+        minUppercase: 1,  // MINIMUM 1 UPPERCASE LETTER
+        minNumbers: 1,    // MINIMUM 1 NUMBER
+        minSymbols: 1,    // MINIMUM 1 SYMBOL
+        returnScore: false,
+    })
+
     const exists = await this.findOne({ email })
 
     if (exists) {
-        throw Error('Email already in use')
+        throw Error('Email already in use !')
     }
 
     // MY PASSWORD

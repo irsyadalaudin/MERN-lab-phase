@@ -13,7 +13,8 @@ export const registerUser = async (req, res) => {
         const user = await User.register(name, username, email, password)
         res.status(200).json({ name, username, email, user })              // INI HARUS DITULIS SEMUANYA 
     } catch (err) {
-        res.status(400).json({ message: 'error', err })
+        // res.status(400).json({ message: 'error', err })
+        res.status(400).json({ message: err.message })
     }
 }
 

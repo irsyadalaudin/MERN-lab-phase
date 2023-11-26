@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useReducer, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 export const AuthContext = createContext()
@@ -19,6 +19,13 @@ export const AuthContextProvider = ({ children }) => {
         user: null
     })
     console.log('AuthContext state: ', state)
+
+useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+        dispatch({ type: 'LOGIN', payload: user})
+    }
+}, [])
 
 
     return (

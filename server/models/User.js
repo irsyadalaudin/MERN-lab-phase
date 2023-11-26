@@ -67,13 +67,18 @@ userSchema.statics.register = async function(name, username, email, password) {
 
 
 // STATIC LOGIN (SIGN IN) METHOD
-userSchema.statics.login = async function(email, password) {
+userSchema.statics.login = async function(identifier, password) {
     // VALIDATION
-    if (!email || !password) {
+    if (!identifier || !password) {
         throw Error('All fields must be filled!')
     }
 
-    const user = await this.findOne({ email })
+    const user = await this.findOne({ 
+        $or: [
+            { username: identifier },
+            { email: identifier }
+        ]
+    })
     if (!user) {
         throw Error('Incorrect Email!')
     }

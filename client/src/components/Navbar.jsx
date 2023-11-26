@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 // import { Link, useNavigate } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
+import { useLogout } from '../hooks/useLogout'
 
 const Navbar = () => {
     const scrollToTopHome = () => {
@@ -23,6 +24,12 @@ const Navbar = () => {
         }
     }
 
+    const  { Logout }  = useLogout()
+    const handleLogout = () => {
+        Logout()
+    }
+
+
     return (
         <nav className='bg-yellow-800 text-neutral-100 md:h-20 lg:h-14 py-3 lg:py-0 px-0 md:px-28 flex-col lg:flex-row flex justify-between items-center sticky top-0 hover:cursor-pointer'>
             <h1>
@@ -37,6 +44,7 @@ const Navbar = () => {
                 <Link to='/about-us' className='text-neutral-100 no-underline'>About us</Link>
                 <Link to='/account' className='text-neutral-100 no-underline'>Account</Link>
                 <Link to='/login' className='text-neutral-100 no-underline'>Login</Link>
+                <button onClick={handleLogout}>Logout</button>
             </div>
         </nav>
     )

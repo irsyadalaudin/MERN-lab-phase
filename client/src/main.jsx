@@ -6,7 +6,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './components/store/store.js'
-import { AuthContext, AuthContextProvider } from './context/AuthContext.js'
+import { AuthContextProvider } from './context/AuthContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<BrowserRouter>

@@ -1,9 +1,5 @@
 config/
 node_modules/
 controllers/recipeControllers.js
-controllers/workoutControllers.js
-middlewares/
 models/db.json
-models/workoutModel.js
-routes/workouts.js
 generateSecret.js

@@ -8,14 +8,14 @@ const createToken = (_id) => {
 
 // LOGIN USER
 export const loginUser = async (req, res) => {
-    const { email, password } = req.body
+    const { identifier, password } = req.body
 
     try {
-        const user = await User.login(email, password)
+        const user = await User.login(identifier, password)
 
         // CREATE A TOKEN
         const token = createToken(user._id)
-        res.status(200).json({ email, token })
+        res.status(200).json({ username: user.username, email: user.email, token })
     } catch (err) {
         res.status(400).json({ message: err.message})
     }

@@ -6,7 +6,7 @@ const Login = () => {
     const [loginInput, setLoginInput] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
         console.log(loginInput, password)
     }
@@ -26,13 +26,13 @@ const Login = () => {
                 </Link>
                 {/* SIGN IN */}
                 <form onSubmit={handleSubmit} className='flex flex-col items-center px-0 lg:px-20 xl:px-28'>
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' value={loginInput} placeholder='Email / Username' />
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' value={password} placeholder='Password' />
+                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setLoginInput(e.target.value)} value={loginInput} placeholder='Email / Username' />
+                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)} value={password} placeholder='Password' />
                     <div className='flex justify-center xl:justify-end'>
                         <p className='mt-3 mr-4 ml-0 xl:ml-9'>
                             <Link to='/register' className='text-black no-underline'>Don't have an account ? Sign Up here !</Link>
                         </p>
-                        <button type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-10 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Login</button>
+                        <button type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-10 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign In</button>
                     </div>
                 </form>
             </div>

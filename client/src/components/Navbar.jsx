@@ -1,6 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-undef */
-// import { Link, useNavigate } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 

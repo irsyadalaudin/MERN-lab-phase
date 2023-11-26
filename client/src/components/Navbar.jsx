@@ -2,8 +2,12 @@
 /* eslint-disable no-undef */
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Navbar = () => {
+    const { Logout }  = useLogout()
+    const { user } = useAuthContext()
+
     const scrollToTopHome = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
@@ -23,7 +27,6 @@ const Navbar = () => {
         }
     }
 
-    const  { Logout }  = useLogout()
     const handleLogout = () => {
         Logout()
     }
@@ -42,8 +45,20 @@ const Navbar = () => {
                 <Link to='/contact-us' className='text-neutral-100 no-underline'>Contact us</Link>
                 <Link to='/about-us' className='text-neutral-100 no-underline'>About us</Link>
                 <Link to='/account' className='text-neutral-100 no-underline'>Account</Link>
-                <Link to='/login' className='text-neutral-100 no-underline'>Login</Link>
-                <button onClick={handleLogout}>Logout</button>
+                {/* <Link to='/login' className='text-neutral-100 no-underline'>Login</Link> */}
+                {user && (
+                    <div>
+                        <span>{user.username}</span> 
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                )}
+                {!user && (
+                    <div>
+                        <Link to='/login' className='text-neutral-100 no-underline'>Login</Link>
+                    </div>
+                )
+
+                }
             </div>
         </nav>
     )

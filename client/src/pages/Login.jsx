@@ -1,14 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
-    const [loginInput, setLoginInput] = useState('')
+    const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
+    const { login, error, isLoading } = useLogin()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        console.log(loginInput, password)
+        // console.log(identifier, password)
+        await login(identifier, password)
+        setIdentifier('')
+        setPassword('')
     }
 
 
@@ -26,14 +31,16 @@ const Login = () => {
                 </Link>
                 {/* SIGN IN */}
                 <form onSubmit={handleSubmit} className='flex flex-col items-center px-0 lg:px-20 xl:px-28'>
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setLoginInput(e.target.value)} value={loginInput} placeholder='Email / Username' />
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)} value={password} placeholder='Password' />
+                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setIdentifier(e.target.value)} value={identifier} placeholder='Email / Username' autoComplete='Email / Username' />
+                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)} value={password} placeholder='Password' autoComplete='Password' />
                     <div className='flex justify-center xl:justify-end'>
                         <p className='mt-3 mr-4 ml-0 xl:ml-9'>
-                            <Link to='/register' className='text-black no-underline'>Don't have an account ? Sign Up here !</Link>
+                            Don't have an account ? &ensp;
+                            <Link to='/register' className='text-black hover:text-white'>Sign Up here !</Link>
                         </p>
-                        <button type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-10 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign In</button>
+                        <button disabled={isLoading} type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-10 bg-yellow-800 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign In</button>
                     </div>
+                    {error && <div className='error'>{error}</div>}
                 </form>
             </div>
             {/* IMAGE */}

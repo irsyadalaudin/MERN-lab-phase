@@ -6,20 +6,28 @@ const router = express.Router()
 // LOGIN ROUTE
 router.post('/login', loginUser)
 
+router.get('/login', async (req, res) => {
+    const { query } = req.query
+    try {
+        const users = await User.findOne({ })
+        res.status(204).json(users)
+    } catch (err) {
+        res.status(404).json({ message: err.message })
+    }
+})
+
 // REGISTER ROUTE
 router.post('/register', registerUser)
 
 router.get('/register', async (req, res) => {
-    const { query } = req.query;
-
+    const { query } = req.query
     try {
-        // You can customize the search logic based on your requirements
-        const users = await User.find({ });
-        res.status(200).json(users);
+        const users = await User.find({ })
+        res.status(204).json(users)
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(404).json({ message: err.message })
     }
-});
+})
 
 export default router
 

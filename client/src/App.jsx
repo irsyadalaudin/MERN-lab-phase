@@ -22,7 +22,7 @@ const App = () => {
 		}
 	}, [navigate, location])
 
-	// CHECK IF THE CURRENT PAGE IS '/login'
+	// CHECK IF THE CURRENT PAGE IS '/login' OR '/register TO HIDE NAVBAR
 	const hideNavbar = location.pathname === '/login' || location.pathname === '/register'
 
 

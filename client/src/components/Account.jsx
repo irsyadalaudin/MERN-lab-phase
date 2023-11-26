@@ -187,10 +187,8 @@ const Account = () => {
             <div className='md:flex gap-14'>
                 <div className='md:w-1/3 mt-5'>
                     <div className='flex flex-row md:flex-col gap-1 mb-8 md:mb-2,5'>
-                        <button onClick={moveTab('personal-information')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Personal Information</button>
                         <button onClick={moveTab('favorite-recipe')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Favorite Recipe</button>
                         <button onClick={moveTab('favorite-food')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Favorite Food</button>
-                        <button onClick={moveTab('account-setting')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Account Setting</button>
                     </div>
                 </div>
                 <div className='md:w-2/3 mt-5'>
@@ -282,24 +280,6 @@ const Account = () => {
                                 )
                             }
                         </div>
-                    )}
-
-                    {selectedTab === 'account-setting' && (
-                        <form>
-                            <div>
-                                <label className='block' htmlFor='currentPassword'>Current Password:</label>
-                                <input className='rounded-md' type='password' placeholder='*****' />
-                            </div>
-                            <div>
-                                <label className='block' htmlFor='newPassword'>New Password:</label>
-                                <input className='rounded-md' type='password' placeholder='*****' />
-                            </div>
-                            <div>
-                                <label className='block' htmlFor='confirmNewPassword'>Confirm New Password:</label>
-                                <input className='rounded-md' type='password' placeholder='*****' />
-                            </div>
-                            <button className='mt-3 bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900'>Save</button>
-                        </form>
                     )}
                 </div>
             </div>

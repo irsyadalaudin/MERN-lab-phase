@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -9,6 +10,7 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { register, error, isLoading } = useRegister()
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -18,6 +20,7 @@ const Register = () => {
         setUsername('')
         setEmail('')
         setPassword('')
+        navigate('/login')
     }
 
     return (
@@ -38,7 +41,7 @@ const Register = () => {
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder='Email' autoComplete='Email' />
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)}  value={password} placeholder='Password' autoComplete='Password' />
                     <div className='flex justify-center xl:justify-end'>
-                        <button disabled={isLoading} type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-9 bg-yellow-800 text-white py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>SIgn Up</button>
+                        <button disabled={isLoading} type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-9 bg-yellow-800 text-white py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign Up</button>
                     </div>
                     {error && <div className='error'>{error}</div>}
                 </form>

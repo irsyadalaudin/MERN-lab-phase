@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
     const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
     const { login, error, isLoading } = useLogin()
+    const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -14,6 +15,7 @@ const Login = () => {
         await login(identifier, password)
         setIdentifier('')
         setPassword('')
+        navigate('/')
     }
 
 

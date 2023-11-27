@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 import { routes } from './routes/recipeRoutes.js'
 import cors from 'cors'
 import userRoutes from './routes/userRoutes.js'
+import path from 'path'
 
 const app = express()
 
@@ -15,6 +16,10 @@ app.use(cors())
 // ROUTES
 app.use('/', routes)
 app.use('/user', userRoutes)
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+})
 
 // MONGODB DATABASE CONNECTION
 const port = process.env.PORT || 3000

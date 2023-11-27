@@ -9,6 +9,7 @@ const Register = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     const { register, error, isLoading } = useRegister()
     const navigate = useNavigate()
 
@@ -21,6 +22,10 @@ const Register = () => {
         setEmail('')
         setPassword('')
         navigate('/login')
+    }
+
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword)
     }
 
     return (
@@ -39,7 +44,11 @@ const Register = () => {
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setName(e.target.value)}  value={name} placeholder='Name' autoComplete='Name' />
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setUsername(e.target.value)}  value={username} placeholder='Username' autoComplete='Username' />
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder='Email' autoComplete='Email' />
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)}  value={password} placeholder='Password' autoComplete='Password' />
+                    {/* <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)}  value={password} placeholder='Password' autoComplete='Password' /> */}
+                    <div className='relative'>
+                        <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} value={password} placeholder='password' autoComplete='password' />
+                        <button className='absolute top-3 right-3 bg-transparent rounded-full' type='button' onClick={handleShowPassword}>👁️‍🗨️</button>
+                    </div>
                     <div className='flex justify-center xl:justify-end'>
                         <button disabled={isLoading} type='submit' className='h-8 w-20 mt-2 mx-0 xl:mx-9 bg-yellow-800 text-white py-2 rounded-md hover:cursor-pointer hover:bg-yellow-900'>Sign Up</button>
                     </div>

@@ -6,6 +6,7 @@ import { useLogin } from '../hooks/useLogin'
 const Login = () => {
     const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     const { login, error, isLoading } = useLogin()
     const navigate = useNavigate()
 
@@ -16,6 +17,10 @@ const Login = () => {
         setIdentifier('')
         setPassword('')
         navigate('/')
+    }
+
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword)
     }
 
 
@@ -34,7 +39,13 @@ const Login = () => {
                 {/* SIGN IN */}
                 <form onSubmit={handleSubmit} className='flex flex-col items-center px-0 lg:px-20 xl:px-28'>
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setIdentifier(e.target.value)} value={identifier} placeholder='Email / Username' autoComplete='Email / Username' />
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)} value={password} placeholder='Password' autoComplete='Password' />
+                    {/* <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} value={password} placeholder='Password' autoComplete='Password' />
+                    <button type='button' onClick={() => setShowPassword(!showPassword)}>👁️‍🗨️</button> */}
+                    <div className='relative'>
+                        <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} value={password} placeholder='password' autoComplete='password' />
+                        <button className='absolute top-3 right-3 bg-transparent rounded-full' type='button' onClick={handleShowPassword}>👁️‍🗨️</button>
+                    </div>
+
                     <div className='flex justify-center xl:justify-end'>
                         <p className='mt-3 mr-4 ml-0 xl:ml-9'>
                             Don't have an account ? &ensp;

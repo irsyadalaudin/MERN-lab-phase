@@ -182,7 +182,6 @@ const Account = () => {
         <div id='container' className='bg-yellow-600 px-10 md:px-28 h-full'>
             <div className='text-center pt-4'>
                 <h1 className='text-4xl'>Account</h1>
-                <p className='text-2xl'>Manage your personal information, including phone numbers and email address where you can be contacted</p>
             </div>
             <div className='md:flex gap-14'>
                 <div className='md:w-1/3 mt-5'>

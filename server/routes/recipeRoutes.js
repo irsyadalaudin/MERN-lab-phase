@@ -1,6 +1,6 @@
-import express from 'express';
-import { Router } from 'express';
-import Recipe from '../models/Recipe.js';
+import express from 'express'
+import { Router } from 'express'
+import Recipe from '../models/Recipe.js'
 
 export const routes = Router()
 
@@ -14,4 +14,4 @@ routes.get('/', async (req, res) => {
     } catch(err) {
         res.status(400).json({ err: 'error getting recipe' })
     }
-});
+})

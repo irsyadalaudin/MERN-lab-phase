@@ -41,9 +41,9 @@ const Register = () => {
                 <button disabled className='p-1 mb-2 bg-amber-700 rounded-r-lg hover: cursor-pointer hover:bg-amber-800'>SignUp</button>
                 {/* SIGN UP */}
                 <form onSubmit={handleSubmit} className='flex flex-col items-center px-0 xl:px-28' >
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setName(e.target.value)}  value={name} placeholder='Name' autoComplete='Name' />
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setUsername(e.target.value)}  value={username} placeholder='Username' autoComplete='Username' />
-                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder='Email' autoComplete='Email' />
+                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setName(e.target.value)}  value={name} placeholder='Name' autoComplete='Name' required />
+                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setUsername(e.target.value)}  value={username} placeholder='Username' autoComplete='Username' required />
+                    <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='email' onChange={(e) => setEmail(e.target.value)} value={email} placeholder='Email' autoComplete='Email' required />
                     {/* <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='password' onChange={(e) => setPassword(e.target.value)}  value={password} placeholder='Password' autoComplete='Password' /> */}
                     <div className='relative'>
                         <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} value={password} placeholder='password' autoComplete='password' />

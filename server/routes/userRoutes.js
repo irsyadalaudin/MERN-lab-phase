@@ -7,10 +7,16 @@ const router = express.Router()
 router.post('/login', loginUser)
 
 router.get('/login', async (req, res) => {
-    const { query } = req.query
+    // const { query } = req.query
+
     try {
-        const users = await User.findOne({ })
-        res.status(204).json(users)
+        const users = await User.find({ }, { password: 0 })
+        const signedUsers = users.map(user => ({
+            name: user.name,
+            username: user.username,
+            email: user.email,
+        }))
+        res.status(201).json(signedUsers)
     } catch (err) {
         res.status(404).json({ message: err.message })
     }
@@ -19,11 +25,29 @@ router.get('/login', async (req, res) => {
 // REGISTER ROUTE
 router.post('/register', registerUser)
 
+// router.get('/register', async (req, res) => {
+//     // const { query } = req.query
+//     try {
+//         const users = await User.find({ })
+//         res.status(204).json(users)
+//     } catch (err) {
+//         res.status(404).json({ message: err.message })
+//     }
+// })
 router.get('/register', async (req, res) => {
-    const { query } = req.query
+
     try {
-        const users = await User.find({ })
-        res.status(204).json(users)
+        // Mengambil data user tanpa password
+        const users = await User.find({}, { password: 0 })
+
+        // Mengembalikan data user dengan format yang diinginkan
+        const registeredUsers = users.map(user => ({
+            name: user.name,
+            username: user.username,
+            email: user.email,
+        }))
+
+        res.status(201).json(registeredUsers)
     } catch (err) {
         res.status(404).json({ message: err.message })
     }

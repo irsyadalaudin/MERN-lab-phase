@@ -12,7 +12,7 @@ export const useLogin = () => {
         setError(null)
 
         try {
-            const response = await fetch('http://localhost:4000/user/register', {
+            const response = await fetch('http://localhost:4000/user/login', {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({ identifier, password })

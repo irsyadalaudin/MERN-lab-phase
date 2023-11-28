@@ -13,10 +13,15 @@ const Login = () => {
     const handleSubmit = async(e) => {
         e.preventDefault()
         // console.log(identifier, password)
-        await login(identifier, password)
-        setIdentifier('')
-        setPassword('')
-        navigate('/')
+        try {
+            await login(identifier, password)
+            setIdentifier('')
+            setPassword('')
+            navigate('/')
+        } catch (err) {
+            console.error(err)
+            navigate('/login')
+        }
     }
 
     const handleShowPassword = () => {

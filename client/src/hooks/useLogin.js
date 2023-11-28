@@ -11,7 +11,8 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-            const response = await fetch('http://localhost:4000/user/login', {
+        try {
+            const response = await fetch('http://localhost:4000/user/register', {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({ identifier, password })
@@ -31,11 +32,11 @@ export const useLogin = () => {
             dispatch({ type: 'LOGIN', payload: json })
             setIsLoading(false)}
                 
-        // } catch (error) {
-        //     setIsLoading(false)
-        //     setError('An error occurred during registration.')
+        } catch (error) {
+            setIsLoading(false)
+            setError('An error occurred during registration.')
         
-    }
+    }}
 
     // return [register, isLoading, error]
     return { login, isLoading, error }

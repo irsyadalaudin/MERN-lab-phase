@@ -26,18 +26,13 @@ const userSchema = new mongoose.Schema({
 
 // STATIC REGISTER (SIGN UP) METHOD  // NYAMBUNG SAMA controllers/userControllers.js
 userSchema.statics.register = async function(name, username, email, password) {
+
     // VALIDATION
     // MESSAGE WHEN 1) THE USER ENTERS THE WRONG EMAIL / USERNAME / PASSWORD OR   
     //              2) WHEN THE USER HAS NOT REGISTERED
     if (!name || !username || !email || !password) {
         throw Error('All fields must be filled!')
     }
-    // if (!validator.isName(name)) {
-    //     throw Error('Name must not contain symbol!')
-    // }
-    // if (!validator.isUniqueUsername(username)) {
-    //     throw Error('Username is already axist!')
-    // }
     if (!validator.isEmail(email)) {
         throw Error('Email is not valid!')
     }
@@ -46,11 +41,11 @@ userSchema.statics.register = async function(name, username, email, password) {
     }
 
     const isStrongPassword = validator.isStrongPassword(password, {
-        minLength: 8,     // MINIMUM LENGTH 7 CHARACTERS
-        minLowercase: 1,  // MINIMUM 1 LOWERCASE LETTER
-        minUppercase: 1,  // MINIMUM 1 UPPERCASE LETTER
-        minNumbers: 1,    // MINIMUM 1 NUMBER
-        minSymbols: 1,    // MINIMUM 1 SYMBOL
+        minLength: 8,        // MINIMUM LENGTH 7 CHARACTERS
+        minLowercase: 1,     // MINIMUM 1 LOWERCASE LETTER
+        minUppercase: 1,     // MINIMUM 1 UPPERCASE LETTER
+        minNumbers: 1,       // MINIMUM 1 NUMBER
+        minSymbols: 1,       // MINIMUM 1 SYMBOL
         returnScore: false,
     })
 
@@ -98,6 +93,8 @@ userSchema.statics.login = async function(identifier, password) {
 const User = mongoose.model('User', userSchema)
 export default User
 
+
+// TO CREATE A USER DIRECTLY INTO MONGODB, (BUT WITHOUT JWT) (TO USE IT, PLEASE REMOVE A COMMEBNT /*  */)
 /*
 User.create([
 

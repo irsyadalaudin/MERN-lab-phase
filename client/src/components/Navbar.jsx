@@ -11,10 +11,6 @@ const Navbar = ({ user, onLogout }) => {
             const recipePage = document.getElementById('recipe')
             recipePage.scrollIntoView({ behavior: 'smooth' })
         } else {
-<<<<<<< HEAD
-            // navigate('/')
-=======
->>>>>>> e1c1fcaa008104b694ba891be0c4fafbaaa40785
             setTimeout(() => {
                 const recipePage = document.getElementById('recipe')
                 recipePage.scrollIntoView({ behavior: 'instant' })

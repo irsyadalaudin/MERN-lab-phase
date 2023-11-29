@@ -11,6 +11,7 @@ import { routes } from './routes/recipeRoutes.js'
 
 const app = express()
 
+// MIDDLEWARE SETUP FOR PARSING JSON REQUESTS AND ENABLING CORS
 app.use(express.json())
 app.use(cors())
 
@@ -19,6 +20,8 @@ app.use('/', routes)
 app.use('/user', userRoutes)
 app.use('/user', userAuth)
 
+
+// SERVE THE REACT APP'S MAIN HTML FILE FOR ALL ROUTES
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 })
@@ -37,7 +40,7 @@ mongoose.connect(process.env.MONGO_URI, {
 		console.log('error connecting to MongoDB', err)
 	})
 
-
+// START THE SERVER AND LOG THE PORT
 app.listen(port, () => {
 	console.log(`server running at port http://localhost:${port}`)
 })

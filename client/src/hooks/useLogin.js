@@ -3,11 +3,10 @@ import { useAuthContext } from './useAuthContext.js'
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { dispatch } = useAuthContext()
-    
 
-    const login = async (identifier, password) => {
+    const login = async (identifier, password, navigate) => {
         setIsLoading(true)
         setError(null)
 
@@ -16,30 +15,37 @@ export const useLogin = () => {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({ identifier, password })
-            })
+            });
+
             const json = await response.json()
 
             if (!response.ok) {
                 setIsLoading(false)
-                setError(json.error)
+                setError(json.message)
+                navigate('/login')
             }
 
-            if (response.ok) {
-            // SAVE THE USER TO LOCAL STORAGE
-            localStorage.setItem('user', JSON.stringify(json))
+            if (response.ok && json.token) {
+                // SAVE THE USER TO LOCAL STORAGE
+                localStorage.setItem('user', JSON.stringify(json))
 
-            // UPDATE THE AUTH CONTEXT
-            dispatch({ type: 'LOGIN', payload: json })
-            setIsLoading(false)}
-                
+                // UPDATE THE AUTH CONTEXT
+                dispatch({ type: 'LOGIN', payload: json })
+                setIsLoading(false);
+
+                // Navigate to home only if token is present
+                navigate('/');
+            } else {
+                // Handle the case where token is not present
+                setIsLoading(false)
+            }
         } catch (error) {
             setIsLoading(false)
-            setError('An error occurred during registration.')
-        
-    }}
+            setError('An error occurred during login.')
+        }
+    };
 
-    // return [register, isLoading, error]
     return { login, isLoading, error }
-}
+};
 
 export default useLogin

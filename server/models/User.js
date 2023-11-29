@@ -27,6 +27,8 @@ const userSchema = new mongoose.Schema({
 // STATIC REGISTER (SIGN UP) METHOD  // NYAMBUNG SAMA controllers/userControllers.js
 userSchema.statics.register = async function(name, username, email, password) {
     // VALIDATION
+    // MESSAGE WHEN 1) THE USER ENTERS THE WRONG EMAIL / USERNAME / PASSWORD OR   
+    //              2) WHEN THE USER HAS NOT REGISTERED
     if (!name || !username || !email || !password) {
         throw Error('All fields must be filled!')
     }
@@ -79,6 +81,8 @@ userSchema.statics.login = async function(identifier, password) {
             { email: identifier }
         ]
     })
+
+
     if (!user) {
         throw Error('Incorrect Email!')
     }

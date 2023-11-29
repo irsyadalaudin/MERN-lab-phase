@@ -3,10 +3,11 @@ dotenv.config({ path: './config/.env' })
 
 import express from 'express'
 import mongoose from 'mongoose'
-import { routes } from './routes/recipeRoutes.js'
 import cors from 'cors'
-import userRoutes from './routes/userRoutes.js'
 import path from 'path'
+import userRoutes from './routes/userRoutes.js'
+import { userAuth } from './middlewares/userAuth.js'
+import { routes } from './routes/recipeRoutes.js'
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(cors())
 // ROUTES
 app.use('/', routes)
 app.use('/user', userRoutes)
+app.use('/user', userAuth)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));

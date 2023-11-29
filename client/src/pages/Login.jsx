@@ -8,25 +8,24 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const { login, error, isLoading } = useLogin()
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        // console.log(identifier, password)
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
         try {
-            await login(identifier, password)
+            await login(identifier, password, navigate)
             setIdentifier('')
             setPassword('')
-            navigate('/')
+            // navigate('/')   // REMOVED navigate() SO THAT AN UNRegistered USER CANNOT ENTER AND BLOW ERROR AND NOT navigate() TO HOME.
         } catch (err) {
             console.error(err)
-            navigate('/login')
         }
     }
 
     const handleShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
+        setShowPassword(!showPassword);
+    };
 
 
     return (

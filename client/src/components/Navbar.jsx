@@ -12,7 +12,7 @@ const Navbar = ({ user, onLogout }) => {
             const recipePage = document.getElementById('recipe')
             recipePage.scrollIntoView({ behavior: 'smooth' })
         } else {
-            navigate('/')
+            // navigate('/')    // REMOVED navigate() AGAR KETIKA USER YANG BELUM TERDAFTAR TIDAK BISA MASUK DAN MEMUNCULKAN ERROR DAN TIDAK navigate() KE home
             setTimeout(() => {
                 const recipePage = document.getElementById('recipe')
                 recipePage.scrollIntoView({ behavior: 'instant' })

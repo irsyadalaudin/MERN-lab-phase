@@ -1,6 +1,5 @@
 config/
 node_modules/
 controllers/recipeControllers.js
-middlewares/
 models/db.json
 generateSecret.js

@@ -1,7 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Navbar = ({ user, onLogout }) => {
-    const navigate = useNavigate()
 
     const scrollToTopHome = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -12,7 +11,10 @@ const Navbar = ({ user, onLogout }) => {
             const recipePage = document.getElementById('recipe')
             recipePage.scrollIntoView({ behavior: 'smooth' })
         } else {
+<<<<<<< HEAD
             // navigate('/')
+=======
+>>>>>>> e1c1fcaa008104b694ba891be0c4fafbaaa40785
             setTimeout(() => {
                 const recipePage = document.getElementById('recipe')
                 recipePage.scrollIntoView({ behavior: 'instant' })

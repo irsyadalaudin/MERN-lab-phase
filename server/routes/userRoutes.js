@@ -1,35 +1,49 @@
-import express from 'express'
-import { loginUser, registerUser } from '../controllers/userControllers.js'
-import User from '../models/User.js'
-const router = express.Router()
+// server/routes/userRoutes.js
+import express from 'express';
+import { loginUser, registerUser } from '../controllers/userControllers.js';
+import { userAuth } from '../middlewares/userAuth.js';
+import User from '../models/User.js';
 
-// LOGIN ROUTE
-router.post('/login', loginUser)
+const router = express.Router();
 
-router.get('/login', async (req, res) => {
-    const { query } = req.query
+// Rute yang memerlukan otentikasi pengguna
+router.get('/profile', userAuth, async (req, res) => {
     try {
-        const users = await User.findOne({ })
-        res.status(204).json(users)
+        const user = await User.findById(req.user._id);
+        res.status(200).json({
+            username: user.username,
+            email: user.email,
+            name: user.name,
+        });
     } catch (err) {
-        res.status(404).json({ message: err.message })
+        res.status(500).json({ message: err.message });
     }
-})
-
-// REGISTER ROUTE
-router.post('/register', registerUser)
+});
 
 router.get('/register', async (req, res) => {
-    const { query } = req.query
     try {
-        const users = await User.find({ })
-        res.status(204).json(users)
+        // Mengambil data user tanpa password
+        const users = await User.find({}, { password: 0 })
+
+        // Mengembalikan data user dengan format yang diinginkan
+        const registeredUsers = users.map(user => ({
+            name: user.name,
+            username: user.username,
+            email: user.email,
+        }))
+
+        res.status(201).json(registeredUsers)
     } catch (err) {
         res.status(404).json({ message: err.message })
     }
 })
 
-export default router
+// Rute login dan register
+router.post('/login', loginUser);
+router.post('/register', registerUser);
+
+export default router;
+
 
 /* CARA MENGGUNAKAN ROUTER DI POSTMAN:
 1) nyalain server di terminal:   npm run start

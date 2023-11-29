@@ -12,7 +12,7 @@ const Navbar = ({ user, onLogout }) => {
             const recipePage = document.getElementById('recipe')
             recipePage.scrollIntoView({ behavior: 'smooth' })
         } else {
-            navigate('/')
+            // navigate('/')
             setTimeout(() => {
                 const recipePage = document.getElementById('recipe')
                 recipePage.scrollIntoView({ behavior: 'instant' })

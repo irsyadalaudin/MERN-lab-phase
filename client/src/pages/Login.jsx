@@ -17,7 +17,6 @@ const Login = () => {
             await login(identifier, password, navigate)
             setIdentifier('')
             setPassword('')
-            // navigate('/')   // REMOVED navigate() SO THAT AN UNRegistered USER CANNOT ENTER AND BLOW ERROR AND NOT navigate() TO HOME.
         } catch (err) {
             console.error(err)
         }
@@ -29,9 +28,9 @@ const Login = () => {
 
 
     return (
-        <div className='bg-yellow-600 h-90 flex items-center pl-10 overflow-hidden'>
+        <div className='bg-yellow-600 h-91 flex items-center pl-10 overflow-hidden'>
             <div className='w-2/3 xl:w-1/2 text-center'>
-                <img src='https://i.postimg.cc/jjCNhpY2/ayo-masak-logo.png' alt='ayo-masak-logo' />
+                <img src='https://i.postimg.cc/Cxs4DX8J/ayoo-masak-logo.png' alt='ayo-masak-logo' />
                 <div className='flex justify-center'>
                     <p className='mb-6 text-2xl text-justify flex justify-center w-85'>Embark on a delightful culinary journey with us at AYO MASAK! &ensp; Let's make every meal an enjoyable and budget-friendly experience</p>
                 </div>
@@ -43,8 +42,6 @@ const Login = () => {
                 {/* SIGN IN */}
                 <form onSubmit={handleSubmit} className='flex flex-col items-center px-0 lg:px-20 xl:px-28'>
                     <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type='text' onChange={(e) => setIdentifier(e.target.value)} value={identifier} placeholder='Email / Username' autoComplete='Email / Username' required />
-                    {/* <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} value={password} placeholder='Password' autoComplete='Password' />
-                    <button type='button' onClick={() => setShowPassword(!showPassword)}>👁️‍🗨️</button> */}
                     <div className='relative'>
                         <input className='placeholder-white focus:outline-none w-80 text-lg p-2 mb-2 bg-yellow-800 text-white rounded-lg' type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} value={password} placeholder='password' autoComplete='password' required />
                         <button className='absolute top-3 right-3 bg-transparent rounded-full' type='button' onClick={handleShowPassword}>👁️‍🗨️</button>
@@ -61,9 +58,11 @@ const Login = () => {
                 </form>
             </div>
             {/* IMAGE */}
-            <div className='bg-yellow-600 h-90 flex items-center pl-10 lg:pl-28 overflow-hidden'>
-                <img className='xl:w-90 2xl:w-93 sm:h-full xl:h-90' src='https://i.postimg.cc/GpDsrkWB/tofu-5.png' alt='tofu-image' />
+            <div className='bg-yellow-600 flex items-center ml-12 lg:ml-20 overflow-hidden'>
+                <img className='xl:w-90 2xl:w-93 sm:h-full xl:h-91' src='https://i.postimg.cc/GpDsrkWB/tofu-5.png' alt='tofu-image' />
             </div>
+            {/* https://i.postimg.cc/VLD6CF6n/ayoo-masak-logo.png */}
+            {/* https://i.postimg.cc/Cxs4DX8J/ayoo-masak-logo.png */}
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
@@ -7,48 +8,41 @@ import AboutUs from './components/AboutUs'
 import Account from './components/Account'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import { Link, useNavigate } from 'react-router-dom'
-import { Route, Routes } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { useLogout } from './hooks/useLogout' 
+import { useEffect } from 'react'
 import { useAuthContext } from './hooks/useAuthContext'
+import { useLogout } from './hooks/useLogout'  // Import useLogout
 
 const App = () => {
-    const [showNavbar, setShowNavbar] = useState(false)
-
-    const { Logout } = useLogout()
-    const { user } = useAuthContext()
     const navigate = useNavigate()
+    const location = useLocation()
+    const { user } = useAuthContext()
+    const { Logout } = useLogout()  // Destructure Logout from useLogout
 
     const handleLogout = () => {
-        Logout()
-        navigate('/login')
+        Logout()  // Call the Logout function
+        navigate('/')  // Navigate to the home page after logout
     }
 
     useEffect(() => {
-        setShowNavbar(!!user && window.location.pathname !== '/login')
-    }, [user])
+        const isLoggedIn = !!user;
+        const isLoginPage = location.pathname === '/login';
+        const isRegisterPage = location.pathname === '/register';
+    
+        if (!isLoggedIn && !isLoginPage && !isRegisterPage) {
+            navigate('/login');
+        } else if (isLoggedIn && (isLoginPage || isRegisterPage)) {
+            navigate('/');
+        }
+    }, [navigate, location.pathname, user]);
+    
+
+    // CHECK IF THE CURRENT PAGE IS '/login'
+    const hideNavbar = location.pathname === '/login' || location.pathname === '/register'
 
     return (
-        <>  
-            {showNavbar && (
-                <>
-                    {/* {user && <Navbar />} */}
-                    {user && <Navbar user={user} onLogout={handleLogout} />}
-                    {/* {user && (
-                        <div className='flex justify-center bg-yellow-600 rounded-md gap-2 pl-1'>
-                            <span className='text-black'>{user.username}</span>
-                            <button onClick={handleLogout} className='bg-yellow-600 text-black rounded-md hover:cursor-pointer hover:bg-yellow-700 border-none'>Logout</button>
-                        </div>
-                    )} */}
-                    {showNavbar && !user && (
-                        <div>
-                            <Link to='/login' className='text-neutral-100 no-underline'>Login</Link>
-                        </div>
-                    )}
-                </>
-            )}
-            {/* <Navbar /> */}
+        <>
+            {/* Render Navbar berdasarkan status autentikasi */}
+            {hideNavbar ? null : <Navbar user={user} onLogout={handleLogout} />}
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/' element={<Recipe />} />

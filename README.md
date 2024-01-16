@@ -2,12 +2,6 @@
 
 This is final project from GOMYCODE javascript fullstack developer course
 
-# Username : 
-Jo333
-
-# password : 
-Jooo333#
-
 
 # React + Vite
 

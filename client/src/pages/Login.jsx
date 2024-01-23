@@ -30,7 +30,7 @@ const Login = () => {
     return (
         <div className='bg-yellow-600 h-91 flex items-center pl-10 overflow-hidden'>
             <div className='w-2/3 xl:w-1/2 text-center'>
-                <img src='https://i.postimg.cc/Cxs4DX8J/ayoo-masak-logo.png' alt='ayo-masak-logo' />
+                <img src='https://i.postimg.cc/GmxMC3MG/ayo-masak-logo2.png' alt='ayo-masak-logo' />
                 <div className='flex justify-center'>
                     <p className='mb-6 text-2xl text-justify flex justify-center w-85'>Embark on a delightful culinary journey with us at AYO MASAK! &ensp; Let's make every meal an enjoyable and budget-friendly experience</p>
                 </div>

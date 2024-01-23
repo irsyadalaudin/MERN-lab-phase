@@ -179,7 +179,7 @@ const Account = () => {
 
 
     return (
-        <div id='container' className='bg-yellow-600 px-10 md:px-28 h-full'>
+        <div id='container' className='px-10 md:px-28 h-full'>
             <div className='text-center pt-4'>
                 <h1 className='text-4xl'>Account</h1>
             </div>

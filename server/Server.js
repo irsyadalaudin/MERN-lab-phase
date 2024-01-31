@@ -20,10 +20,13 @@ app.use('/', routes)
 app.use('/user', userRoutes)
 app.use('/user', userAuth)
 
-
 // SERVE THE REACT APP'S MAIN HTML FILE FOR ALL ROUTES
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+	res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+})
+
+app.use((req, res) => {
+	res.send('API is running..')
 })
 
 // MONGODB DATABASE CONNECTION

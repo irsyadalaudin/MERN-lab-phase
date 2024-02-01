@@ -3,7 +3,11 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"start": "nodemon Server.js"
+		"dev": "astro dev",
+		"start": "HOST=0.0.0.0 node ./dist/server/entry.mjs",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
 	},
 	"type": "module",
 	"dependencies": {

@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"start": "node Server.js",
+		"start": "nodemon Server.js",
 		"deploy": "npm run build && npm start"
 	},
 	"type": "module",

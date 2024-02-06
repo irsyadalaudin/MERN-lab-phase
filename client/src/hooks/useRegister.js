@@ -11,7 +11,8 @@ export const useRegister = () => {
         setIsLoading(true)
         setError(null)
 
-            const response = await fetch('http://localhost:4000/user/register', {
+            // const response = await fetch('http://localhost:4000/user/register', {
+            const response = await fetch('https://mern-backend-us5i.onrender.com/user/register', {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({ name, username, email, password })

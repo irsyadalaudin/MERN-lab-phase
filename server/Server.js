@@ -43,13 +43,3 @@ mongoose.connect(process.env.MONGO_URI, {
 app.listen(port, () => {
 	console.log(`server running at port http://localhost:${port}`)
 })
-
-// ADDITIONAL CODE FOR HTTP SERVER LISTENING
-import http from 'http'
-
-const httpServer = http.createServer(app)
-
-httpServer.listen(port, '0.0.0.0', err => {
-    if (err) throw err;
-    console.log(`Listening on port ${port}`)
-});

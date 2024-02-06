@@ -3,11 +3,8 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "astro dev",
-		"start": "HOST=0.0.0.0 node ./dist/server/entry.mjs",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro"
+		"start": "nodemon Server.js",
+		"deploy": "npm run build && npm start"
 	},
 	"type": "module",
 	"dependencies": {

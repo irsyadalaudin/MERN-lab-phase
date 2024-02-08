@@ -11,6 +11,7 @@ export const useLogin = () => {
         setError(null)
 
         try {
+            // AFTER DEPLOYING THE BACKEND, THE LOCALHOST FETCH IS REPLACED WITH THE ACTIVE BACKEND LINK
             // const response = await fetch('http://localhost:4000/user/login', {
             const response = await fetch('https://mern-backend-us5i.onrender.com/user/login', {
                 method: 'POST',
@@ -39,14 +40,15 @@ export const useLogin = () => {
             } else {
                 // Handle the case where token is not present
                 setIsLoading(false)
+                setError('Incorrect username or email or password')
             }
         } catch (error) {
             setIsLoading(false)
-            setError('An error occurred during login.')
+            setError('An error occurred during login')
         }
-    };
+    }
 
     return { login, isLoading, error }
-};
+}
 
 export default useLogin

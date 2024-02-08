@@ -11,6 +11,8 @@ export const useRegister = () => {
         setIsLoading(true)
         setError(null)
 
+        try {
+            // AFTER DEPLOYING THE BACKEND, THE LOCALHOST FETCH IS REPLACED WITH THE ACTIVE BACKEND LINK
             // const response = await fetch('http://localhost:4000/user/register', {
             const response = await fetch('https://mern-backend-us5i.onrender.com/user/register', {
                 method: 'POST',
@@ -32,13 +34,12 @@ export const useRegister = () => {
             dispatch({ type: 'LOGIN', payload: json })
             setIsLoading(false)}
                 
-        // } catch (error) {
-        //     setIsLoading(false)
-        //     setError('An error occurred during registration.')
-        
+        } catch (error) {
+            setIsLoading(false)
+            setError('An error occurred during registration.')
+        }
     }
 
-    // return [register, isLoading, error]
     return { register, isLoading, error }
 }
 

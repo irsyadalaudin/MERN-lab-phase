@@ -32,7 +32,8 @@ const Recipe = () => {
             console.log(ingredients)
             // USE Set() TO SAVE UNIQUE RECIPES
             const uniqueRecipes = new Set()
-            const { data } = await axios.get('http://localhost:4000/')
+            /* const { data } = await axios.get('http://localhost:4000/') */
+            const { data } = await axios.get('https://mern-backend-us5i.onrender.com/')
             // LOOPING TO SEARCH FOR INGREDIENTS THAT WILL BRING UP THE RECIPE
             for (let i = 0; i < data.recipe.length; i++) {
                 const res = data.recipe[i]

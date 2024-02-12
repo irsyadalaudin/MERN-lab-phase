@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+// import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRegister } from '../hooks/useRegister.js'
@@ -10,6 +11,7 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const { register, error, isLoading } = useRegister()
+    // const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -19,6 +21,7 @@ const Register = () => {
         setUsername('')
         setEmail('')
         setPassword('')
+        // navigate('/login')
     }
 
     const handleShowPassword = () => {

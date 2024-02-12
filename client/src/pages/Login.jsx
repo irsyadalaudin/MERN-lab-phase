@@ -24,7 +24,7 @@ const Login = () => {
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
-    };
+    }
 
 
     return (

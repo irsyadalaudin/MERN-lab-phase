@@ -3,7 +3,7 @@ import { useAuthContext } from './useAuthContext.js'
 
 export const useRegister = () => {
     const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { dispatch } = useAuthContext()
     
 
@@ -16,7 +16,7 @@ export const useRegister = () => {
             // const response = await fetch('http://localhost:4000/user/register', {
             const response = await fetch('https://mern-backend-us5i.onrender.com/user/register', {
                 method: 'POST',
-                headers: { 'Content-type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, username, email, password })
             })
             const json = await response.json()
@@ -31,9 +31,14 @@ export const useRegister = () => {
             localStorage.setItem('user', JSON.stringify(json))
 
             // UPDATE THE AUTH CONTEXT
-            dispatch({ type: 'LOGIN', payload: json })
-            setIsLoading(false)}
-                
+            dispatch({ type: 'REGISTER', payload: json })    // REGISTER MUST BE WRITTEN HERE SO THAT IT DOES NOT IMMEDIATELY LOG IN
+            setIsLoading(false)
+        
+            } else {
+                setIsLoading(false)
+                setError('username or password is not strong ')
+            }
+
         } catch (error) {
             setIsLoading(false)
             setError('An error occurred during registration.')

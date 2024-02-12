@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext.js'
+import { useNavigate } from 'react-router-dom'
 
 export const useRegister = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const { dispatch } = useAuthContext()
-    
+    const navigate = useNavigate()
 
     const register = async (name, username, email, password) => {
         setIsLoading(true)
@@ -29,6 +30,7 @@ export const useRegister = () => {
             if (response.ok) {
             // SAVE THE USER TO LOCAL STORAGE
             localStorage.setItem('user', JSON.stringify(json))
+            navigate('/login')
 
             // UPDATE THE AUTH CONTEXT
             dispatch({ type: 'REGISTER', payload: json })    // REGISTER MUST BE WRITTEN HERE SO THAT IT DOES NOT IMMEDIATELY LOG IN
@@ -36,12 +38,12 @@ export const useRegister = () => {
         
             } else {
                 setIsLoading(false)
-                setError('username or password is not strong ')
+                setError('username or password is not strong !')
             }
 
         } catch (error) {
             setIsLoading(false)
-            setError('An error occurred during registration.')
+            setError('An error occurred during registration')
         }
     }
 

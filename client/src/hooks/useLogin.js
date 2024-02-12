@@ -6,7 +6,7 @@ export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(false)
     const { dispatch } = useAuthContext()
 
-    const login = async (identifier, password, navigate) => {
+    const login = async (identifier, password) => {
         setIsLoading(true)
         setError(null)
 
@@ -24,7 +24,6 @@ export const useLogin = () => {
             if (!response.ok) {
                 setIsLoading(false)
                 setError(json.message)
-                navigate('/login')
             }
 
             if (response.ok && json.token) {
@@ -36,7 +35,7 @@ export const useLogin = () => {
                 setIsLoading(false);
 
                 // Navigate to home only if token is present
-                navigate('/');
+                // navigate('/');
             } else {
                 // Handle the case where token is not present
                 setIsLoading(false)

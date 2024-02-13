@@ -26,37 +26,55 @@ const Recipe = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const inputRef = useRef(null)
 
-
     const searchRecipeButton = async () => {
+        /* 1st METHOD */
+        // try {
+        //     console.log(ingredients)
+        //     // USE Set() TO SAVE UNIQUE RECIPES
+        //     const uniqueRecipes = new Set()
+        //     /* const { data } = await axios.get('http://localhost:4000/') */
+        //     const { data } = await axios.get('https://mern-backend-us5i.onrender.com/')
+        //     // LOOPING TO SEARCH FOR INGREDIENTS THAT WILL BRING UP THE RECIPE
+        //     for (let i = 0; i < data.recipe.length; i++) {
+        //         const res = data.recipe[i]
+        //         for (let x = 0; x < res.ingredients.length; x++) {
+        //             const ingredient = res.ingredients[x].toLowerCase()
+        //             for (let y = 0; y < ingredients.length; y++) {
+        //                 if (ingredient.toLowerCase().includes(ingredients[y].toLowerCase())) {
+        //                     // ADD RECIPE TO Set()
+        //                     uniqueRecipes.add(res)
+        //                     // BREAK THE INNER LOOP ONCE A MATCH IS FOUND
+        //                     break                              
+        //                 }
+        //             }
+        //         }
+        //     }
+    /* 2nd METHOD */
         try {
             console.log(ingredients)
             // USE Set() TO SAVE UNIQUE RECIPES
             const uniqueRecipes = new Set()
-            /* const { data } = await axios.get('http://localhost:4000/') */
             const { data } = await axios.get('https://mern-backend-us5i.onrender.com/')
-            // LOOPING TO SEARCH FOR INGREDIENTS THAT WILL BRING UP THE RECIPE
-            for (let i = 0; i < data.recipe.length; i++) {
-                const res = data.recipe[i]
-                for (let x = 0; x < res.ingredients.length; x++) {
-                    const ingredient = res.ingredients[x].toLowerCase()
-                    for (let y = 0; y < ingredients.length; y++) {
-                        if (ingredient.toLowerCase().includes(ingredients[y].toLowerCase())) {
-                            // ADD RECIPE TO Set()
-                            uniqueRecipes.add(res)
-                            // BREAK THE INNER LOOP ONCE A MATCH IS FOUND
-                            break                                                  
-                        }
-                    }
+            // ITERATE THROUGH EACH RECIPE AND CHECK IF AT LEAST ON EINGREDIENT MATCHES THE SEARCHED INGREDIENT
+            data.recipe.forEach(recipe => {
+                // TO CHECK IF EACH INGREDIENT IN THE RECIPE MATCHES THE SEARCHED INGREDIENT
+                // if (recipe.ingredients.some(ingredient => ingredients.includes(ingredient.toLowerCase()))) {
+                //     uniqueRecipes.add(recipe);
+                // }
+                // TO CHECK IF EACH INGREDIENT IN THE RECIPE MATCHES AT LEAST ONE SEARCH KEYWORD
+                if (ingredients.some(searchTerm => recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(searchTerm.toLowerCase())))) {
+                    uniqueRecipes.add(recipe)
                 }
-            }
+            })
+            /* METHODS 1st AND 2nd USE THE SAME STEPS BELOW: */
             // CONVERT Set() BACK TO ARRAY
             const arr = Array.from(uniqueRecipes)
-            dispatch(setRecipes(arr || []));
-            setShowNoRecipesMessage(arr.length === 0 ? true : false);
+            dispatch(setRecipes(arr || []))
+            setShowNoRecipesMessage(arr.length === 0)
             // UPDATE THE STORED RECIPE HISTORY IF NEEDED
             const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || []
             // USE SET TO REMOVE DUPLICATES
-            const newIngredients = [...new Set([...previousIngredients, ...ingredients.map(i => i.toLowerCase())])]           
+            const newIngredients = [...new Set([...previousIngredients, ...ingredients.map(i => i.toLowerCase())])]
             localStorage.setItem('recipe-history', JSON.stringify(newIngredients))
         } catch (error) {
             console.error(error)
@@ -271,3 +289,27 @@ const Recipe = () => {
 }
 
 export default Recipe
+
+
+/* searchRecipeButton FUNCTION EXPLANATION :
+
+1.  const searchRecipeButton = async () => {:                                     Ini adalah deklarasi fungsi asynchronous bernama searchRecipeButton.
+2.  console.log(ingredients):                                                     Ini adalah perintah untuk mencetak ke konsol nilai dari variabel ingredients. Namun, kode ini tidak akan berfungsi jika ingredients tidak didefinisikan di lingkungan saat fungsi dipanggil.
+3.  const uniqueRecipes = new Set():                                              Ini adalah inisialisasi objek Set yang digunakan untuk menyimpan resep-resep unik yang ditemukan. Objek Set adalah struktur data yang hanya menyimpan nilai unik, sehingga resep yang duplikat akan dihapus.
+4.  const { data } = await axios.get('https://mern-backend-us5i.onrender.com/'):  Ini adalah penggunaan axios untuk melakukan HTTP GET request ke URL yang disediakan (https://mern-backend-us5i.onrender.com/), yang akan mengembalikan data resep.
+5.  for (let i = 0; i < data.recipe.length; i++) { ... }:                         Ini adalah loop untuk mengiterasi melalui setiap resep yang diterima dari respons API.
+6.  const res = data.recipe[i]:                                                   Ini adalah penugasan variabel res dengan satu resep dari array resep yang diterima.
+7.  for (let x = 0; x < res.ingredients.length; x++) { ... }:                     Ini adalah loop nested untuk mengiterasi melalui setiap bahan dalam resep saat ini.
+8.  const ingredient = res.ingredients[x].toLowerCase():                          Ini adalah penugasan variabel ingredient dengan satu bahan dari resep saat ini yang sudah diubah menjadi huruf kecil.
+9.  for (let y = 0; y < ingredients.length; y++) { ... }:                         Ini adalah loop nested lainnya untuk mencocokkan bahan dari resep dengan bahan yang dicari (variabel ingredients).
+10. if (ingredient.toLowerCase().includes(ingredients[y].toLowerCase())) { ... }: Ini adalah kondisi untuk memeriksa apakah bahan dari resep saat ini mengandung bahan yang sedang dicari.
+11. uniqueRecipes.add(res):                                                       Jika ada kecocokan, resep saat ini ditambahkan ke objek Set uniqueRecipes.
+12. break:                                                                        Ini adalah perintah untuk keluar dari loop saat ini setelah resep ditambahkan ke uniqueRecipes.
+13. const arr = Array.from(uniqueRecipes):                                        Ini adalah konversi objek Set uniqueRecipes kembali menjadi array.
+14. dispatch(setRecipes(arr || [])):                                              Ini adalah pemanggilan fungsi dispatch dengan parameter arr atau array kosong (jika arr kosong), yang kemungkinan akan mengirimkan resep-resep ke suatu tempat (misalnya, ke Redux store).
+15. setShowNoRecipesMessage(arr.length === 0 ? true : false):                     Ini adalah penyesuaian tampilan berdasarkan apakah ada resep yang ditemukan atau tidak.
+16. const previousIngredients = JSON.parse(localStorage.getItem('recipe-history')) || []:                    Ini adalah mendapatkan data bahan sebelumnya dari localStorage dan menginisialisasi dengan array kosong jika tidak ada data yang tersimpan.
+17. const newIngredients = [...new Set([...previousIngredients, ...ingredients.map(i => i.toLowerCase())])]: Ini adalah menggabungkan bahan-bahan sebelumnya dengan bahan yang baru dicari dan menghapus duplikat menggunakan objek Set.
+18. localStorage.setItem('recipe-history', JSON.stringify(newIngredients)):                                  Ini adalah menyimpan bahan yang sudah dicari ke localStorage dengan nama kunci 'recipe-history'.
+*/
+

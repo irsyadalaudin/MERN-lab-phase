@@ -57,10 +57,6 @@ const Recipe = () => {
             const { data } = await axios.get('https://mern-backend-us5i.onrender.com/')
             // ITERATE THROUGH EACH RECIPE AND CHECK IF AT LEAST ON EINGREDIENT MATCHES THE SEARCHED INGREDIENT
             data.recipe.forEach(recipe => {
-                // TO CHECK IF EACH INGREDIENT IN THE RECIPE MATCHES THE SEARCHED INGREDIENT
-                // if (recipe.ingredients.some(ingredient => ingredients.includes(ingredient.toLowerCase()))) {
-                //     uniqueRecipes.add(recipe);
-                // }
                 // TO CHECK IF EACH INGREDIENT IN THE RECIPE MATCHES AT LEAST ONE SEARCH KEYWORD
                 if (ingredients.some(searchTerm => recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(searchTerm.toLowerCase())))) {
                     uniqueRecipes.add(recipe)

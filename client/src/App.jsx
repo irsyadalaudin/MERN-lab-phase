@@ -16,22 +16,22 @@ const App = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const { user } = useAuthContext()
-    const { Logout } = useLogout()  // Destructure Logout from useLogout
+    const { Logout } = useLogout()    // Destructure Logout from useLogout
 
     const handleLogout = () => {
-        Logout()  // Call the Logout function
-        navigate('/')  // Navigate to the home page after logout
+        Logout()                      // Call the Logout function
+        navigate('/')                 // Navigate to the home page after logout
     }
 
     useEffect(() => {
         const isLoggedIn = !!user;
-        const isLoginPage = location.pathname === '/login';
-        const isRegisterPage = location.pathname === '/register';
+        const isLoginPage = location.pathname === '/login'
+        const isRegisterPage = location.pathname === '/register'
     
         if (!isLoggedIn && !isLoginPage && !isRegisterPage) {
-            navigate('/login');
+            navigate('/login')
         } else if (isLoggedIn && (isLoginPage || isRegisterPage)) {
-            navigate('/');
+            navigate('/')
         }
     }, [navigate, location.pathname, user]);
     

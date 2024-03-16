@@ -143,6 +143,7 @@ const Account = () => {
     }
 
     const handleEditFavoriteFood = (id) => {
+        console.log('Food ID:', id)
         const editFavoriteFood = submitedFavoriteFood.find(food => food.id === id)
         setEditFavoriteFood({ id, text: editFavoriteFood.favoriteFood })
         // SHORTHAND PROPERTY. IF THE PROPERTY NAME IN THE OBJECT IS THE SAME AS THE NAME OF THE VARIABLE THAT STORES IT
@@ -186,34 +187,12 @@ const Account = () => {
             <div className='md:flex gap-14'>
                 <div className='md:w-1/3 mt-5'>
                     <div className='flex flex-row md:flex-col gap-1 mb-8 md:mb-2,5'>
+                        {/* <button onClick={moveTab('personal-information')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Personal Information</button> */}
                         <button onClick={moveTab('favorite-recipe')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Favorite Recipe</button>
                         <button onClick={moveTab('favorite-food')} className='bg-yellow-800 rounded-md text-white xl:w-80 h-14 mb-2'>Favorite Food</button>
                     </div>
                 </div>
                 <div className='md:w-2/3 mt-5'>
-                    {selectedTab === 'personal-information' && (
-                        <form action='#'>
-                            <div>
-                                <label className='block' htmlFor='name'>Name:</label>
-                                <input className='rounded-md' onChange={editName} onKeyDown={handleSaveWithEnter} type='text' value={name} disabled={!isEditing || (editId && editId !== 'name') } autoComplete='off'/>
-                                <button className='rounded-md' onClick={handleEditName}>✎</button>
-                                <button className='rounded-md' onClick={handleSave}>save</button>
-                            </div>
-                            <div>
-                                <label className='block' htmlFor='userName'>Username:</label>
-                                <input className='rounded-md' onChange={editUserName} onKeyDown={handleSaveWithEnter} type='text' value={userName} disabled={!isEditing || (editId && editId !== 'userName') } autoComplete='off'/>
-                                <button className='rounded-md' onClick={handleEditUserName}>✎</button>
-                                <button className='rounded-md' onClick={handleSave}>save</button>
-                            </div>
-                            <div>
-                                <label className='block' htmlFor='email'>Email:</label>
-                                <input className='rounded-md' onChange={editEmail} onKeyDown={handleSaveWithEnter} type='text' value={email} disabled={!isEditing || (editId && editId !== 'email') } autoComplete='off'/>
-                                <button className='rounded-md' onClick={handleEditEmail}>✎</button>
-                                <button className='rounded-md' onClick={handleSave}>save</button>
-                            </div>
-                        </form>
-                    )}
-
                     {selectedTab === 'favorite-recipe' && (
                         <div>
                             <h2 className='mb-4'>Favorite Recipe:</h2>
@@ -251,18 +230,11 @@ const Account = () => {
                                 {submitedFavoriteFood.map((food) => (
                                     <li className='w-64' key={food.id}>
                                         {editFavoriteFood.id === food.id ? (
-                                            <form onSubmit={() => handleSaveAfterEditFavoriteFood(food.id)}>
+                                            <>
                                                 <input className='bg-transparent outline-none border-none text-base' type='text' value={editFavoriteFood.text} onChange={handleFavoriteFood} ref={editInputRef} />
-                                                <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' type='submit'>✔</button>
-                                            </form>
+                                                <button onClick={() => handleSaveAfterEditFavoriteFood(food.id)} className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' type='submit'>✔</button>
+                                            </>
                                         ) : (
-                                            // <form className='flex items-center w-52'>
-                                            //     {food.favoriteFood}
-                                            //     <div className='ml-auto'>
-                                            //         <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleDeleteFavoriteFood(food.id)}>✖</button>
-                                            //         <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={() => handleEditFavoriteFood(food.id)}>✎</button>
-                                            //     </div>
-                                            // </form>
                                             <form className='flex justify-between w-52'>
                                                 {food.favoriteFood}
                                                 <div className=''>
@@ -280,6 +252,30 @@ const Account = () => {
                             }
                         </div>
                     )}
+
+                    {selectedTab === 'personal-information' && (
+                        <form action='#'>
+                            <div>
+                                <label className='block' htmlFor='name'>Name:</label>
+                                <input className='rounded-md' onChange={editName} onKeyDown={handleSaveWithEnter} type='text' value={name} disabled={!isEditing || (editId && editId !== 'name') } autoComplete='off'/>
+                                <button className='rounded-md' onClick={handleEditName}>✎</button>
+                                <button className='rounded-md' onClick={handleSave}>save</button>
+                            </div>
+                            <div>
+                                <label className='block' htmlFor='userName'>Username:</label>
+                                <input className='rounded-md' onChange={editUserName} onKeyDown={handleSaveWithEnter} type='text' value={userName} disabled={!isEditing || (editId && editId !== 'userName') } autoComplete='off'/>
+                                <button className='rounded-md' onClick={handleEditUserName}>✎</button>
+                                <button className='rounded-md' onClick={handleSave}>save</button>
+                            </div>
+                            <div>
+                                <label className='block' htmlFor='email'>Email:</label>
+                                <input className='rounded-md' onChange={editEmail} onKeyDown={handleSaveWithEnter} type='text' value={email} disabled={!isEditing || (editId && editId !== 'email') } autoComplete='off'/>
+                                <button className='rounded-md' onClick={handleEditEmail}>✎</button>
+                                <button className='rounded-md' onClick={handleSave}>save</button>
+                            </div>
+                        </form>
+                    )}
+
                 </div>
             </div>
         </div>

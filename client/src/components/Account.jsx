@@ -248,8 +248,7 @@ const Account = () => {
                             </ol>
                             {submitedFavoriteFood.length > 0 && (
                                     <button className='bg-yellow-800 text-white rounded-md hover:cursor-pointer hover:bg-yellow-900' onClick={handleDeleteAll}>deleteAll</button>
-                                )
-                            }
+                            )}
                         </div>
                     )}
 

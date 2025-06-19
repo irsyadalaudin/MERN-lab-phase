@@ -33,7 +33,7 @@ const Navbar = ({ user, onLogout }) => {
                 <Link to='/' onClick={scrollToBottomRecipe} className='text-neutral-100 no-underline'>Recipe</Link>
                 <Link to='/contact-us' className='text-neutral-100 no-underline'>Contact us</Link>
                 <Link to='/about-us' className='text-neutral-100 no-underline'>About us</Link>
-                <Link to='/account' className='text-neutral-100 no-underline'>Account</Link>
+                <Link to='/account' className='text-neutral-100 no-underline'>Favorite</Link>
                 {/* <Link to='/login' className='text-neutral-100 no-underline'>Login</Link> */}
                 {user && (
                     <div className='flex items-center bg-yellow-600 rounded-md gap-2 pl-1 mr-1 sm:mr-0 md:mr-2 '>

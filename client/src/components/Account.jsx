@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 
 const Account = () => {
-    const [selectedTab, setSelectedTab] = useState('personal-information')
+    // const [selectedTab, setSelectedTab] = useState('personal-information')
+    const [selectedTab, setSelectedTab] = useState('favorite-recipe')
     const [isEditing, setIsEditing] = useState(false)
     const [editId, setEditId] = useState(null)
     const [name, setName] = useState('Joko')
@@ -182,7 +183,7 @@ const Account = () => {
     return (
         <div id='container' className='px-10 md:px-28 h-full'>
             <div className='text-center pt-4'>
-                <h1 className='text-4xl'>Account</h1>
+                <h1 className='text-4xl'>Favorite</h1>
             </div>
             <div className='md:flex gap-14'>
                 <div className='md:w-1/3 mt-5'>

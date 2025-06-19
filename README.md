@@ -2,9 +2,6 @@
 
 This is final project from GOMYCODE javascript fullstack developer course
 
-# To use this website:
-You have to register an account first
-
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

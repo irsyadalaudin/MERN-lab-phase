@@ -1,4 +1,5 @@
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+// import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
@@ -8,11 +9,14 @@ import AboutUs from './components/AboutUs'
 import Account from './components/Account'
 import Login from './pages/Login'
 import Register from './pages/Register'
+/*
 import { useEffect } from 'react'
 import { useAuthContext } from './hooks/useAuthContext'
 import { useLogout } from './hooks/useLogout'  // Import useLogout
+*/
 
 const App = () => {
+    /*
     const navigate = useNavigate()
     const location = useLocation()
     const { user } = useAuthContext()
@@ -34,15 +38,16 @@ const App = () => {
             navigate('/')
         }
     }, [navigate, location.pathname, user]);
-    
 
     // CHECK IF THE CURRENT PAGE IS '/login'
     const hideNavbar = location.pathname === '/login' || location.pathname === '/register'
+    */
 
     return (
         <>
-            {/* Render Navbar berdasarkan status autentikasi */}
-            {hideNavbar ? null : <Navbar user={user} onLogout={handleLogout} />}
+            {/* Render Navbar berdasarkan status autentikasi
+            {hideNavbar ? null : <Navbar user={user} onLogout={handleLogout} />} */}
+            <Navbar />
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/' element={<Recipe />} />

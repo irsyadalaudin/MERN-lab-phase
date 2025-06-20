@@ -23,7 +23,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='bg-yellow-800 text-neutral-100 lg:h-14 pb-2 lg:pb-0 px-0 lg:px-18 xl:px-28 flex-col lg:flex-row flex justify-between items-center sticky top-0 hover:cursor-pointer'>
+        <nav className='bg-yellow-800 text-neutral-100 lg:h-14 pb-2 lg:pb-0 px-0 lg:px-18 xl:px-28 flex-col lg:flex-row flex justify-between items-center sticky top-0'>
             <h1>
                 <Link to='/' onClick={scrollToTopHome}><img className='justify-center w-22 mt-0 md:mt-1 lg:mt-2 xl:mt-1 mx-0 lg:mx-10 xl:mx-0' src='https://i.postimg.cc/J4w6KWXw/ayo-masak-logo2.png' alt='ayo masak logo' /></Link>
             </h1>

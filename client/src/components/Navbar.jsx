@@ -4,7 +4,8 @@
 // import { Link, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-const Navbar = ({ user, onLogout }) => {
+// const Navbar = ({ user, onLogout }) => {
+const Navbar = () => {
     const scrollToTopHome = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
@@ -24,8 +25,6 @@ const Navbar = ({ user, onLogout }) => {
     return (
         <nav className='bg-yellow-800 text-neutral-100 lg:h-14 pb-2 lg:pb-0 px-0 lg:px-18 xl:px-28 flex-col lg:flex-row flex justify-between items-center sticky top-0 hover:cursor-pointer'>
             <h1>
-                {/* <Link to='/' onClick={scrollToTopHome}>AYO MASAK</Link> */}
-
                 <Link to='/' onClick={scrollToTopHome}><img className='justify-center w-22 mt-0 md:mt-1 lg:mt-2 xl:mt-1 mx-0 lg:mx-10 xl:mx-0' src='https://i.postimg.cc/J4w6KWXw/ayo-masak-logo2.png' alt='ayo masak logo' /></Link>
             </h1>
             <div className='flex gap-4 text-xs sm:text-base ml-0.5 sm:ml-0'>
@@ -35,12 +34,14 @@ const Navbar = ({ user, onLogout }) => {
                 <Link to='/about-us' className='text-neutral-100 no-underline'>About us</Link>
                 <Link to='/account' className='text-neutral-100 no-underline'>Favorite</Link>
                 {/* <Link to='/login' className='text-neutral-100 no-underline'>Login</Link> */}
+                {/*                 
                 {user && (
                     <div className='flex items-center bg-yellow-600 rounded-md gap-2 pl-1 mr-1 sm:mr-0 md:mr-2 '>
                         <span className='text-black'>{user.username}</span>
                         <button onClick={onLogout} className='bg-yellow-600 text-black rounded-md hover:cursor-pointer hover:bg-yellow-700 border-none'>Logout</button>
                     </div>
-                )}
+                )} 
+                */}
             </div>
         </nav>
     )
